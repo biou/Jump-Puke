@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 
 #import "PhysicsSprite.h"
+#import "JNPPlayer.h"
 
 enum {
 	kTagParentNode = 1,
@@ -98,48 +99,9 @@ enum {
 }
 
 -(void)initPlayer {
-    /*
-    // init du joueur
-    CCTMXObjectGroup *objects = [_tileMap objectGroupNamed:@"objets"];
-    NSAssert(objects != nil, @"'Objects' object group not found");
-    NSMutableDictionary *spawnPoint = [objects objectNamed:@"spawn"];        
-    NSAssert(spawnPoint != nil, @"SpawnPoint object not found");
-    int x = [[spawnPoint valueForKey:@"x"] intValue];
-    int y = [[spawnPoint valueForKey:@"y"] intValue];
-    
-    self.player = [CCSprite spriteWithFile:@"player.png"];
-    _player.position = ccp(x, y);
-    [self addChild:_player];
-    */
-
-    CGSize s = [CCDirector sharedDirector].winSize;
-    CGPoint p = ccp(s.width/2, s.height/2);
-    
-	CCNode *parent = [self getChildByTag:kTagParentNode];
-    PhysicsSprite *sprite = [PhysicsSprite spriteWithFile:@"player.png"];
-	[parent addChild:sprite];
-	
-	sprite.position = ccp( p.x, p.y);
-	
-	// Define the dynamic body.
-	//Set up a 1m squared box in the physics world
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
-	self.playerBody = world->CreateBody(&bodyDef);
-	
-	// Define another box shape for our dynamic body.
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(1.0f, 1.0f);//These are mid points for our 1m box
-	
-	// Define the dynamic body fixture.
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;	
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-	self.playerBody->CreateFixture(&fixtureDef);
-	
-	[sprite setPhysicsBody:self.playerBody];
+    self.player = [[[JNPPlayer alloc] init] autorelease];
+    [self addChild:self.player];
+    [self.player initialize:world parent:self];
 }
 
 -(void) dealloc
@@ -315,8 +277,8 @@ enum {
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    b2Vec2 force = b2Vec2(30.0f, 39.0f );
-    self.playerBody->ApplyLinearImpulse(force, self.playerBody->GetPosition());
+    b2Vec2 force = b2Vec2(30.0f, 39.0f);
+    [self.player jump:force atPoint:[self.player getPosition]];
 }
 
 #pragma mark GameKit delegate
