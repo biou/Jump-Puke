@@ -52,6 +52,9 @@ enum {
     [bgLayer addChild:bgpic];
     [scene addChild:bgLayer];
     
+    JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
+    [scene addChild:audioManager];
+    [baseLayer setAudioManager:audioManager];
     
 	// add layer as a child to scene
 	[scene addChild: baseLayer];
@@ -141,7 +144,7 @@ enum {
     // NSLog(@"Vitesse : %f",v);
     
     if (v<140) {
-        float zeForce = (140 - v)/400;
+        float zeForce = (140 - v)/200;
         b2Vec2 force = b2Vec2(zeForce, 0.0f);
         playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
     }
@@ -349,6 +352,13 @@ enum {
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 }
+
+
+
+-(void)setAudioManager:(JNPAudioManager *)audioM {
+    _audioManager = audioM;
+}
+
 
 #pragma mark GameKit delegate
 

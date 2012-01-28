@@ -15,6 +15,7 @@
 #import "GLES-Render.h"
 #import "JNPControlLayer.h"
 #import "JNPPlayer.h"
+#import "JNPAudioManager.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
@@ -36,6 +37,8 @@
     b2Body *playerBody;
     float prevPlayerPosition;
     float currentSpeed;
+
+    JNPAudioManager *_audioManager;
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
@@ -44,6 +47,7 @@
 
 @property (nonatomic) b2Body *playerBody;
 
+-(void)setAudioManager:(JNPAudioManager *)audioM;
 -(void)tellPlayerToJump;
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
