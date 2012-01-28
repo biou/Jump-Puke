@@ -148,7 +148,7 @@ enum {
         playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
     }
     
-    NSLog(@"music speed set to %f", v);
+    // NSLog(@"music speed set to %f", v);
     
     if (v<KVMIN) {
         [_audioManager playMusicWithStress:1];

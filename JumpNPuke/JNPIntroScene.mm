@@ -15,7 +15,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        id layer = [JNPIntroBaseLayer node];
+        JNPIntroBaseLayer * layer = [JNPIntroBaseLayer node];
         
         [self addChild:layer];
         
