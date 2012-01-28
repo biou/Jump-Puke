@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BFBE8FDD14D3DE8A00C3C94B /* JNPAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */; };
 		BFDE4D1114D3C68700481370 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1014D3C68700481370 /* QuartzCore.framework */; };
 		BFDE4D1314D3C68700481370 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1214D3C68700481370 /* OpenGLES.framework */; };
 		BFDE4D1514D3C68700481370 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1414D3C68700481370 /* OpenAL.framework */; };
@@ -193,6 +194,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPAudioManager.h; sourceTree = "<group>"; };
+		BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPAudioManager.m; sourceTree = "<group>"; };
 		BFDE4D0C14D3C68700481370 /* JumpNPuke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpNPuke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFDE4D1014D3C68700481370 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BFDE4D1214D3C68700481370 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -565,6 +568,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BFBE8FD914D3DE7800C3C94B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */,
+				BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		BFDE4D0114D3C68700481370 = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +613,7 @@
 		BFDE4D2214D3C68700481370 /* JumpNPuke */ = {
 			isa = PBXGroup;
 			children = (
+				BFBE8FD914D3DE7800C3C94B /* Classes */,
 				BFDE4F2614D3C68900481370 /* AppDelegate.h */,
 				BFDE4F2714D3C68900481370 /* AppDelegate.mm */,
 				BFDE4F2914D3C68900481370 /* HelloWorldLayer.h */,
@@ -1368,6 +1381,7 @@
 				BFDE4F2B14D3C68900481370 /* HelloWorldLayer.mm in Sources */,
 				BFDE4F2E14D3C68900481370 /* GLES-Render.mm in Sources */,
 				BFDE4F3214D3C68900481370 /* PhysicsSprite.mm in Sources */,
+				BFBE8FDD14D3DE8A00C3C94B /* JNPAudioManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1469,6 +1483,7 @@
 				BFDE4F3914D3C68900481370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
