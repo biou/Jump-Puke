@@ -71,10 +71,9 @@ id pukeButtonSelected;
 	if (location.x < winSize.width /2) {
 		[jumpButton setTexture:jumpButtonSelected]; 
 
-        JNPPlayer *player = [JNPPlayer jnpplayer];
-        b2Vec2 force = b2Vec2(30.0f, 39.0f);
-        [player jump:force atPoint:[player getPosition]];
-
+                
+        [ref tellPlayerToJump];
+        
         NSLog(@"Jump!\n");
 	} else {
 		[pukeButton setTexture:pukeButtonSelected];		
@@ -93,6 +92,14 @@ id pukeButtonSelected;
 	[pukeButton setTexture:pukeButtonNormal]; 
 }
 
+-(void)assignGameLayer:(HelloWorldLayer *)gameLayer{
+    ref=gameLayer;
+}
 
+
+
+- (void)dealloc {
+    [super dealloc];
+}
 
 @end

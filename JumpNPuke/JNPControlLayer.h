@@ -10,6 +10,8 @@
 #import "cocos2d.h"
 #import "CCTouchDispatcher.h"
 
+@class HelloWorldLayer;
+
 typedef enum tagPaddleState {
 	kPaddleStateGrabbed,
 	kPaddleStateUngrabbed
@@ -17,7 +19,10 @@ typedef enum tagPaddleState {
 
 @interface JNPControlLayer : CCLayer <CCTargetedTouchDelegate> {
 	@private
-		PaddleState state;
+    PaddleState state;
+    HelloWorldLayer *ref;
 }
+
+-(void)assignGameLayer:(HelloWorldLayer*)gameLayer;
 
 @end

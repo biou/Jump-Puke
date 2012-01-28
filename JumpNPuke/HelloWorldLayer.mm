@@ -40,7 +40,19 @@ enum {
 	// 'layer' is an autorelease object.
 	HelloWorldLayer * baseLayer = [HelloWorldLayer node];
 	JNPControlLayer * controlLayer = [JNPControlLayer node];
+    [controlLayer assignGameLayer:baseLayer];
 	
+    CCLayer *bgLayer = [CCLayer node];
+    CGSize s = [CCDirector sharedDirector].winSize;
+    
+    // init du background
+    CCSprite *bgpic = [CCSprite spriteWithFile:@"fondpapier.png"];
+    bgpic.position = ccp(bgpic.position.x + s.width/2.0, bgpic.position.y+s.height/2.0);
+    bgpic.opacity = 160;
+    [bgLayer addChild:bgpic];
+    [scene addChild:bgLayer];
+    
+    
 	// add layer as a child to scene
 	[scene addChild: baseLayer];
 	[scene addChild: controlLayer];
@@ -52,13 +64,7 @@ enum {
 -(id) init
 {
 	if( (self=[super init])) {
-        CGSize s = [CCDirector sharedDirector].winSize;
-
-		// init du background
-        CCSprite *bgpic = [CCSprite spriteWithFile:@"fondpapier.png"];
-        bgpic.position = ccp(bgpic.position.x + s.width/2.0, bgpic.position.y+s.height/2.0);
-        bgpic.opacity = 160;
-        [self addChild:bgpic];
+        
         
         
         // init de la Map avant box2d
@@ -79,8 +85,33 @@ enum {
 		[self createMenu];
 		
 		//Set up sprite
-        [self initPlayer];
-                
+        //[self initPlayer];
+        
+        
+        // Create ball body and shape
+        CCSprite *playerSprite = [CCSprite spriteWithFile:@"player.png"];
+        playerSprite.scale=0.2;
+        playerSprite.position=ccp(400, 400);
+        [self addChild:playerSprite];
+        b2BodyDef ballBodyDef;
+        ballBodyDef.type = b2_dynamicBody;
+        ballBodyDef.position.Set(400.0/PTM_RATIO, 400.0/PTM_RATIO);
+        ballBodyDef.userData = playerSprite;
+        playerBody = world->CreateBody(&ballBodyDef);
+        playerBody->SetUserData(playerSprite);
+        //[self.sprite setPhysicsBody:body];
+        
+        b2CircleShape circle;
+        circle.m_radius = 26.0/PTM_RATIO;
+        
+        b2FixtureDef ballShapeDef;
+        ballShapeDef.shape = &circle;
+        ballShapeDef.density = 1.0f;
+        ballShapeDef.friction = 0.2f;
+        ballShapeDef.restitution = 0.8f;
+        playerBody->CreateFixture(&ballShapeDef);
+        [self schedule:@selector(updatePlayerPosFromPhysics:)];
+        
 		
 #if 1
 		// Use batch node. Faster
@@ -101,9 +132,29 @@ enum {
 
 
 -(void)updateViewPoint:(float)dt {
-    self.position = ccp(self.player.position.x-250, self.position.y);
+    self.position = ccp(200-((CCSprite *)playerBody->GetUserData()).position.x, self.position.y);
+    
+    
 }
 
+-(void)updatePlayerPosFromPhysics:(float)dt {
+    
+    // world->Step(dt, 10, 10);
+    for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {    
+        if (b->GetUserData() != NULL) {
+            CCSprite *ballData = (CCSprite *)b->GetUserData();
+            ballData.position = ccp(b->GetPosition().x * PTM_RATIO,
+                                    b->GetPosition().y * PTM_RATIO);
+            ballData.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+        }        
+    }
+    
+}
+
+-(void)tellPlayerToJump {
+    b2Vec2 force = b2Vec2(3.0f, 27.0f);
+    playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
+}
 
 -(void)initPlayer {
     self.player = [JNPPlayer jnpplayer];
@@ -174,7 +225,7 @@ enum {
 	CGSize s = [[CCDirector sharedDirector] winSize];
 	
 	b2Vec2 gravity;
-	gravity.Set(0.0f, -10.0f);
+	gravity.Set(0.0f, -30.0f);
 	world = new b2World(gravity);
 	
 	

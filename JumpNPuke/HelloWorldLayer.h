@@ -34,6 +34,7 @@
     JNPPlayer *_player;
  
     b2Body *playerBody;
+    float prevPlayerPosition;
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
@@ -42,7 +43,7 @@
 
 @property (nonatomic) b2Body *playerBody;
 
-
+-(void)tellPlayerToJump;
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
