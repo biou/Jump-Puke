@@ -1162,6 +1162,9 @@
 /* Begin PBXProject section */
 		BFDE4D0314D3C68700481370 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = BFDE4D0614D3C68700481370 /* Build configuration list for PBXProject "JumpNPuke" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -1469,6 +1472,7 @@
 				BFDE4F3914D3C68900481370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
