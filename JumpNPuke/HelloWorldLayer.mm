@@ -141,13 +141,14 @@ enum {
     float dp = currentPlayerPosition - prevPlayerPosition;
     float v = dp/dt;
     currentSpeed=v;
-    // NSLog(@"Vitesse : %f",v);
     
     if (v<140) {
         float zeForce = (140 - v)/200;
         b2Vec2 force = b2Vec2(zeForce, 0.0f);
         playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
     }
+    
+    NSLog(@"music speed set to %f", v);
     
     if (v<KVMIN) {
         [_audioManager playMusicWithStress:1];
@@ -160,8 +161,6 @@ enum {
     } else {
         [_audioManager playMusicWithStress:5];
     }
-    
-    
     
     prevPlayerPosition = currentPlayerPosition;
 }
