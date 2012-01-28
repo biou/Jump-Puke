@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "JNPAudioManager.h"
+#import "JNPMenuScene.h"
 
 @interface JNPDeathLayer : CCLayer {
     

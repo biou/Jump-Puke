@@ -33,10 +33,43 @@
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
         bgpic.position = ccp(winsize.width/2 , winsize.height/2 );
 		[self addChild:bgpic];
- 		
+		JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
+		[audioManager play:jnpSndDie];
+		self.isTouchEnabled = YES;
+
     }
     return self;
 }
+
+- (void)onEnter
+{
+	CCDirector *director = [CCDirector sharedDirector];
+	
+	[[director touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+	[super onEnter];
+}
+
+- (void)onExit
+{
+	CCDirector *director = [CCDirector sharedDirector];
+	
+	[[director touchDispatcher] removeDelegate:self];
+	[super onExit];
+}
+
+
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+	return YES;
+}
+
+
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPMenuScene node]]];
+}
+
 
 - (void)dealloc {
     

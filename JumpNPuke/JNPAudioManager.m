@@ -63,7 +63,7 @@
             [[SimpleAudioEngine sharedEngine] playEffect:@"jump.mp3"];
             break;
         case jnpSndDie:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"die.mp3"];
+            [[SimpleAudioEngine sharedEngine] playEffect:@"gameover.mp3"];
             break;
         default:
             break;
