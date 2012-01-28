@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		32A7A74814D3E8B100C54055 /* JNPControlLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A74714D3E8B100C54055 /* JNPControlLayer.m */; };
+		32A7A74814D3E8B100C54055 /* JNPControlLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */; };
 		32A7A75414D3ECCD00C54055 /* jumpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75214D3ECCD00C54055 /* jumpButton.png */; };
 		32A7A75514D3ECCD00C54055 /* pukeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75314D3ECCD00C54055 /* pukeButton.png */; };
 		32A7A75814D3FE8E00C54055 /* pukeButton-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75614D3FE8E00C54055 /* pukeButton-selected.png */; };
@@ -204,7 +204,7 @@
 
 /* Begin PBXFileReference section */
 		32A7A74614D3E8B100C54055 /* JNPControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPControlLayer.h; sourceTree = "<group>"; };
-		32A7A74714D3E8B100C54055 /* JNPControlLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPControlLayer.m; sourceTree = "<group>"; };
+		32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPControlLayer.mm; sourceTree = "<group>"; };
 		32A7A75214D3ECCD00C54055 /* jumpButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpButton.png; sourceTree = "<group>"; };
 		32A7A75314D3ECCD00C54055 /* pukeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pukeButton.png; sourceTree = "<group>"; };
 		32A7A75614D3FE8E00C54055 /* pukeButton-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pukeButton-selected.png"; sourceTree = "<group>"; };
@@ -649,7 +649,7 @@
 				BFDE4D5414D3C68700481370 /* libs */,
 				BFDE4F2214D3C68900481370 /* Supporting Files */,
 				32A7A74614D3E8B100C54055 /* JNPControlLayer.h */,
-				32A7A74714D3E8B100C54055 /* JNPControlLayer.m */,
+				32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */,
 			);
 			path = JumpNPuke;
 			sourceTree = "<group>";
@@ -1423,7 +1423,7 @@
 				BFDE4F2E14D3C68900481370 /* GLES-Render.mm in Sources */,
 				BFDE4F3214D3C68900481370 /* PhysicsSprite.mm in Sources */,
 				BFBE8FDD14D3DE8A00C3C94B /* JNPAudioManager.m in Sources */,
-				32A7A74814D3E8B100C54055 /* JNPControlLayer.m in Sources */,
+				32A7A74814D3E8B100C54055 /* JNPControlLayer.mm in Sources */,
 				BFBEF4F814D420C600144BDD /* JNPPlayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

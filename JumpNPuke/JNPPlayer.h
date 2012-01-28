@@ -8,13 +8,14 @@
 
 #import "PhysicsSprite.h"
 
-
 @interface JNPPlayer : CCNode {
     b2Body *body;
     
 }
 
 @property (nonatomic, retain) CCSprite *sprite;
+
++(JNPPlayer*) jnpplayer;
 
 -(b2Vec2) getPosition;
 -(void) jump:(b2Vec2)impulse atPoint:(b2Vec2)point;

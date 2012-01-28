@@ -19,6 +19,7 @@
 
 #define PTM_RATIO 32
 
+static JNPPlayer * singleton = nil;
 
 @implementation JNPPlayer
 
@@ -27,9 +28,21 @@
 -(id) init
 {
 	if( (self=[super init])) {
-    
+        
     }
    	return self;
+}
+
++(JNPPlayer*)jnpplayer
+{
+    if (singleton == nil) {
+        @synchronized(self) {
+            if (singleton == nil) {
+                singleton = [[JNPPlayer alloc] init];
+            }
+        }
+    }
+    return singleton;
 }
 
 -(void) initialize:(b2World*)world parent:(CCNode*)parent
@@ -44,7 +57,7 @@
     // Create ball body and shape
     b2BodyDef ballBodyDef;
     ballBodyDef.type = b2_dynamicBody;
-    ballBodyDef.position.Set(100/PTM_RATIO, 100/PTM_RATIO);
+    ballBodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
     ballBodyDef.userData = self;
     body = world->CreateBody(&ballBodyDef);
     body->SetUserData(self.sprite);
@@ -70,6 +83,13 @@
 
 -(void) jump:(b2Vec2)impulse atPoint:(b2Vec2)point {
     body->ApplyLinearImpulse(impulse, point);
+}
+
+-(id) dealloc
+{
+	body = nil;
+    self.sprite = nil;
+    [super dealloc];
 }
 
 @end

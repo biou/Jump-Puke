@@ -99,8 +99,9 @@ enum {
 }
 
 -(void)initPlayer {
-    self.player = [[[JNPPlayer alloc] init] autorelease];
-    [self addChild:self.player];
+    self.player = [JNPPlayer jnpplayer];
+    [self removeChildByTag:9 cleanup:TRUE];
+    [self addChild:self.player z:1 tag:9];
     [self.player initialize:world parent:self];
 }
 
@@ -277,8 +278,6 @@ enum {
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    b2Vec2 force = b2Vec2(30.0f, 39.0f);
-    [self.player jump:force atPoint:[self.player getPosition]];
 }
 
 #pragma mark GameKit delegate

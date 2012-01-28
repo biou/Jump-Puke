@@ -6,8 +6,9 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "JNPControlLayer.h"
-
+#import "JNPPlayer.h"
 
 CCSprite * jumpButton;
 CCSprite * pukeButton;
@@ -69,7 +70,12 @@ id pukeButtonSelected;
 	
 	if (location.x < winSize.width /2) {
 		[jumpButton setTexture:jumpButtonSelected]; 
-		NSLog(@"Jump!\n");
+
+        JNPPlayer *player = [JNPPlayer jnpplayer];
+        b2Vec2 force = b2Vec2(30.0f, 39.0f);
+        [player jump:force atPoint:[player getPosition]];
+
+        NSLog(@"Jump!\n");
 	} else {
 		[pukeButton setTexture:pukeButtonSelected];		
 		NSLog(@"Puke!\n");			
