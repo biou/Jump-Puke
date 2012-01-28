@@ -51,7 +51,15 @@ enum {
 -(id) init
 {
 	if( (self=[super init])) {
-		
+        CGSize s = [CCDirector sharedDirector].winSize;
+
+		// init du background ta mère
+        CCSprite *bgpic = [CCSprite spriteWithFile:@"fondpapier.png"];
+        bgpic.position = ccp(bgpic.position.x + s.width/2.0, bgpic.position.y+s.height/2.0);
+        bgpic.opacity = 160;
+        [self addChild:bgpic];
+        
+        
         // init de la Map avant box2d
         self.tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"map.tmx"];
         self.background = [_tileMap layerNamed:@"background"];
@@ -62,7 +70,6 @@ enum {
 		
 		self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = YES;
-		CGSize s = [CCDirector sharedDirector].winSize;
 		
 		// init physics
 		[self initPhysics];
@@ -253,7 +260,7 @@ enum {
         float p2x = [[p2 objectAtIndex:0] floatValue] + x;
         float p2y = y - [[p2 objectAtIndex:1] floatValue];
         
-        NSLog(@"Adding a fixture x=%d y=%d p1x=%f p1y=%f p2x=%f p2y=%f, p2xstr=%@", x, y, p1x, p1y, p2x, p2y, [p2 objectAtIndex:0]);
+        // NSLog(@"Adding a fixture x=%d y=%d p1x=%f p1y=%f p2x=%f p2y=%f, p2xstr=%@", x, y, p1x, p1y, p2x, p2y, [p2 objectAtIndex:0]);
         
         groundBox.Set(b2Vec2(p1x/PTM_RATIO,p1y/PTM_RATIO), b2Vec2(p2x/PTM_RATIO,p2y/PTM_RATIO));
         //groundBox.Set(b2Vec2(64/PTM_RATIO,64/PTM_RATIO), b2Vec2(256/PTM_RATIO,64/PTM_RATIO));
