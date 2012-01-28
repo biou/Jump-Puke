@@ -53,6 +53,8 @@ enum {
     [scene addChild:bgLayer];
     
     JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
+    [audioManager playMusic:1];
+    
     [scene addChild:audioManager];
     [baseLayer setAudioManager:audioManager];
     

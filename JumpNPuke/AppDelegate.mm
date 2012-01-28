@@ -9,11 +9,13 @@
 #import "cocos2d.h"
 
 #import "AppDelegate.h"
-#import "JNPIntroScene.h"
+
 
 @implementation AppController
 
 @synthesize window=window_, navController=navController_, director=director_;
+
+@synthesize queue;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -78,9 +80,20 @@
 	// Assume that PVR images have premultiplied alpha
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 	
-	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
-	[director_ pushScene: [[JNPIntroScene alloc]init]]; 
+	//Initialize the NSOperationQueue here
+	queue = [[NSOperationQueue alloc] init];
 	
+	//Only load item at a time. No point loading more than one anyway.
+	[queue setMaxConcurrentOperationCount:1];
+	
+	//Prepare the loading screen
+	introScene = [[JNPIntroScene alloc] init];
+
+	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
+	//[director_ pushScene: [[JNPIntroScene alloc]init]]; 
+	
+    [self startGame:nil];
+    
 	return YES;
 }
 
@@ -142,4 +155,41 @@
 	
 	[super dealloc];
 }
+
+-(void)startGame:(id)sender{
+	//Throw up the loading screen while loading stuff in the background.
+	//[[CCDirector sharedDirector] replaceScene:introScene];
+    [[CCDirector sharedDirector] pushScene: introScene]; 
+	
+	//Load all the resources. This will not block the main thread. See JNPIntroBaseLayer.m and etc...
+	introLayer = [JNPIntroBaseLayer node];
+}
+
+//This function should only be called when everything is done loading. This function is only called in
+//targetLayer since it's the last item to be loaded. Once it's loaded, we know the game is ready to go.
+-(void) reportProgressDone:(id)obj
+{
+	[introScene increasePercentage:1];	
+	
+    NSLog(@"JNPMenuScene node...");
+
+	JNPMenuScene *menuScene = [[JNPMenuScene node] retain];
+	//[menuScene node];
+	
+    NSLog(@"pushScene: menuScene node...");
+    
+	//Everything is now loaded. Let's start the game!
+	//[[CCDirector sharedDirector] replaceScene:menuScene];
+    [[CCDirector sharedDirector] pushScene: menuScene]; 
+}
+
+//Increment the loading scene progrss bar.
+-(void) reportProgress:(id)obj
+{
+    NSLog(@"reportProgress...");
+    
+	[introScene increasePercentage:33];	
+}
+
 @end
+
