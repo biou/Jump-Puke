@@ -18,6 +18,12 @@
 @interface JNPIntroBaseLayer : CCLayer
 {
 }
+@end
 
 
+@interface JNPIntroBaseLayerLoader : NSOperation
+{
+	JNPIntroBaseLayer *introLayer;
+}
+@property (nonatomic, retain) JNPIntroBaseLayer *introLayer;
 @end

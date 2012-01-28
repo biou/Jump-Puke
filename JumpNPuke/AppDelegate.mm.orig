@@ -90,7 +90,11 @@
 	introScene = [[JNPIntroScene alloc] init];
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
+<<<<<<< HEAD
+	[director_ pushScene: [JNPIntroScene node]]; 
+=======
 	//[director_ pushScene: [[JNPIntroScene alloc]init]]; 
+>>>>>>> 200d4a296fa0f6894805330e6ab111548951376a
 	
     [self startGame:nil];
     

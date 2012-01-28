@@ -10,6 +10,25 @@
 // Import the interfaces
 #import "JNPIntroBaseLayer.h"
 
+#import "AppDelegate.h"
+
+
+//------------------------
+//This is the helper class to load the JNPIntroBaseLayer
+//
+@implementation JNPIntroBaseLayerLoader
+@synthesize introLayer;
+
+-(void) main 
+{
+	[introLayer
+	 performSelectorOnMainThread:@selector(loadResources:)
+	 withObject:self
+	 waitUntilDone:YES];	
+}
+@end
+//------------------------
+
 
 
 // IntroBaseLayer implementation
@@ -42,34 +61,39 @@
 		CGPoint location = ccp(winsize.width/2,winsize.height/2);
 		[logo runAction: [CCMoveTo actionWithDuration:1 position:location]];          
 
-		// Pour éviter de saccader l'animation lors du chargement du son, on préload le son maintenant et on le schedule quand on veut. Aussi, on unload le son dans la méthode dealloc (j'imagine que c'est nécessaire, je ne l'ai lu nulle part mais c'est logique.
-        // à noter également qu'il faut éviter les sons en wav et qu'il est facile de convertir en .caf… j'amènerai un script pour faire cette conversion tt seule
-        //[[SimpleAudioEngine sharedEngine] preloadEffect:@"gameboy-startup.wav"];
-		[self schedule:@selector(introSound:) interval:0.65];
-		[self schedule:@selector(toNextScene:) interval:3.8];
+        JNPIntroBaseLayerLoader *loader = [[JNPIntroBaseLayerLoader alloc] init];
+		loader.introLayer = self;
+		[[(AppController*)[[UIApplication sharedApplication] delegate] queue] addOperation:loader];
+		[loader release];
     
     }
 	return self;
 }
-                                 
-- (void) toNextScene:(ccTime) dt {
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.75f scene:[JNPMenuScene node]]];
-}
-
-- (void) introSound:(ccTime) dt {
-	//[[SimpleAudioEngine sharedEngine] playEffect:@"gameboy-startup.wav"];
-	[self unschedule:@selector(introSound:)];
-}
-
 
 
 - (void)dealloc {
     
-    // unload des sons préchargés dont on ne se servira plus.
-    //[[SimpleAudioEngine sharedEngine] unloadEffect:@"gameboy-startup.wav"];
-    
     [super dealloc];
 }
+
+
+
+-(BOOL) loadResources:(id)sender
+{
+    
+	NSLog(@"Loading resources");
+	
+    JNPAudioManager *am = [[JNPAudioManager alloc] init];
+    [am preload];
+	
+	//Report back to the delegate that the loading is done. 
+	[(AppController*)[[UIApplication sharedApplication] delegate] 	  
+	   performSelectorOnMainThread:@selector(reportProgressDone:)
+	   withObject:self
+	   waitUntilDone:YES];
+	
+	return YES;
+}	
 
 
 @end

@@ -18,7 +18,7 @@
 {
 	if( (self=[super init])) {
         self.counter = 0;
-        self.nextMusicStress = 0;
+        self.nextMusicStress = -1;
         [self preload];
         [self schedule:@selector(backgroundMusicTick:) interval:0.83];
     }
@@ -63,7 +63,7 @@
             [[SimpleAudioEngine sharedEngine] playEffect:@"jump.mp3"];
             break;
         case jnpSndDie:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"die.mp3"];
+            [[SimpleAudioEngine sharedEngine] playEffect:@"gameover.mp3"];
             break;
         default:
             break;
@@ -85,7 +85,7 @@
 -(void) backgroundMusicTick:(ccTime)time {
     self.counter = self.counter + 1;
     
-    if (self.counter % 10 == 0 && self.nextMusicStress != 0) {
+    if (self.nextMusicStress == -1 || (self.counter % 10 == 0 && self.nextMusicStress != 0)) {
         //NSLog(@"time has come to play next music with stress %d", self.nextMusicStress);
         int stress = self.nextMusicStress;
         self.nextMusicStress = 0;
