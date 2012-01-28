@@ -14,6 +14,7 @@
 #import "Box2D.h"
 #import "GLES-Render.h"
 #import "JNPControlLayer.h"
+#import "JNPPlayer.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
@@ -30,14 +31,14 @@
 
     CCTMXTiledMap *_tileMap;
     CCTMXLayer *_background;
-    CCSprite *_player;
+    JNPPlayer *_player;
  
     b2Body *playerBody;
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
 @property (nonatomic, retain) CCTMXLayer *background;
-@property (nonatomic, retain) CCSprite *player;
+@property (nonatomic, retain) JNPPlayer *player;
 
 @property (nonatomic) b2Body *playerBody;
 

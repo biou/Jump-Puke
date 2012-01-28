@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		32A7A74814D3E8B100C54055 /* JNPControlLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A74714D3E8B100C54055 /* JNPControlLayer.m */; };
+		32A7A74814D3E8B100C54055 /* JNPControlLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */; };
 		32A7A75414D3ECCD00C54055 /* jumpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75214D3ECCD00C54055 /* jumpButton.png */; };
 		32A7A75514D3ECCD00C54055 /* pukeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75314D3ECCD00C54055 /* pukeButton.png */; };
 		32A7A75814D3FE8E00C54055 /* pukeButton-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75614D3FE8E00C54055 /* pukeButton-selected.png */; };
@@ -16,6 +16,7 @@
 		B50B7FF814D40FA400FAAEF9 /* bords.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B7FF614D40FA400FAAEF9 /* bords.png */; };
 		B50B7FFB14D4136200FAAEF9 /* fondpapier.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B7FFA14D4136200FAAEF9 /* fondpapier.png */; };
 		BFBE8FDD14D3DE8A00C3C94B /* JNPAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */; };
+		BFBEF4F814D420C600144BDD /* JNPPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFBEF4F714D420C600144BDD /* JNPPlayer.mm */; };
 		BFDE4D1114D3C68700481370 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1014D3C68700481370 /* QuartzCore.framework */; };
 		BFDE4D1314D3C68700481370 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1214D3C68700481370 /* OpenGLES.framework */; };
 		BFDE4D1514D3C68700481370 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1414D3C68700481370 /* OpenAL.framework */; };
@@ -203,7 +204,7 @@
 
 /* Begin PBXFileReference section */
 		32A7A74614D3E8B100C54055 /* JNPControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPControlLayer.h; sourceTree = "<group>"; };
-		32A7A74714D3E8B100C54055 /* JNPControlLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPControlLayer.m; sourceTree = "<group>"; };
+		32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPControlLayer.mm; sourceTree = "<group>"; };
 		32A7A75214D3ECCD00C54055 /* jumpButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpButton.png; sourceTree = "<group>"; };
 		32A7A75314D3ECCD00C54055 /* pukeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pukeButton.png; sourceTree = "<group>"; };
 		32A7A75614D3FE8E00C54055 /* pukeButton-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pukeButton-selected.png"; sourceTree = "<group>"; };
@@ -213,6 +214,8 @@
 		B50B7FFA14D4136200FAAEF9 /* fondpapier.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fondpapier.png; sourceTree = "<group>"; };
 		BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPAudioManager.h; sourceTree = "<group>"; };
 		BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPAudioManager.m; sourceTree = "<group>"; };
+		BFBEF4F614D420C600144BDD /* JNPPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPPlayer.h; sourceTree = "<group>"; };
+		BFBEF4F714D420C600144BDD /* JNPPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPPlayer.mm; sourceTree = "<group>"; };
 		BFDE4D0C14D3C68700481370 /* JumpNPuke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpNPuke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFDE4D1014D3C68700481370 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BFDE4D1214D3C68700481370 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -588,6 +591,8 @@
 		BFBE8FD914D3DE7800C3C94B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BFBEF4F614D420C600144BDD /* JNPPlayer.h */,
+				BFBEF4F714D420C600144BDD /* JNPPlayer.mm */,
 				BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */,
 				BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */,
 			);
@@ -644,7 +649,7 @@
 				BFDE4D5414D3C68700481370 /* libs */,
 				BFDE4F2214D3C68900481370 /* Supporting Files */,
 				32A7A74614D3E8B100C54055 /* JNPControlLayer.h */,
-				32A7A74714D3E8B100C54055 /* JNPControlLayer.m */,
+				32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */,
 			);
 			path = JumpNPuke;
 			sourceTree = "<group>";
@@ -1418,7 +1423,8 @@
 				BFDE4F2E14D3C68900481370 /* GLES-Render.mm in Sources */,
 				BFDE4F3214D3C68900481370 /* PhysicsSprite.mm in Sources */,
 				BFBE8FDD14D3DE8A00C3C94B /* JNPAudioManager.m in Sources */,
-				32A7A74814D3E8B100C54055 /* JNPControlLayer.m in Sources */,
+				32A7A74814D3E8B100C54055 /* JNPControlLayer.mm in Sources */,
+				BFBEF4F814D420C600144BDD /* JNPPlayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
