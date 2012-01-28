@@ -14,7 +14,6 @@
 #import "Box2D.h"
 #import "GLES-Render.h"
 #import "JNPControlLayer.h"
-#import "JNPPlayer.h"
 #import "JNPAudioManager.h"
 
 #define KVMIN 155.0
@@ -38,7 +37,6 @@
 
     CCTMXTiledMap *_tileMap;
     CCTMXLayer *_background;
-    JNPPlayer *_player;
  
     b2Body *playerBody;
     float prevPlayerPosition;
@@ -49,7 +47,6 @@
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
 @property (nonatomic, retain) CCTMXLayer *background;
-@property (nonatomic, retain) JNPPlayer *player;
 
 @property (nonatomic) b2Body *playerBody;
 

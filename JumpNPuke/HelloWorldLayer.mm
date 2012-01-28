@@ -12,8 +12,6 @@
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
-#import "PhysicsSprite.h"
-#import "JNPPlayer.h"
 
 enum {
 	kTagParentNode = 1,
@@ -90,9 +88,11 @@ enum {
 		//Set up sprite
         //[self initPlayer];
         
-        
+       
+		// taille en pixels de l'éléphant : 260px
+		float elephantSize = 260.0;
         // Create ball body and shape
-        CCSprite *playerSprite = [CCSprite spriteWithFile:@"player.png"];
+        CCSprite *playerSprite = [CCSprite spriteWithFile:@"elephants/elephant-normal.png"];
         playerSprite.scale=0.2;
         playerSprite.position=ccp(400, 400);
         [self addChild:playerSprite];
@@ -105,7 +105,7 @@ enum {
         //[self.sprite setPhysicsBody:body];
         
         b2CircleShape circle;
-        circle.m_radius = 26.0/PTM_RATIO;
+        circle.m_radius = elephantSize*playerSprite.scale/2/PTM_RATIO;
         
         b2FixtureDef ballShapeDef;
         ballShapeDef.shape = &circle;
@@ -114,7 +114,7 @@ enum {
         ballShapeDef.restitution = 0.8f;
         playerBody->CreateFixture(&ballShapeDef);
         [self schedule:@selector(updatePlayerPosFromPhysics:)];
-        
+		[self schedule:@selector(updatePlayerSize:) interval:0.3];
 		
 #if 1
 		// Use batch node. Faster
@@ -133,6 +133,10 @@ enum {
 	return self;
 }
 
+-(void)updatePlayerSize:(float)dt {
+ 
+}
+
 
 -(void)updateViewPoint:(float)dt {
     float currentPlayerPosition = ((CCSprite *)playerBody->GetUserData()).position.x;
@@ -148,7 +152,7 @@ enum {
         playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
     }
     
-    NSLog(@"music speed set to %f", v);
+    //NSLog(@"music speed set to %f", v);
     
     if (v<KVMIN) {
         [_audioManager playMusicWithStress:1];
@@ -184,12 +188,7 @@ enum {
     playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
 }
 
--(void)initPlayer {
-    self.player = [JNPPlayer jnpplayer];
-    [self removeChildByTag:9 cleanup:TRUE];
-    [self addChild:self.player z:1 tag:9];
-    [self.player initialize:world parent:self];
-}
+
 
 -(void) dealloc
 {
@@ -392,7 +391,7 @@ enum {
 
 @synthesize tileMap = _tileMap;
 @synthesize background = _background;
-@synthesize player = _player;
+
 
 
 @end
