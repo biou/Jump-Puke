@@ -9,11 +9,14 @@
   </data>
  </layer>
  <objectgroup name="objets" width="300" height="12">
-  <object name="spawn" x="187" y="487"/>
+  <object name="spawn" x="227" y="263"/>
  </objectgroup>
  <objectgroup name="box" width="300" height="12">
-  <object x="196" y="577">
-   <polyline points="0,0 534,39"/>
+  <object x="128" y="128">
+   <polyline points="-64,-64 64,64"/>
+  </object>
+  <object x="526" y="394">
+   <polyline points="0,0 294,-101"/>
   </object>
  </objectgroup>
 </map>
