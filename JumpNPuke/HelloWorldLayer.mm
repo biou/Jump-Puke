@@ -53,7 +53,7 @@ enum {
 	if( (self=[super init])) {
         CGSize s = [CCDirector sharedDirector].winSize;
 
-		// init du background ta mère
+		// init du background
         CCSprite *bgpic = [CCSprite spriteWithFile:@"fondpapier.png"];
         bgpic.position = ccp(bgpic.position.x + s.width/2.0, bgpic.position.y+s.height/2.0);
         bgpic.opacity = 160;
@@ -93,9 +93,16 @@ enum {
 		[self addChild:parent z:0 tag:kTagParentNode];
 		
         [self scheduleUpdate];
+        [self schedule:@selector(updateViewPoint:)];
 	}
 	return self;
 }
+
+
+-(void)updateViewPoint:(float)dt {
+    self.position = ccp(self.player.position.x-250, self.position.y);
+}
+
 
 -(void)initPlayer {
     /*
