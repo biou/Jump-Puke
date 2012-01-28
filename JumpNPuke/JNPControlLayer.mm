@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "JNPControlLayer.h"
-#import "JNPPlayer.h"
 
 CCSprite * jumpButton;
 CCSprite * pukeButton;

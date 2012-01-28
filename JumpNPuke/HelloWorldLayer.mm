@@ -12,8 +12,6 @@
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
-#import "PhysicsSprite.h"
-#import "JNPPlayer.h"
 
 enum {
 	kTagParentNode = 1,
@@ -27,6 +25,9 @@ enum {
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) createMenu;
 @end
+
+
+// ta mere elle mange des pruneaux
 
 @implementation HelloWorldLayer
 
@@ -92,10 +93,13 @@ enum {
 		//Set up sprite
         //[self initPlayer];
         
-        
+       
+		// taille en pixels de l'éléphant : 260px
+		elephantSize = 260.0;
+		currentScale = 0.4;
         // Create ball body and shape
-        CCSprite *playerSprite = [CCSprite spriteWithFile:@"player.png"];
-        playerSprite.scale=0.2;
+        CCSprite *playerSprite = [CCSprite spriteWithFile:@"elephant-normal.png"];
+        playerSprite.scale=currentScale;
         playerSprite.position=ccp(400, 400);
         [self addChild:playerSprite];
         b2BodyDef ballBodyDef;
@@ -107,8 +111,8 @@ enum {
         //[self.sprite setPhysicsBody:body];
         
         b2CircleShape circle;
-        circle.m_radius = 26.0/PTM_RATIO;
-        
+        circle.m_radius = elephantSize*playerSprite.scale/2/PTM_RATIO;
+        currentCircle = &circle;
         b2FixtureDef ballShapeDef;
         ballShapeDef.shape = &circle;
         ballShapeDef.density = 1.0f;
@@ -116,7 +120,7 @@ enum {
         ballShapeDef.restitution = 0.8f;
         playerBody->CreateFixture(&ballShapeDef);
         [self schedule:@selector(updatePlayerPosFromPhysics:)];
-        
+		[self schedule:@selector(updatePlayerSize:) interval:0.3];
 		
 #if 1
 		// Use batch node. Faster
@@ -135,6 +139,33 @@ enum {
 	return self;
 }
 
+-(void)updatePlayerSize:(float)dt {
+	if (fabs(currentScale) > 0.05) {
+		currentScale -= 0.001;
+
+		if (playerBody->GetUserData() != NULL) {
+				CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
+				ballData.scale=currentScale;
+				playerBody->DestroyFixture(playerBody->GetFixtureList());
+				b2CircleShape circle;
+				circle.m_radius = elephantSize*currentScale/2/PTM_RATIO;
+				b2FixtureDef ballShapeDef;
+				ballShapeDef.shape = &circle;
+				ballShapeDef.density = 0.5f * currentScale;
+				ballShapeDef.friction = 0.2f;
+				ballShapeDef.restitution = 0.8f;
+				playerBody->CreateFixture(&ballShapeDef);
+			 
+		}        
+	} else {
+		currentScale = 0.0;
+		NSLog(@"trop petit");
+		
+	}
+	
+}
+
+// c'est toi Soyouz !!!
 
 -(void)updateViewPoint:(float)dt {
     float currentPlayerPosition = ((CCSprite *)playerBody->GetUserData()).position.x;
@@ -150,7 +181,7 @@ enum {
         playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
     }
     
-    NSLog(@"music speed set to %f", v);
+    //NSLog(@"music speed set to %f", v);
     
     if (v<KVMIN) {
         [_audioManager playMusicWithStress:1];
@@ -170,14 +201,15 @@ enum {
 -(void)updatePlayerPosFromPhysics:(float)dt {
     
     // world->Step(dt, 10, 10);
-    for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {    
-        if (b->GetUserData() != NULL) {
+    //for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {    
+	b2Body * b = playerBody;
+		if (b->GetUserData() != NULL) {
             CCSprite *ballData = (CCSprite *)b->GetUserData();
             ballData.position = ccp(b->GetPosition().x * PTM_RATIO,
                                     b->GetPosition().y * PTM_RATIO);
             ballData.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
         }        
-    }
+    //}
     
 }
 
@@ -186,12 +218,7 @@ enum {
     playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
 }
 
--(void)initPlayer {
-    self.player = [JNPPlayer jnpplayer];
-    [self removeChildByTag:9 cleanup:TRUE];
-    [self addChild:self.player z:1 tag:9];
-    [self.player initialize:world parent:self];
-}
+// il y a vraiment des commentaires de merde dans ce code
 
 -(void) dealloc
 {
@@ -203,6 +230,8 @@ enum {
 	
 	[super dealloc];
 }	
+
+// c'est toi le commentaire
 
 -(void) createMenu
 {
@@ -394,7 +423,7 @@ enum {
 
 @synthesize tileMap = _tileMap;
 @synthesize background = _background;
-@synthesize player = _player;
+
 
 
 @end

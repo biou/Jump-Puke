@@ -85,8 +85,13 @@
 -(void) backgroundMusicTick:(ccTime)time {
     self.counter = self.counter + 1;
     
+<<<<<<< HEAD
     if (self.nextMusicStress == -1 || (self.counter % 10 == 0 && self.nextMusicStress != 0)) {
         NSLog(@"time has come to play next music with stress %d", self.nextMusicStress);
+=======
+    if (self.counter % 10 == 0 && self.nextMusicStress != 0) {
+        //NSLog(@"time has come to play next music with stress %d", self.nextMusicStress);
+>>>>>>> 631380cbdc24fc280b487927aa8505cd7c2e681e
         int stress = self.nextMusicStress;
         self.nextMusicStress = 0;
         [self playMusic:stress];
