@@ -19,8 +19,8 @@
 	if( (self=[super init])) {
         self.counter = 0;
         self.nextMusicStress = 0;
-
-        [self schedule:@selector(backgroundMusicTick:) interval:0.84];
+        [self preload];
+        [self schedule:@selector(backgroundMusicTick:) interval:0.83];
     }
    	return self;
 }

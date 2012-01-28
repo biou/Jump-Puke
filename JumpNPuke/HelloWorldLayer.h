@@ -18,9 +18,9 @@
 #import "JNPAudioManager.h"
 
 #define KVMIN 155.0
-#define KV2 170.0
-#define KV3 185.0
-#define KV4 200.0
+#define KV2 180.0
+#define KV3 260.0
+#define KV4 400.0
 
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
