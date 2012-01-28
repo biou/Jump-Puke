@@ -64,7 +64,7 @@ static JNPPlayer * singleton = nil;
     [parent addChild:self.sprite];
     [self.sprite setPhysicsBody:body];
     
-	[self changeScale:50];
+	[self changeScale:67.0];
 
 }
 
@@ -73,8 +73,14 @@ static JNPPlayer * singleton = nil;
 -(void) changeScale:(float) size 
 {
 	radius = size;
-	[self.sprite setScaleX:10.0];
-	
+
+	self.sprite.scale=0.5;
+    
+    CGSize mySize;
+    mySize.width=20.0;
+    mySize.height=20.0;
+    self.sprite.scaleX=0.3;
+    
     b2CircleShape circle;
     circle.m_radius = size/PTM_RATIO;
     
@@ -96,7 +102,7 @@ static JNPPlayer * singleton = nil;
     body->ApplyLinearImpulse(impulse, point);
 }
 
--(id) dealloc
+-(void) dealloc
 {
 	body = nil;
     self.sprite = nil;

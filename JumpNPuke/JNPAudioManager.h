@@ -19,6 +19,7 @@
     int nextMusicStress;
 }
 
+-(void) playMusicWithStress:(int)stress;
 -(void) playMusic:(int)stress;
 -(void) play:(int)soundType;
 
