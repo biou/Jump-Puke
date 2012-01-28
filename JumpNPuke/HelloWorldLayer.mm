@@ -132,9 +132,21 @@ enum {
 
 
 -(void)updateViewPoint:(float)dt {
-    self.position = ccp(200-((CCSprite *)playerBody->GetUserData()).position.x, self.position.y);
+    float currentPlayerPosition = ((CCSprite *)playerBody->GetUserData()).position.x;
+    self.position = ccp(200-currentPlayerPosition, self.position.y);
     
+    float dp = currentPlayerPosition - prevPlayerPosition;
+    float v = dp/dt;
+    currentSpeed=v;
+    // NSLog(@"Vitesse : %f",v);
     
+    if (v<140) {
+        float zeForce = (140 - v)/400;
+        b2Vec2 force = b2Vec2(zeForce, 0.0f);
+        playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
+    }
+    
+    prevPlayerPosition = currentPlayerPosition;
 }
 
 -(void)updatePlayerPosFromPhysics:(float)dt {

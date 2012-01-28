@@ -35,6 +35,7 @@
  
     b2Body *playerBody;
     float prevPlayerPosition;
+    float currentSpeed;
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
