@@ -26,6 +26,9 @@ enum {
 -(void) createMenu;
 @end
 
+
+// ta mere elle mange des pruneaux
+
 @implementation HelloWorldLayer
 
 @synthesize playerBody;
@@ -90,10 +93,11 @@ enum {
         
        
 		// taille en pixels de l'éléphant : 260px
-		float elephantSize = 260.0;
+		elephantSize = 260.0;
+		currentScale = 0.4;
         // Create ball body and shape
-        CCSprite *playerSprite = [CCSprite spriteWithFile:@"elephants/elephant-normal.png"];
-        playerSprite.scale=0.2;
+        CCSprite *playerSprite = [CCSprite spriteWithFile:@"elephant-normal.png"];
+        playerSprite.scale=currentScale;
         playerSprite.position=ccp(400, 400);
         [self addChild:playerSprite];
         b2BodyDef ballBodyDef;
@@ -106,7 +110,7 @@ enum {
         
         b2CircleShape circle;
         circle.m_radius = elephantSize*playerSprite.scale/2/PTM_RATIO;
-        
+        currentCircle = &circle;
         b2FixtureDef ballShapeDef;
         ballShapeDef.shape = &circle;
         ballShapeDef.density = 1.0f;
@@ -134,9 +138,32 @@ enum {
 }
 
 -(void)updatePlayerSize:(float)dt {
- 
+	if (fabs(currentScale) > 0.05) {
+		currentScale -= 0.001;
+
+		if (playerBody->GetUserData() != NULL) {
+				CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
+				ballData.scale=currentScale;
+				playerBody->DestroyFixture(playerBody->GetFixtureList());
+				b2CircleShape circle;
+				circle.m_radius = elephantSize*currentScale/2/PTM_RATIO;
+				b2FixtureDef ballShapeDef;
+				ballShapeDef.shape = &circle;
+				ballShapeDef.density = 0.5f * currentScale;
+				ballShapeDef.friction = 0.2f;
+				ballShapeDef.restitution = 0.8f;
+				playerBody->CreateFixture(&ballShapeDef);
+			 
+		}        
+	} else {
+		currentScale = 0.0;
+		NSLog(@"trop petit");
+		
+	}
+	
 }
 
+// c'est toi Soyouz !!!
 
 -(void)updateViewPoint:(float)dt {
     float currentPlayerPosition = ((CCSprite *)playerBody->GetUserData()).position.x;
@@ -172,14 +199,15 @@ enum {
 -(void)updatePlayerPosFromPhysics:(float)dt {
     
     // world->Step(dt, 10, 10);
-    for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {    
-        if (b->GetUserData() != NULL) {
+    //for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {    
+	b2Body * b = playerBody;
+		if (b->GetUserData() != NULL) {
             CCSprite *ballData = (CCSprite *)b->GetUserData();
             ballData.position = ccp(b->GetPosition().x * PTM_RATIO,
                                     b->GetPosition().y * PTM_RATIO);
             ballData.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
         }        
-    }
+    //}
     
 }
 
@@ -188,7 +216,7 @@ enum {
     playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
 }
 
-
+// il y a vraiment des commentaires de merde dans ce code
 
 -(void) dealloc
 {
@@ -200,6 +228,8 @@ enum {
 	
 	[super dealloc];
 }	
+
+// c'est toi le commentaire
 
 -(void) createMenu
 {

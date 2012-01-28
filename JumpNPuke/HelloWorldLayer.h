@@ -39,8 +39,12 @@
     CCTMXLayer *_background;
  
     b2Body *playerBody;
+
     float prevPlayerPosition;
     float currentSpeed;
+	float currentScale;
+	float elephantSize;
+	b2CircleShape * currentCircle;
 
     JNPAudioManager *_audioManager;
 }
