@@ -11,6 +11,7 @@
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
+#import "JNPBasicLayer.h"
 
 
 enum {
@@ -142,7 +143,7 @@ enum {
 
 -(void)gameover
 {
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPDeathLayer scene]]];
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpGameover]]];
 	
 }
 

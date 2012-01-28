@@ -15,7 +15,7 @@
 #import "GLES-Render.h"
 #import "JNPControlLayer.h"
 #import "JNPAudioManager.h"
-#import "JNPDeathLayer.h"
+#import "JNPBasicLayer.h"
 
 #define KVMIN 155.0
 #define KV2 180.0

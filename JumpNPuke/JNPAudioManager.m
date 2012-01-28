@@ -29,19 +29,19 @@
 -(void) playMusic:(int)stress {
     switch (stress) {
         case 1:
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Tribal_1.wav" loop:YES];
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Tribal_1.aifc" loop:YES];
             break;
         case 2:
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Tribal_2.wav" loop:YES];
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Tribal_2.aifc" loop:YES];
             break;
         case 3:
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Tribal_3.wav" loop:YES];
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Tribal_3.aifc" loop:YES];
             break;
         case 4:
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Tribal_4.wav" loop:YES];
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Tribal_4.aifc" loop:YES];
             break;
         case 5:
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Tribal_5.wav" loop:YES];
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Tribal_5.aifc" loop:YES];
             break;
         default:
             break;
