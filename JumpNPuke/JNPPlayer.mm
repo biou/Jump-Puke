@@ -47,7 +47,7 @@ static JNPPlayer * singleton = nil;
 
 -(void) initialize:(b2World*)world parent:(CCNode*)parent
 {
-    self.sprite = [PhysicsSprite spriteWithFile:@"player.png"];
+    self.sprite = [PhysicsSprite spriteWithFile:@"elephants/elephant-normal.png"];
     
     CGSize s = [CCDirector sharedDirector].winSize;
     CGPoint p = ccp(s.width/2, s.height/2);
