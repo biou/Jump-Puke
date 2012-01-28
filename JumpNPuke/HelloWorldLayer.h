@@ -31,12 +31,15 @@
     CCTMXTiledMap *_tileMap;
     CCTMXLayer *_background;
     CCSprite *_player;
-    
+ 
+    b2Body *playerBody;
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
 @property (nonatomic, retain) CCTMXLayer *background;
 @property (nonatomic, retain) CCSprite *player;
+
+@property (nonatomic) b2Body *playerBody;
 
 
 
