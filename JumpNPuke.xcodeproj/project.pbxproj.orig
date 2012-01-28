@@ -7,17 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
-		B54D1E4C14D4066F007AFC94 /* bords.plist in Resources */ = {isa = PBXBuildFile; fileRef = B54D1E4A14D4066F007AFC94 /* bords.plist */; };
-		B54D1E4D14D4066F007AFC94 /* bords.png in Resources */ = {isa = PBXBuildFile; fileRef = B54D1E4B14D4066F007AFC94 /* bords.png */; };
-=======
-		32A7A74814D3E8B100C54055 /* JNPControlLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A74714D3E8B100C54055 /* JNPControlLayer.m */; };
+		32A7A74814D3E8B100C54055 /* JNPControlLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */; };
 		32A7A75414D3ECCD00C54055 /* jumpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75214D3ECCD00C54055 /* jumpButton.png */; };
 		32A7A75514D3ECCD00C54055 /* pukeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75314D3ECCD00C54055 /* pukeButton.png */; };
 		32A7A75814D3FE8E00C54055 /* pukeButton-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75614D3FE8E00C54055 /* pukeButton-selected.png */; };
 		32A7A75914D3FE8E00C54055 /* jumpButton-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75714D3FE8E00C54055 /* jumpButton-selected.png */; };
->>>>>>> 64ead4d5e8cf11710c02e26abc32309991a55e0a
+		B50B7FF714D40FA400FAAEF9 /* bords.plist in Resources */ = {isa = PBXBuildFile; fileRef = B50B7FF514D40FA400FAAEF9 /* bords.plist */; };
+		B50B7FF814D40FA400FAAEF9 /* bords.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B7FF614D40FA400FAAEF9 /* bords.png */; };
+		B50B7FFB14D4136200FAAEF9 /* fondpapier.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B7FFA14D4136200FAAEF9 /* fondpapier.png */; };
+		B50B800514D4499800FAAEF9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B800414D4499800FAAEF9 /* Default.png */; };
+		B50B800814D449AA00FAAEF9 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B800714D449AA00FAAEF9 /* Default-Portrait~ipad.png */; };
+		B50B800A14D45FC700FAAEF9 /* icone.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B800914D45FC700FAAEF9 /* icone.png */; };
 		BFBE8FDD14D3DE8A00C3C94B /* JNPAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */; };
+		BFBEF4F814D420C600144BDD /* JNPPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFBEF4F714D420C600144BDD /* JNPPlayer.mm */; };
+		BFBEF50314D4598B00144BDD /* Tribal_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFBEF4FE14D4598B00144BDD /* Tribal_1.mp3 */; };
+		BFBEF50414D4598B00144BDD /* Tribal_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFBEF4FF14D4598B00144BDD /* Tribal_2.mp3 */; };
+		BFBEF50514D4598B00144BDD /* Tribal_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFBEF50014D4598B00144BDD /* Tribal_3.mp3 */; };
+		BFBEF50614D4598B00144BDD /* Tribal_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFBEF50114D4598B00144BDD /* Tribal_4.mp3 */; };
+		BFBEF50714D4598B00144BDD /* Tribal_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFBEF50214D4598B00144BDD /* Tribal_5.mp3 */; };
+		BFBEF50E14D45FB000144BDD /* Tribal_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = BFBEF50914D45FB000144BDD /* Tribal_1.wav */; };
+		BFBEF50F14D45FB000144BDD /* Tribal_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = BFBEF50A14D45FB000144BDD /* Tribal_2.wav */; };
+		BFBEF51014D45FB000144BDD /* Tribal_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = BFBEF50B14D45FB000144BDD /* Tribal_3.wav */; };
+		BFBEF51114D45FB000144BDD /* Tribal_4.wav in Resources */ = {isa = PBXBuildFile; fileRef = BFBEF50C14D45FB000144BDD /* Tribal_4.wav */; };
+		BFBEF51214D45FB000144BDD /* Tribal_5.wav in Resources */ = {isa = PBXBuildFile; fileRef = BFBEF50D14D45FB000144BDD /* Tribal_5.wav */; };
 		BFDE4D1114D3C68700481370 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1014D3C68700481370 /* QuartzCore.framework */; };
 		BFDE4D1314D3C68700481370 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1214D3C68700481370 /* OpenGLES.framework */; };
 		BFDE4D1514D3C68700481370 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1414D3C68700481370 /* OpenAL.framework */; };
@@ -204,19 +216,32 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-<<<<<<< HEAD
-		B54D1E4A14D4066F007AFC94 /* bords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bords.plist; sourceTree = "<group>"; };
-		B54D1E4B14D4066F007AFC94 /* bords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bords.png; sourceTree = "<group>"; };
-=======
 		32A7A74614D3E8B100C54055 /* JNPControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPControlLayer.h; sourceTree = "<group>"; };
-		32A7A74714D3E8B100C54055 /* JNPControlLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPControlLayer.m; sourceTree = "<group>"; };
+		32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPControlLayer.mm; sourceTree = "<group>"; };
 		32A7A75214D3ECCD00C54055 /* jumpButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpButton.png; sourceTree = "<group>"; };
 		32A7A75314D3ECCD00C54055 /* pukeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pukeButton.png; sourceTree = "<group>"; };
 		32A7A75614D3FE8E00C54055 /* pukeButton-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pukeButton-selected.png"; sourceTree = "<group>"; };
 		32A7A75714D3FE8E00C54055 /* jumpButton-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jumpButton-selected.png"; sourceTree = "<group>"; };
->>>>>>> 64ead4d5e8cf11710c02e26abc32309991a55e0a
+		B50B7FF514D40FA400FAAEF9 /* bords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bords.plist; sourceTree = "<group>"; };
+		B50B7FF614D40FA400FAAEF9 /* bords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bords.png; sourceTree = "<group>"; };
+		B50B7FFA14D4136200FAAEF9 /* fondpapier.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fondpapier.png; sourceTree = "<group>"; };
+		B50B800414D4499800FAAEF9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		B50B800714D449AA00FAAEF9 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		B50B800914D45FC700FAAEF9 /* icone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icone.png; sourceTree = "<group>"; };
 		BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPAudioManager.h; sourceTree = "<group>"; };
 		BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPAudioManager.m; sourceTree = "<group>"; };
+		BFBEF4F614D420C600144BDD /* JNPPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPPlayer.h; sourceTree = "<group>"; };
+		BFBEF4F714D420C600144BDD /* JNPPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPPlayer.mm; sourceTree = "<group>"; };
+		BFBEF4FE14D4598B00144BDD /* Tribal_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_1.mp3; sourceTree = "<group>"; };
+		BFBEF4FF14D4598B00144BDD /* Tribal_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_2.mp3; sourceTree = "<group>"; };
+		BFBEF50014D4598B00144BDD /* Tribal_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_3.mp3; sourceTree = "<group>"; };
+		BFBEF50114D4598B00144BDD /* Tribal_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_4.mp3; sourceTree = "<group>"; };
+		BFBEF50214D4598B00144BDD /* Tribal_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_5.mp3; sourceTree = "<group>"; };
+		BFBEF50914D45FB000144BDD /* Tribal_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_1.wav; sourceTree = "<group>"; };
+		BFBEF50A14D45FB000144BDD /* Tribal_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_2.wav; sourceTree = "<group>"; };
+		BFBEF50B14D45FB000144BDD /* Tribal_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_3.wav; sourceTree = "<group>"; };
+		BFBEF50C14D45FB000144BDD /* Tribal_4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_4.wav; sourceTree = "<group>"; };
+		BFBEF50D14D45FB000144BDD /* Tribal_5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_5.wav; sourceTree = "<group>"; };
 		BFDE4D0C14D3C68700481370 /* JumpNPuke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpNPuke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFDE4D1014D3C68700481370 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BFDE4D1214D3C68700481370 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -592,6 +617,8 @@
 		BFBE8FD914D3DE7800C3C94B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BFBEF4F614D420C600144BDD /* JNPPlayer.h */,
+				BFBEF4F714D420C600144BDD /* JNPPlayer.mm */,
 				BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */,
 				BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */,
 			);
@@ -601,6 +628,9 @@
 		BFDE4D0114D3C68700481370 = {
 			isa = PBXGroup;
 			children = (
+				B50B800914D45FC700FAAEF9 /* icone.png */,
+				B50B800714D449AA00FAAEF9 /* Default-Portrait~ipad.png */,
+				B50B800414D4499800FAAEF9 /* Default.png */,
 				BFDE4D2214D3C68700481370 /* JumpNPuke */,
 				BFDE4D0F14D3C68700481370 /* Frameworks */,
 				BFDE4D0D14D3C68700481370 /* Products */,
@@ -648,7 +678,7 @@
 				BFDE4D5414D3C68700481370 /* libs */,
 				BFDE4F2214D3C68900481370 /* Supporting Files */,
 				32A7A74614D3E8B100C54055 /* JNPControlLayer.h */,
-				32A7A74714D3E8B100C54055 /* JNPControlLayer.m */,
+				32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */,
 			);
 			path = JumpNPuke;
 			sourceTree = "<group>";
@@ -656,15 +686,23 @@
 		BFDE4D2314D3C68700481370 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				B54D1E4A14D4066F007AFC94 /* bords.plist */,
-				B54D1E4B14D4066F007AFC94 /* bords.png */,
-=======
+				BFBEF50914D45FB000144BDD /* Tribal_1.wav */,
+				BFBEF50A14D45FB000144BDD /* Tribal_2.wav */,
+				BFBEF50B14D45FB000144BDD /* Tribal_3.wav */,
+				BFBEF50C14D45FB000144BDD /* Tribal_4.wav */,
+				BFBEF50D14D45FB000144BDD /* Tribal_5.wav */,
+				BFBEF4FE14D4598B00144BDD /* Tribal_1.mp3 */,
+				BFBEF4FF14D4598B00144BDD /* Tribal_2.mp3 */,
+				BFBEF50014D4598B00144BDD /* Tribal_3.mp3 */,
+				BFBEF50114D4598B00144BDD /* Tribal_4.mp3 */,
+				BFBEF50214D4598B00144BDD /* Tribal_5.mp3 */,
 				32A7A75614D3FE8E00C54055 /* pukeButton-selected.png */,
 				32A7A75714D3FE8E00C54055 /* jumpButton-selected.png */,
 				32A7A75214D3ECCD00C54055 /* jumpButton.png */,
+				B50B7FFA14D4136200FAAEF9 /* fondpapier.png */,
+				B50B7FF514D40FA400FAAEF9 /* bords.plist */,
+				B50B7FF614D40FA400FAAEF9 /* bords.png */,
 				32A7A75314D3ECCD00C54055 /* pukeButton.png */,
->>>>>>> 64ead4d5e8cf11710c02e26abc32309991a55e0a
 				BFDE4D2414D3C68700481370 /* Default.png */,
 				BFDE4F3A14D3C80200481370 /* map.tmx */,
 				BFDE4F3B14D3C80200481370 /* player.png */,
@@ -1262,15 +1300,29 @@
 				BFDE4F3F14D3C80200481370 /* player.png in Resources */,
 				BFDE4F4014D3C80200481370 /* tiles.plist in Resources */,
 				BFDE4F4114D3C80200481370 /* tiles.png in Resources */,
-<<<<<<< HEAD
-				B54D1E4C14D4066F007AFC94 /* bords.plist in Resources */,
-				B54D1E4D14D4066F007AFC94 /* bords.png in Resources */,
-=======
 				32A7A75414D3ECCD00C54055 /* jumpButton.png in Resources */,
 				32A7A75514D3ECCD00C54055 /* pukeButton.png in Resources */,
 				32A7A75814D3FE8E00C54055 /* pukeButton-selected.png in Resources */,
 				32A7A75914D3FE8E00C54055 /* jumpButton-selected.png in Resources */,
->>>>>>> 64ead4d5e8cf11710c02e26abc32309991a55e0a
+				B50B7FF714D40FA400FAAEF9 /* bords.plist in Resources */,
+				B50B7FF814D40FA400FAAEF9 /* bords.png in Resources */,
+				B50B7FFB14D4136200FAAEF9 /* fondpapier.png in Resources */,
+				B50B800514D4499800FAAEF9 /* Default.png in Resources */,
+				B50B800814D449AA00FAAEF9 /* Default-Portrait~ipad.png in Resources */,
+<<<<<<< HEAD
+				BFBEF50314D4598B00144BDD /* Tribal_1.mp3 in Resources */,
+				BFBEF50414D4598B00144BDD /* Tribal_2.mp3 in Resources */,
+				BFBEF50514D4598B00144BDD /* Tribal_3.mp3 in Resources */,
+				BFBEF50614D4598B00144BDD /* Tribal_4.mp3 in Resources */,
+				BFBEF50714D4598B00144BDD /* Tribal_5.mp3 in Resources */,
+				BFBEF50E14D45FB000144BDD /* Tribal_1.wav in Resources */,
+				BFBEF50F14D45FB000144BDD /* Tribal_2.wav in Resources */,
+				BFBEF51014D45FB000144BDD /* Tribal_3.wav in Resources */,
+				BFBEF51114D45FB000144BDD /* Tribal_4.wav in Resources */,
+				BFBEF51214D45FB000144BDD /* Tribal_5.wav in Resources */,
+=======
+				B50B800A14D45FC700FAAEF9 /* icone.png in Resources */,
+>>>>>>> 317e106a9439352b0e9d8429659aa1423bfdd558
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1426,7 +1478,8 @@
 				BFDE4F2E14D3C68900481370 /* GLES-Render.mm in Sources */,
 				BFDE4F3214D3C68900481370 /* PhysicsSprite.mm in Sources */,
 				BFBE8FDD14D3DE8A00C3C94B /* JNPAudioManager.m in Sources */,
-				32A7A74814D3E8B100C54055 /* JNPControlLayer.m in Sources */,
+				32A7A74814D3E8B100C54055 /* JNPControlLayer.mm in Sources */,
+				BFBEF4F814D420C600144BDD /* JNPPlayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1486,6 +1539,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "\"JumpNPuke/libs\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1503,6 +1557,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "\"JumpNPuke/libs\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

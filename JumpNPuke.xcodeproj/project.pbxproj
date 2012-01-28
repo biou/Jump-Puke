@@ -17,6 +17,7 @@
 		B50B7FFB14D4136200FAAEF9 /* fondpapier.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B7FFA14D4136200FAAEF9 /* fondpapier.png */; };
 		B50B800514D4499800FAAEF9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B800414D4499800FAAEF9 /* Default.png */; };
 		B50B800814D449AA00FAAEF9 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B800714D449AA00FAAEF9 /* Default-Portrait~ipad.png */; };
+		B50B800A14D45FC700FAAEF9 /* icone.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B800914D45FC700FAAEF9 /* icone.png */; };
 		BFBE8FDD14D3DE8A00C3C94B /* JNPAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */; };
 		BFBEF4F814D420C600144BDD /* JNPPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFBEF4F714D420C600144BDD /* JNPPlayer.mm */; };
 		BFBEF50314D4598B00144BDD /* Tribal_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFBEF4FE14D4598B00144BDD /* Tribal_1.mp3 */; };
@@ -226,6 +227,7 @@
 		B50B7FFA14D4136200FAAEF9 /* fondpapier.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fondpapier.png; sourceTree = "<group>"; };
 		B50B800414D4499800FAAEF9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		B50B800714D449AA00FAAEF9 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		B50B800914D45FC700FAAEF9 /* icone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icone.png; sourceTree = "<group>"; };
 		BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPAudioManager.h; sourceTree = "<group>"; };
 		BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPAudioManager.m; sourceTree = "<group>"; };
 		BFBEF4F614D420C600144BDD /* JNPPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPPlayer.h; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 		BFDE4D0114D3C68700481370 = {
 			isa = PBXGroup;
 			children = (
+				B50B800914D45FC700FAAEF9 /* icone.png */,
 				B50B800714D449AA00FAAEF9 /* Default-Portrait~ipad.png */,
 				B50B800414D4499800FAAEF9 /* Default.png */,
 				BFDE4D2214D3C68700481370 /* JumpNPuke */,
@@ -1316,6 +1319,7 @@
 				BFBEF51014D45FB000144BDD /* Tribal_3.wav in Resources */,
 				BFBEF51114D45FB000144BDD /* Tribal_4.wav in Resources */,
 				BFBEF51214D45FB000144BDD /* Tribal_5.wav in Resources */,
+				B50B800A14D45FC700FAAEF9 /* icone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
