@@ -29,6 +29,8 @@ enum {
 
 @implementation HelloWorldLayer
 
+@synthesize playerBody;
+
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
@@ -54,24 +56,6 @@ enum {
         [self addChild:_tileMap z:0];
         
         
-        // init du joueur
-        CCTMXObjectGroup *objects = [_tileMap objectGroupNamed:@"objets"];
-        NSAssert(objects != nil, @"'Objects' object group not found");
-        NSMutableDictionary *spawnPoint = [objects objectNamed:@"spawn"];        
-        NSAssert(spawnPoint != nil, @"SpawnPoint object not found");
-        int x = [[spawnPoint valueForKey:@"x"] intValue];
-        int y = [[spawnPoint valueForKey:@"y"] intValue];
-        
-        self.player = [CCSprite spriteWithFile:@"player.png"];
-        _player.position = ccp(x, y);
-        [self addChild:_player]; 
-        
-        
-        // ajout des murs etc
-        //[self drawCollisionTiles];
-        
-
-        
 		// enable events
 		
 		self.isTouchEnabled = YES;
@@ -85,6 +69,8 @@ enum {
 		[self createMenu];
 		
 		//Set up sprite
+        [self initPlayer];
+                
 		
 #if 1
 		// Use batch node. Faster
@@ -97,17 +83,54 @@ enum {
 #endif
 		[self addChild:parent z:0 tag:kTagParentNode];
 		
-		
-		[self addNewSpriteAtPosition:ccp(s.width/2, s.height/2)];
-		
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
-		[self addChild:label z:0];
-		[label setColor:ccc3(0,0,255)];
-		label.position = ccp( s.width/2, s.height-50);
-		
-		[self scheduleUpdate];
+        [self scheduleUpdate];
 	}
 	return self;
+}
+
+-(void)initPlayer {
+    /*
+    // init du joueur
+    CCTMXObjectGroup *objects = [_tileMap objectGroupNamed:@"objets"];
+    NSAssert(objects != nil, @"'Objects' object group not found");
+    NSMutableDictionary *spawnPoint = [objects objectNamed:@"spawn"];        
+    NSAssert(spawnPoint != nil, @"SpawnPoint object not found");
+    int x = [[spawnPoint valueForKey:@"x"] intValue];
+    int y = [[spawnPoint valueForKey:@"y"] intValue];
+    
+    self.player = [CCSprite spriteWithFile:@"player.png"];
+    _player.position = ccp(x, y);
+    [self addChild:_player];
+    */
+
+    CGSize s = [CCDirector sharedDirector].winSize;
+    CGPoint p = ccp(s.width/2, s.height/2);
+    
+	CCNode *parent = [self getChildByTag:kTagParentNode];
+    PhysicsSprite *sprite = [PhysicsSprite spriteWithFile:@"player.png"];
+	[parent addChild:sprite];
+	
+	sprite.position = ccp( p.x, p.y);
+	
+	// Define the dynamic body.
+	//Set up a 1m squared box in the physics world
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
+	self.playerBody = world->CreateBody(&bodyDef);
+	
+	// Define another box shape for our dynamic body.
+	b2PolygonShape dynamicBox;
+	dynamicBox.SetAsBox(1.0f, 1.0f);//These are mid points for our 1m box
+	
+	// Define the dynamic body fixture.
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;	
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.3f;
+	self.playerBody->CreateFixture(&fixtureDef);
+	
+	[sprite setPhysicsBody:self.playerBody];
 }
 
 -(void) dealloc
@@ -235,24 +258,13 @@ enum {
         groundBody->CreateFixture(&groundBox,0);
     }
 
-    /*
 	// bottom
-	
 	groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO,0));
 	groundBody->CreateFixture(&groundBox,0);
 	
 	// top
 	groundBox.Set(b2Vec2(0,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO));
 	groundBody->CreateFixture(&groundBox,0);
-	
-	// left
-	groundBox.Set(b2Vec2(0,s.height/PTM_RATIO), b2Vec2(0,0));
-	groundBody->CreateFixture(&groundBox,0);
-	
-	// right
-	groundBox.Set(b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,0));
-	groundBody->CreateFixture(&groundBox,0);
-     */
 }
 
 -(void) draw
@@ -273,41 +285,6 @@ enum {
 	kmGLPopMatrix();
 }
 
--(void) addNewSpriteAtPosition:(CGPoint)p
-{
-	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
-	CCNode *parent = [self getChildByTag:kTagParentNode];
-	
-	//We have a 64x64 sprite sheet with 4 different 32x32 images.  The following code is
-	//just randomly picking one of the images
-	int idx = (CCRANDOM_0_1() > .5 ? 0:1);
-	int idy = (CCRANDOM_0_1() > .5 ? 0:1);
-	PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];						
-	[parent addChild:sprite];
-	
-	sprite.position = ccp( p.x, p.y);
-	
-	// Define the dynamic body.
-	//Set up a 1m squared box in the physics world
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
-	b2Body *body = world->CreateBody(&bodyDef);
-	
-	// Define another box shape for our dynamic body.
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
-	
-	// Define the dynamic body fixture.
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;	
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-	body->CreateFixture(&fixtureDef);
-	
-	[sprite setPhysicsBody:body];
-}
-
 -(void) update: (ccTime) dt
 {
 	//It is recommended that a fixed time step is used with Box2D for stability
@@ -325,14 +302,8 @@ enum {
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	//Add a new body/atlas sprite at the touched location
-	for( UITouch *touch in touches ) {
-		CGPoint location = [touch locationInView: [touch view]];
-		
-		location = [[CCDirector sharedDirector] convertToGL: location];
-		
-		[self addNewSpriteAtPosition: location];
-	}
+    b2Vec2 force = b2Vec2(30.0f, 39.0f );
+    self.playerBody->ApplyLinearImpulse(force, self.playerBody->GetPosition());
 }
 
 #pragma mark GameKit delegate
