@@ -243,8 +243,8 @@ enum {
 
         NSString *p1s = [points objectAtIndex:0];
         NSArray *p1 = [p1s componentsSeparatedByString:@","];
-        float p1x = [[p1 objectAtIndex:0] floatValue];
-        float p1y = [[p1 objectAtIndex:1] floatValue];
+        float p1x = x + [[p1 objectAtIndex:0] floatValue];
+        float p1y = y - [[p1 objectAtIndex:1] floatValue];
         
         NSString *p2s = [points objectAtIndex:1];
         NSArray *p2 = [p2s componentsSeparatedByString:@","];
@@ -253,9 +253,10 @@ enum {
         
         NSLog(@"Adding a fixture x=%d y=%d p1x=%f p1y=%f p2x=%f p2y=%f, p2xstr=%@", x, y, p1x, p1y, p2x, p2y, [p2 objectAtIndex:0]);
         
-        groundBox.Set(b2Vec2(x/PTM_RATIO,y/PTM_RATIO), b2Vec2(p2x/PTM_RATIO,p2y/PTM_RATIO));
+        groundBox.Set(b2Vec2(p1x/PTM_RATIO,p1y/PTM_RATIO), b2Vec2(p2x/PTM_RATIO,p2y/PTM_RATIO));
         //groundBox.Set(b2Vec2(64/PTM_RATIO,64/PTM_RATIO), b2Vec2(256/PTM_RATIO,64/PTM_RATIO));
         groundBody->CreateFixture(&groundBox,0);
+        
     }
 
 	// bottom
