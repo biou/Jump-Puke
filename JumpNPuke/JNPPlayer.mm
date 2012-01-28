@@ -64,16 +64,27 @@ static JNPPlayer * singleton = nil;
     [parent addChild:self.sprite];
     [self.sprite setPhysicsBody:body];
     
+	[self changeScale:50];
+
+}
+
+
+
+-(void) changeScale:(float) size 
+{
+	radius = size;
+	[self.sprite setScaleX:10.0];
+	
     b2CircleShape circle;
-    circle.m_radius = 26.0/PTM_RATIO;
+    circle.m_radius = size/PTM_RATIO;
     
     b2FixtureDef ballShapeDef;
     ballShapeDef.shape = &circle;
     ballShapeDef.density = 1.0f;
     ballShapeDef.friction = 0.2f;
     ballShapeDef.restitution = 0.8f;
-    body->CreateFixture(&ballShapeDef);
-
+    body->CreateFixture(&ballShapeDef);	
+	
 }
 
 -(b2Vec2) getPosition

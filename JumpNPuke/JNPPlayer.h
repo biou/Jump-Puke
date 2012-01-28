@@ -10,6 +10,7 @@
 
 @interface JNPPlayer : CCNode {
     b2Body *body;
+	int radius;
     
 }
 
@@ -20,5 +21,6 @@
 -(b2Vec2) getPosition;
 -(void) jump:(b2Vec2)impulse atPoint:(b2Vec2)point;
 -(void) initialize:(b2World*)world parent:(CCNode*)parent;
+-(void) changeScale:(float) size;
 
 @end
