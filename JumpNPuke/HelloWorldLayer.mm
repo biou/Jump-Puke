@@ -137,9 +137,16 @@ enum {
 	return self;
 }
 
+
+-(void)gameover
+{
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPDeathLayer scene]]];
+	
+}
+
 -(void)updatePlayerSize:(float)dt {
-	if (fabs(currentScale) > 0.05) {
-		currentScale -= 0.001;
+	if (fabs(currentScale) > 0.08) {
+		currentScale -= 0.005;
 
 		if (playerBody->GetUserData() != NULL) {
 				CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
@@ -158,6 +165,7 @@ enum {
 	} else {
 		currentScale = 0.0;
 		NSLog(@"trop petit");
+		[self gameover];
 		
 	}
 	
