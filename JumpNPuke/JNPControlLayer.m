@@ -25,7 +25,7 @@ id pukeButtonSelected;
 		winSize = [[CCDirector sharedDirector] winSize];
 		
 		jumpButton = [CCSprite spriteWithFile: @"jumpButton.png"];
-        jumpButton.position = ccp( 50, 50 );
+        jumpButton.position = ccp( 100, 100 );
         [self addChild:jumpButton];
 		jumpButtonNormal = [[CCTextureCache sharedTextureCache] addImage:@"jumpButton.png"];
 		jumpButtonSelected= [[CCTextureCache sharedTextureCache] addImage:@"jumpButton-selected.png"];	
@@ -33,7 +33,7 @@ id pukeButtonSelected;
 		pukeButtonSelected= [[CCTextureCache sharedTextureCache] addImage:@"pukeButton-selected.png"];		
 		
 		pukeButton = [CCSprite spriteWithFile: @"pukeButton.png"];
-        pukeButton.position = ccp(winSize.width - 50, 50);
+        pukeButton.position = ccp(winSize.width - 100, 100);
         [self addChild:pukeButton];	
 		
 		self.isTouchEnabled = YES;
