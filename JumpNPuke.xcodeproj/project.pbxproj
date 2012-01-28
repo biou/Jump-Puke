@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B54D1E4C14D4066F007AFC94 /* bords.plist in Resources */ = {isa = PBXBuildFile; fileRef = B54D1E4A14D4066F007AFC94 /* bords.plist */; };
+		B54D1E4D14D4066F007AFC94 /* bords.png in Resources */ = {isa = PBXBuildFile; fileRef = B54D1E4B14D4066F007AFC94 /* bords.png */; };
 		BFBE8FDD14D3DE8A00C3C94B /* JNPAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */; };
 		BFDE4D1114D3C68700481370 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1014D3C68700481370 /* QuartzCore.framework */; };
 		BFDE4D1314D3C68700481370 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1214D3C68700481370 /* OpenGLES.framework */; };
@@ -194,6 +196,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B54D1E4A14D4066F007AFC94 /* bords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bords.plist; sourceTree = "<group>"; };
+		B54D1E4B14D4066F007AFC94 /* bords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bords.png; sourceTree = "<group>"; };
 		BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPAudioManager.h; sourceTree = "<group>"; };
 		BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPAudioManager.m; sourceTree = "<group>"; };
 		BFDE4D0C14D3C68700481370 /* JumpNPuke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpNPuke.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -633,6 +637,8 @@
 		BFDE4D2314D3C68700481370 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B54D1E4A14D4066F007AFC94 /* bords.plist */,
+				B54D1E4B14D4066F007AFC94 /* bords.png */,
 				BFDE4D2414D3C68700481370 /* Default.png */,
 				BFDE4F3A14D3C80200481370 /* map.tmx */,
 				BFDE4F3B14D3C80200481370 /* player.png */,
@@ -1230,6 +1236,8 @@
 				BFDE4F3F14D3C80200481370 /* player.png in Resources */,
 				BFDE4F4014D3C80200481370 /* tiles.plist in Resources */,
 				BFDE4F4114D3C80200481370 /* tiles.png in Resources */,
+				B54D1E4C14D4066F007AFC94 /* bords.plist in Resources */,
+				B54D1E4D14D4066F007AFC94 /* bords.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -234,6 +234,7 @@ enum {
         //groundBox.Set(b2Vec2(64/PTM_RATIO,64/PTM_RATIO), b2Vec2(256/PTM_RATIO,64/PTM_RATIO));
         groundBody->CreateFixture(&groundBox,0);
         
+        
     }
 
     /*
@@ -256,6 +257,8 @@ enum {
      */
 }
 
+
+#pragma mark DRAW DEBUG DATA ICI !!!
 -(void) draw
 {
 	//
@@ -264,7 +267,7 @@ enum {
 	// It is recommend to disable it
 	//
 	[super draw];
-	
+    
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
 	
 	kmGLPushMatrix();
