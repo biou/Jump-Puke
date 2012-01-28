@@ -35,10 +35,12 @@ enum {
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	HelloWorldLayer *layer = [HelloWorldLayer node];
+	HelloWorldLayer * baseLayer = [HelloWorldLayer node];
+	JNPControlLayer * controlLayer = [JNPControlLayer node];
 	
 	// add layer as a child to scene
-	[scene addChild: layer];
+	[scene addChild: baseLayer];
+	[scene addChild: controlLayer];
 	
 	// return the scene
 	return scene;
