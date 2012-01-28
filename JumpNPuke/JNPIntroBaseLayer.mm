@@ -10,7 +10,7 @@
 // Import the interfaces
 #import "JNPIntroBaseLayer.h"
 
-CCSprite *logo;
+
 
 // IntroBaseLayer implementation
 @implementation JNPIntroBaseLayer
@@ -23,7 +23,7 @@ CCSprite *logo;
 	if( (self=[super init])) {
 
 		// logo qui va s'animer
-        logo = [CCSprite spriteWithFile: @"intro.png"];
+        CCSprite *logo = [CCSprite spriteWithFile:@"intro.png"];
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
 		
 		// fond d'écran
