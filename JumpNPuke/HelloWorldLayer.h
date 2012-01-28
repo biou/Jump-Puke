@@ -48,6 +48,8 @@
 	b2CircleShape * currentCircle;
 
     JNPAudioManager *_audioManager;
+    
+    NSMutableArray *lesBonusDeTaMere;
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;

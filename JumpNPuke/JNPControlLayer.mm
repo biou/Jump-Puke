@@ -27,10 +27,10 @@ id pukeButtonSelected;
 		jumpButton = [CCSprite spriteWithFile: @"jumpButton.png"];
         jumpButton.position = ccp( 100, 100 );
         [self addChild:jumpButton];
-		jumpButtonNormal = [[CCTextureCache sharedTextureCache] addImage:@"jumpButton.png"];
-		jumpButtonSelected= [[CCTextureCache sharedTextureCache] addImage:@"jumpButton-selected.png"];	
-		pukeButtonNormal = [[CCTextureCache sharedTextureCache] addImage:@"pukeButton.png"];
-		pukeButtonSelected= [[CCTextureCache sharedTextureCache] addImage:@"pukeButton-selected.png"];		
+		jumpButtonNormal = [[[CCTextureCache sharedTextureCache] addImage:@"jumpButton.png"] retain];
+		jumpButtonSelected= [[[CCTextureCache sharedTextureCache] addImage:@"jumpButton-selected.png"] retain];	
+		pukeButtonNormal = [[[CCTextureCache sharedTextureCache] addImage:@"pukeButton.png"] retain];
+		pukeButtonSelected= [[[CCTextureCache sharedTextureCache] addImage:@"pukeButton-selected.png"] retain];		
 		
 		pukeButton = [CCSprite spriteWithFile: @"pukeButton.png"];
         pukeButton.position = ccp(winSize.width - 100, 100);

@@ -32,6 +32,20 @@
 		B50B800514D4499800FAAEF9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B800414D4499800FAAEF9 /* Default.png */; };
 		B50B800814D449AA00FAAEF9 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B800714D449AA00FAAEF9 /* Default-Portrait~ipad.png */; };
 		B50B800A14D45FC700FAAEF9 /* icone.png in Resources */ = {isa = PBXBuildFile; fileRef = B50B800914D45FC700FAAEF9 /* icone.png */; };
+		B5A5BFE414D4BD4700A018A0 /* bonus_06.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFE314D4BD4700A018A0 /* bonus_06.png */; };
+		B5A5BFF314D4BD5100A018A0 /* bonus_02.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFE614D4BD5100A018A0 /* bonus_02.png */; };
+		B5A5BFF414D4BD5100A018A0 /* bonus_03.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFE714D4BD5100A018A0 /* bonus_03.png */; };
+		B5A5BFF514D4BD5100A018A0 /* bonus_04.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFE814D4BD5100A018A0 /* bonus_04.png */; };
+		B5A5BFF614D4BD5100A018A0 /* bonus_05.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFE914D4BD5100A018A0 /* bonus_05.png */; };
+		B5A5BFF714D4BD5100A018A0 /* bonus_06.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFEA14D4BD5100A018A0 /* bonus_06.png */; };
+		B5A5BFF814D4BD5100A018A0 /* bonus_07.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFEB14D4BD5100A018A0 /* bonus_07.png */; };
+		B5A5BFF914D4BD5100A018A0 /* ennemis_01.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFEC14D4BD5100A018A0 /* ennemis_01.png */; };
+		B5A5BFFA14D4BD5100A018A0 /* ennemis_02.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFED14D4BD5100A018A0 /* ennemis_02.png */; };
+		B5A5BFFB14D4BD5100A018A0 /* ennemis_03.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFEE14D4BD5100A018A0 /* ennemis_03.png */; };
+		B5A5BFFC14D4BD5100A018A0 /* ennemis_04.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFEF14D4BD5100A018A0 /* ennemis_04.png */; };
+		B5A5BFFD14D4BD5100A018A0 /* ennemis_05.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFF014D4BD5100A018A0 /* ennemis_05.png */; };
+		B5A5BFFE14D4BD5100A018A0 /* ennemis_06.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFF114D4BD5100A018A0 /* ennemis_06.png */; };
+		B5A5BFFF14D4BD5100A018A0 /* ennemis_07.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A5BFF214D4BD5100A018A0 /* ennemis_07.png */; };
 		BF1F161E14D46847009481D1 /* intro.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1F161D14D46847009481D1 /* intro.png */; };
 		BF1F162614D468BB009481D1 /* credits-over.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1F162014D468BB009481D1 /* credits-over.png */; };
 		BF1F162714D468BB009481D1 /* credits.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1F162114D468BB009481D1 /* credits.png */; };
@@ -246,7 +260,6 @@
 		32F18A8714D444FC004D69CE /* serpent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = serpent.png; sourceTree = "<group>"; };
 		32F18A8A14D4452A004D69CE /* typo */ = {isa = PBXFileReference; lastKnownFileType = folder; path = typo; sourceTree = "<group>"; };
 		32F18A8C14D44537004D69CE /* elephants */ = {isa = PBXFileReference; lastKnownFileType = folder; path = elephants; sourceTree = "<group>"; };
-		32F18A8E14D44540004D69CE /* bonus-ennemis */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "bonus-ennemis"; sourceTree = "<group>"; };
 		32F18A9014D44D11004D69CE /* JNPIntroBaseLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPIntroBaseLayer.mm; sourceTree = "<group>"; };
 		32F18A9114D44D11004D69CE /* JNPIntroScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPIntroScene.mm; sourceTree = "<group>"; };
 		32F18A9214D44D11004D69CE /* JNPMenuBaseLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPMenuBaseLayer.mm; sourceTree = "<group>"; };
@@ -267,6 +280,20 @@
 		B50B800414D4499800FAAEF9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		B50B800714D449AA00FAAEF9 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		B50B800914D45FC700FAAEF9 /* icone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icone.png; path = ../icone.png; sourceTree = "<group>"; };
+		B5A5BFE314D4BD4700A018A0 /* bonus_06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bonus_06.png; path = "bonus-ennemis/bonus_06.png"; sourceTree = "<group>"; };
+		B5A5BFE614D4BD5100A018A0 /* bonus_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bonus_02.png; path = "bonus-ennemis/bonus_02.png"; sourceTree = "<group>"; };
+		B5A5BFE714D4BD5100A018A0 /* bonus_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bonus_03.png; path = "bonus-ennemis/bonus_03.png"; sourceTree = "<group>"; };
+		B5A5BFE814D4BD5100A018A0 /* bonus_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bonus_04.png; path = "bonus-ennemis/bonus_04.png"; sourceTree = "<group>"; };
+		B5A5BFE914D4BD5100A018A0 /* bonus_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bonus_05.png; path = "bonus-ennemis/bonus_05.png"; sourceTree = "<group>"; };
+		B5A5BFEA14D4BD5100A018A0 /* bonus_06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bonus_06.png; path = "bonus-ennemis/bonus_06.png"; sourceTree = "<group>"; };
+		B5A5BFEB14D4BD5100A018A0 /* bonus_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bonus_07.png; path = "bonus-ennemis/bonus_07.png"; sourceTree = "<group>"; };
+		B5A5BFEC14D4BD5100A018A0 /* ennemis_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ennemis_01.png; path = "bonus-ennemis/ennemis_01.png"; sourceTree = "<group>"; };
+		B5A5BFED14D4BD5100A018A0 /* ennemis_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ennemis_02.png; path = "bonus-ennemis/ennemis_02.png"; sourceTree = "<group>"; };
+		B5A5BFEE14D4BD5100A018A0 /* ennemis_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ennemis_03.png; path = "bonus-ennemis/ennemis_03.png"; sourceTree = "<group>"; };
+		B5A5BFEF14D4BD5100A018A0 /* ennemis_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ennemis_04.png; path = "bonus-ennemis/ennemis_04.png"; sourceTree = "<group>"; };
+		B5A5BFF014D4BD5100A018A0 /* ennemis_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ennemis_05.png; path = "bonus-ennemis/ennemis_05.png"; sourceTree = "<group>"; };
+		B5A5BFF114D4BD5100A018A0 /* ennemis_06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ennemis_06.png; path = "bonus-ennemis/ennemis_06.png"; sourceTree = "<group>"; };
+		B5A5BFF214D4BD5100A018A0 /* ennemis_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ennemis_07.png; path = "bonus-ennemis/ennemis_07.png"; sourceTree = "<group>"; };
 		BF1F161D14D46847009481D1 /* intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro.png; sourceTree = "<group>"; };
 		BF1F162014D468BB009481D1 /* credits-over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "credits-over.png"; sourceTree = "<group>"; };
 		BF1F162114D468BB009481D1 /* credits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = credits.png; sourceTree = "<group>"; };
@@ -730,7 +757,6 @@
 				B50B800914D45FC700FAAEF9 /* icone.png */,
 				B50B800714D449AA00FAAEF9 /* Default-Portrait~ipad.png */,
 				B50B800414D4499800FAAEF9 /* Default.png */,
-				32F18A8E14D44540004D69CE /* bonus-ennemis */,
 				32F18A8C14D44537004D69CE /* elephants */,
 				32F18A8A14D4452A004D69CE /* typo */,
 				32F18A8714D444FC004D69CE /* serpent.png */,
