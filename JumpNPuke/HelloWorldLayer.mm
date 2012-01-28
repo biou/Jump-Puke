@@ -149,6 +149,20 @@ enum {
         playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
     }
     
+    if (v<KVMIN) {
+        [_audioManager playMusicWithStress:1];
+    } else if (v<KV2) {
+        [_audioManager playMusicWithStress:2];
+    } else if (v<KV3) {
+        [_audioManager playMusicWithStress:3];
+    } else if (v<KV4) {
+        [_audioManager playMusicWithStress:4];
+    } else {
+        [_audioManager playMusicWithStress:5];
+    }
+    
+    
+    
     prevPlayerPosition = currentPlayerPosition;
 }
 

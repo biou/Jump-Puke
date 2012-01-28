@@ -17,6 +17,12 @@
 #import "JNPPlayer.h"
 #import "JNPAudioManager.h"
 
+#define KVMIN 155.0
+#define KV2 170.0
+#define KV3 185.0
+#define KV4 200.0
+
+
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
