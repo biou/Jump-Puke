@@ -54,7 +54,7 @@
 
 -(void)menu1 {
 	NSLog(@"menu1");	
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HelloWorldLayer node]]];
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HelloWorldLayer scene]]];
 }
 
 -(void)menu2 {
