@@ -16,10 +16,11 @@
 #import "JNPControlLayer.h"
 #import "JNPAudioManager.h"
 #import "JNPBasicLayer.h"
-
+#import "JNPScore.h"
 #import "MyContactListener.h"
+#import "JNPScore.h"
 
-
+#define KLIMITLEVELUP 23000
 #define KVMIN 155.0
 #define KV2 180.0
 #define KV3 260.0
@@ -71,6 +72,8 @@
 -(void)tellPlayerToJump;
 -(void)unpuke:(float)dt;
 -(void)tellPlayertoPuke:(CGPoint)position;
+-(void)diminuerPlayerDeltaScale:(float)deltaScale;
+-(void)diminuerPlayerDeltaScale:(float)deltaScale withEffect:(Boolean)effect;
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
