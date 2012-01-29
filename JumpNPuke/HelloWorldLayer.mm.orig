@@ -140,6 +140,17 @@ static JNPControlLayer * controlLayer;
         
         
 		
+<<<<<<< HEAD
+=======
+        // après le tirage au sort des positions, on y ajoute des sprites de bonus avec des images originales et également tirées au hasard! youpi super hahaha huhuhu hihihi
+        for (NSMutableDictionary *nodule in electedBonusPositionsInMap) {
+            CGPoint dasPunkt = ccp([[nodule valueForKey:@"x"] floatValue], [[nodule valueForKey:@"y"] floatValue]);
+            CCSprite *newCollectibleBonusYoupiTralalaPouetPouet = [CCSprite spriteWithFile:[@"bonus_0" stringByAppendingFormat:@"%d.png",arc4random()%6+2]];
+            newCollectibleBonusYoupiTralalaPouetPouet.position=dasPunkt;
+            [self addChild:newCollectibleBonusYoupiTralalaPouetPouet];
+            [lesBonusDeTaMere addObject:newCollectibleBonusYoupiTralalaPouetPouet];
+        }
+>>>>>>> 1c36f64ac071c0c6964a575af710d4f5a2da12ec
         [lesBonusDeTaMere retain];
         
         // initialisation de textures
@@ -387,11 +398,8 @@ static JNPControlLayer * controlLayer;
     float v = dp/dt;
     currentSpeed=v;
     
-    JNPScore *s = [JNPScore jnpscore];
-    float leveldifficulty = 120.0+40.0*[s getLevel];
-    
-    if (v<leveldifficulty) {
-        float zeForce = (leveldifficulty - v)/200;
+    if (v<140) {
+        float zeForce = (140 - v)/200;
         b2Vec2 force = b2Vec2(zeForce, 0.0f);
         playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
     }
@@ -493,7 +501,7 @@ static JNPControlLayer * controlLayer;
 	// son
 	[_audioManager playPuke];	
 	
-	[self diminuerPlayerDeltaScale:0.055];
+	[self diminuerPlayerDeltaScale:0.03];
     
 }
 
