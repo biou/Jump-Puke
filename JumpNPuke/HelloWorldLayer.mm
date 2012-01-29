@@ -11,7 +11,7 @@
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
-
+#import "JNPBasicLayer.h"
 
 enum {
 	kTagParentNode = 1,
@@ -189,6 +189,18 @@ enum {
 		CCNode *parent = [CCNode node];
 #endif
 		[self addChild:parent z:0 tag:kTagParentNode];
+        
+
+        particleSystem = [[CCParticleFire alloc] initWithTotalParticles:50];
+        //[particleSystem setEmitterMode: kCCParticleModeRadius];
+        particleSystem.startColor = (ccColor4F){200/255.f, 200/255.f, 200/255.f, 0.6f};
+        particleSystem.life = 1;
+        particleSystem.lifeVar = 1;
+        particleSystem.angleVar = 50;
+        particleSystem.startSize = 1.5;
+        particleSystem.texture = [[CCTextureCache sharedTextureCache] addImage:@"player.png"];
+        [self addChild:particleSystem z:10];
+        
 		
         [self scheduleUpdate];
 	}
@@ -198,7 +210,7 @@ enum {
 
 -(void)gameover
 {
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPDeathLayer scene]]];
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpGameover]]];
 	
 }
 
@@ -218,7 +230,6 @@ enum {
             ballShapeDef.friction = 0.2f;
             ballShapeDef.restitution = 0.8f;
             playerBody->CreateFixture(&ballShapeDef);
-            
 		}        
 	} else {
 		currentScale = 0.0;
@@ -468,6 +479,13 @@ enum {
 	// top
 	groundBox.Set(b2Vec2(0,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO));
 	groundBody->CreateFixture(&groundBox,0);
+
+    /*****************************************************************/
+    // Create contact listener
+    _contactListener = new MyContactListener();
+    world->SetContactListener(_contactListener);
+    
+    
 }
 
 
@@ -502,7 +520,66 @@ enum {
 	
 	// Instruct the world to perform a single step of simulation. It is
 	// generally best to keep the time step and iterations fixed.
-	world->Step(dt, velocityIterations, positionIterations);	
+	world->Step(dt, velocityIterations, positionIterations);
+    
+    [self checkCollisions];
+}
+
+-(void) checkCollisions
+{
+    std::vector<MyContact>::iterator pos;
+    for(pos = _contactListener->_contacts.begin(); 
+        pos != _contactListener->_contacts.end(); ++pos) {
+        MyContact contact = *pos;
+
+        b2Body *bodyA = contact.fixtureA->GetBody();
+        b2Body *bodyB = contact.fixtureB->GetBody();
+
+        CCSprite *playerSpriteA = (CCSprite*)bodyB->GetUserData();
+        //CCSprite *playerSpriteB = (CCSprite*)bodyB->GetUserData();
+        NSLog(@"----------------------");
+        NSLog(@"%f , %f", playerSpriteA.position.x, playerSpriteA.position.y);
+        NSLog(@"%f , %f", bodyB->GetPosition().x, bodyB->GetPosition().y);
+        
+        //NSLog(@"%f , %f", playerSpriteB.position.x, playerSpriteB.position.y);
+        //NSLog(@"%@", bodyA);
+        //NSLog(@"%@", bodyB);
+        NSLog(@"----------------------");
+        
+        //particleSystem.sourcePosition = playerSpriteA.position;
+
+        
+        float speedFactor = [[NSString stringWithFormat:@"%d", currentSpeed] length];
+        particleSystem.sourcePosition = ccp( playerSpriteA.position.x - 450 , playerSpriteA.position.y );
+        particleSystem.startSizeVar = 0.9 * speedFactor;
+        particleSystem.lifeVar = 3 * speedFactor;
+        particleSystem.life = 2 * speedFactor;
+
+        //particleSystem.sourcePosition = ccp(bodyB->GetPosition().x, bodyB->GetPosition().y);
+        
+        //CGPoint p1 = [[CCDirector sharedDirector] convertToUI:ccp(bodyB->GetPosition().x, bodyB->GetPosition().y)];
+        //particleSystem.sourcePosition = ccp( p1.x, p1.y );
+
+        /*CGPoint p2 = [[CCDirector sharedDirector] convertToGL:playerSpriteA.position];
+        particleSystem.sourcePosition = ccp( 1024 - p2.y, 768 - p2.y );*/
+
+        
+        [particleSystem resetSystem];
+        
+        if (bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL) {
+            CCSprite *spriteA = (CCSprite *) bodyA->GetUserData();
+            CCSprite *spriteB = (CCSprite *) bodyB->GetUserData();
+
+            NSLog(@"%@ , %@", spriteA, spriteB);
+            
+            if (spriteA.tag == 1 && spriteB.tag == 2) {
+
+            } else if (spriteA.tag == 2 && spriteB.tag == 1) {
+
+            } 
+        }        
+    }
+    
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
