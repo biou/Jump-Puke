@@ -55,6 +55,34 @@ static int mode;
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
         bgpic.position = ccp(winsize.width/2 , winsize.height/2 );
 		[self addChild:bgpic];
+		
+		
+		if (mode != jnpCredits)
+		{
+			JNPScore * s = [JNPScore jnpscore];
+			int t = [s getScore];
+			NSString * str = [NSString stringWithFormat:@"Score: %d", t]; 
+			CCLabelTTF *label = [CCLabelTTF labelWithString:str fontName:@"Arial" fontSize:64];
+			[label setPosition: ccp(winsize.width/2, winsize.height-50)];
+			[self addChild: label];
+		}
+		
+		if (mode == jnpNewLevel)
+		{
+			JNPScore * s = [JNPScore jnpscore];
+			[s incrementLevel];
+			int t = [s getLevel];
+			NSString * str = [NSString stringWithFormat:@"Level %d", t]; 
+			CCLabelTTF *label = [CCLabelTTF labelWithString:str fontName:@"Arial" fontSize:64];
+			[label setPosition: ccp(winsize.width/2, 50)];
+			[self addChild: label];
+		}
+		
+
+		
+		
+		
+		
 		JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
 		[audioManager play:son];
 		self.isTouchEnabled = YES;
