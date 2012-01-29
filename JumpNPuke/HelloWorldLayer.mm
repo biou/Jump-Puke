@@ -349,7 +349,7 @@ static JNPControlLayer * controlLayer;
             [self playerGetBiggerBecauseHeJustAteOneBonusYeahDudeYouKnow];
 			JNPScore * s = [JNPScore jnpscore];
 			[s incrementScore:500];
-            [_audioManager play:1];
+            [_audioManager play:jnpSndBonus];
             return;
         }
     }
@@ -369,7 +369,7 @@ static JNPControlLayer * controlLayer;
             [self removeChild:schpritz cleanup:NO];
             [lesObstaclesDeTonPere removeObject:schpritz];
             [self diminuerPlayerDeltaScale:0.035];	
-            [_audioManager play:1];
+            [_audioManager play:jnpSndMalus];
             return;
         }
     }
