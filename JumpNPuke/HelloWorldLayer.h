@@ -16,8 +16,9 @@
 #import "JNPControlLayer.h"
 #import "JNPAudioManager.h"
 #import "JNPBasicLayer.h"
-
+#import "JNPScore.h"
 #import "MyContactListener.h"
+#import "JNPScore.h"
 
 
 #define KVMIN 155.0

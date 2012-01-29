@@ -45,7 +45,10 @@ JNPAudioManager * audioManager;
         
         // add the menu to your scene
         [self addChild:myMenu];
-
+		// increment level
+		JNPScore * sc = [JNPScore jnpscore];
+		[sc setLevel:1];
+		[sc setScore:0];
 		
 		NSLog(@"plop");
 		

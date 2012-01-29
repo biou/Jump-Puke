@@ -194,6 +194,7 @@ static JNPControlLayer * controlLayer;
 		[self schedule:@selector(updatePlayerSize:) interval:0.3];
         [self schedule:@selector(updateViewPoint:)];
         [self schedule:@selector(detectBonusPickup:)];
+		[self schedule:@selector(updateScore:) interval:0.5];
 
 #if 1
 		// Use batch node. Faster
@@ -231,6 +232,13 @@ static JNPControlLayer * controlLayer;
 		[self unscheduleUpdate];
 		[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpGameover]]];
 	}
+	
+}
+
+-(void)updateScore:(float)dt
+{
+	JNPScore * s = [JNPScore jnpscore];
+	[s incrementScore:10];
 	
 }
 
@@ -299,6 +307,8 @@ static JNPControlLayer * controlLayer;
             [lesBonusDeTaMere removeObject:schpritz];
             NSLog(@"You just picked up an item, baby! YEAH!");
             [self playerGetBiggerBecauseHeJustAteOneBonusYeahDudeYouKnow];
+			JNPScore * s = [JNPScore jnpscore];
+			[s incrementScore:500];
             [_audioManager play:1];
             return;
         }
