@@ -16,7 +16,7 @@
 #define jnpNewLevel 2
 
 @interface JNPBasicLayer : CCLayer {
-
+    NSMutableArray *lesVomisDeTaGrandMere;
 }
 
 // returns a CCScene that contains the JNPBasicLayer layer as the only child

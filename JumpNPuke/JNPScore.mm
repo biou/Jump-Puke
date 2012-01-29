@@ -62,4 +62,11 @@ static JNPScore * instance = nil;
 	level++;	
 }
 
+- (void)dealloc {
+    self.vomis = nil;
+    [super dealloc];
+}
+
+@synthesize vomis;
+
 @end

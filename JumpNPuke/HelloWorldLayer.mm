@@ -88,25 +88,58 @@ static JNPControlLayer * controlLayer;
         NSMutableArray *tableauObjets = [bonusGroup objects];
         int nomber = [tableauObjets count];
         
-        // grande cagnotte tirage au sort parmis les positions possibles de bonus, pour obtenir un tableau de quelques points différents sur lesquels placer des cadeaux bonux
-        NSMutableArray *electedBonusPositionsInMap = [NSMutableArray arrayWithCapacity:12];
-        lesBonusDeTaMere = [NSMutableArray arrayWithCapacity:12];
-        for (int ii=0; ii<12; ii++) {
-            int kk = arc4random() % nomber;
-            [electedBonusPositionsInMap insertObject:[tableauObjets objectAtIndex:kk] atIndex:ii];
-            [tableauObjets removeObjectAtIndex:kk];
-            nomber--;
+        
+        // initiailisation des bonus collectables
+        lesBonusDeTaMere = [NSMutableArray array];
+
+        
+        JNPScore *s = [JNPScore jnpscore];
+        NSMutableArray *tmpVomis = s.vomis;
+        
+        // s'il y a trop de vomi, on en supprime jusqu'à ce qu'il ne reste plus que 23 vomis
+        if ([tmpVomis count]>20) {
+            while ([tmpVomis count]>20) {
+                [tmpVomis removeObjectAtIndex:(arc4random()%[tmpVomis count])];
+            }
         }
         
-		
-        // après le tirage au sort des positions, on y ajoute des sprites de bonus avec des images originales et également tirées au hasard! youpi super hahaha huhuhu hihihi
-        for (NSMutableDictionary *nodule in electedBonusPositionsInMap) {
-            CGPoint dasPunkt = ccp([[nodule valueForKey:@"x"] floatValue], [[nodule valueForKey:@"y"] floatValue]);
-            CCSprite *newCollectibleBonusYoupiTralalaPouetPouet = [CCSprite spriteWithFile:[@"bonus_0" stringByAppendingFormat:@"%d.png",arc4random()%6+2]];
-            newCollectibleBonusYoupiTralalaPouetPouet.position=dasPunkt;
-            [self addChild:newCollectibleBonusYoupiTralalaPouetPouet];
-            [lesBonusDeTaMere addObject:newCollectibleBonusYoupiTralalaPouetPouet];
+        int inheritedVomiCounter = 0;
+        for (CCSprite *sprout in tmpVomis) {
+            inheritedVomiCounter++;
+            [self addChild:sprout];
+            [lesBonusDeTaMere addObject:sprout];
         }
+        
+        // S'il y a moins de 12 vomis, on ajoute des bonus aléatoirement sur la map parmis de positions prévues;
+        int maxBonus = 12;
+        maxBonus -= inheritedVomiCounter;
+        
+        
+        // grande cagnotte tirage au sort parmis les positions possibles de bonus, pour obtenir un tableau de quelques points différents sur lesquels placer des cadeaux bonux
+        NSMutableArray *electedBonusPositionsInMap = [NSMutableArray arrayWithCapacity:12];
+        if (maxBonus>0) {
+            for (int ii=0; ii<maxBonus; ii++) {
+                int kk = arc4random() % nomber;
+                [electedBonusPositionsInMap insertObject:[tableauObjets objectAtIndex:kk] atIndex:ii];
+                [tableauObjets removeObjectAtIndex:kk];
+                nomber--;
+            }
+            
+            
+            // après le tirage au sort des positions, on y ajoute des sprites de bonus avec des images originales et également tirées au hasard! youpi super hahaha huhuhu hihihi
+            for (NSMutableDictionary *nodule in electedBonusPositionsInMap) {
+                CGPoint dasPunkt = ccp([[nodule valueForKey:@"x"] floatValue], [[nodule valueForKey:@"y"] floatValue]);
+                CCSprite *newCollectibleBonusYoupiTralalaPouetPouet = [CCSprite spriteWithFile:[@"bonus_0" stringByAppendingFormat:@"%d.png",arc4random()%6+2]];
+                newCollectibleBonusYoupiTralalaPouetPouet.position=dasPunkt;
+                [self addChild:newCollectibleBonusYoupiTralalaPouetPouet];
+                NSLog(@"Populate lesBonusDeTaMere");
+                [lesBonusDeTaMere addObject:newCollectibleBonusYoupiTralalaPouetPouet];
+            }
+            
+        }
+        
+        
+		
         [lesBonusDeTaMere retain];
         
         // initialisation de textures
@@ -115,6 +148,11 @@ static JNPControlLayer * controlLayer;
 		elephantJumpTexture = [[[CCTextureCache sharedTextureCache] addImage:@"elephant-saute.png"] retain];
         
         
+        
+        // initialisation des vomis de ta grand mere
+        lesVomisDeTaGrandMere = [NSMutableArray array];
+        [lesVomisDeTaGrandMere retain];
+
         
         // obtention des positions potentielles de super bonus ta mère
         CCTMXObjectGroup *obstaclesGroup = [_tileMap objectGroupNamed:@"obstacles"];
@@ -402,7 +440,9 @@ static JNPControlLayer * controlLayer;
 				[self unscheduleAllSelectors];
 				[self unscheduleUpdate];
 
-				
+                JNPScore * s = [JNPScore jnpscore];
+				s.vomis=lesVomisDeTaGrandMere;
+
 				[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpNewLevel]]];
 			}
 			
@@ -434,12 +474,24 @@ static JNPControlLayer * controlLayer;
 		CCSprite *ballData = (CCSprite *)b->GetUserData();
 		[ballData setTexture:elephantPukeTexture];
 		[self schedule:@selector(unpuke:) interval:0.3];
-	}
+        
+        
+        
+        
+        // ajout du vomi !
+        CGPoint dasPunkt = ccp(ballData.position.x,ballData.position.y);
+        CCSprite *vomi = [CCSprite spriteWithFile:[@"bonus_0" stringByAppendingFormat:@"%d.png",arc4random()%6+2]];
+        vomi.position=dasPunkt;
+        [self addChild:vomi];
+        NSLog(@"Populate lesVomisDeTaGrandMere");
+        [lesVomisDeTaGrandMere addObject:vomi];
+}
 
 	// son
 	[_audioManager playPuke];	
 	
-	[self diminuerPlayerDeltaScale:0.03];	
+	[self diminuerPlayerDeltaScale:0.03];
+    
 }
 
 -(void)diminuerPlayerDeltaScale:(float)deltaScale {
@@ -492,6 +544,7 @@ static JNPControlLayer * controlLayer;
 	world = NULL;
     [lesBonusDeTaMere release];
 	[lesObstaclesDeTonPere release];
+    [lesVomisDeTaGrandMere release];
 	
 	
 	delete m_debugDraw;
