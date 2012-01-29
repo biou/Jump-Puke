@@ -70,12 +70,13 @@ id pukeButtonSelected;
 	if (location.x < winSize.width /2) {
 		[jumpButton setTexture:jumpButtonSelected]; 
 
-                
         [ref tellPlayerToJump];
         
         NSLog(@"Jump!\n");
 	} else {
 		[pukeButton setTexture:pukeButtonSelected];		
+
+        [ref tellPlayertoPuke:location];
 		NSLog(@"Puke!\n");			
 	}	
 	

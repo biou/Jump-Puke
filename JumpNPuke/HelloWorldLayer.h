@@ -67,6 +67,8 @@
 
 -(void)setAudioManager:(JNPAudioManager *)audioM;
 -(void)tellPlayerToJump;
+-(void)unpuke:(float)dt;
+-(void)tellPlayertoPuke:(CGPoint)position;
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
