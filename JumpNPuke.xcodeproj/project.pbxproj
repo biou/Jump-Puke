@@ -248,6 +248,7 @@
 		BFDE4F3F14D3C80200481370 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3B14D3C80200481370 /* player.png */; };
 		BFDE4F4014D3C80200481370 /* tiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3C14D3C80200481370 /* tiles.plist */; };
 		BFDE4F4114D3C80200481370 /* tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3D14D3C80200481370 /* tiles.png */; };
+		BFE60E8314D4BB430010A72B /* MyContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFE60E8214D4BB430010A72B /* MyContactListener.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -282,6 +283,7 @@
 		32F18A8714D444FC004D69CE /* serpent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = serpent.png; sourceTree = "<group>"; };
 		32F18A8A14D4452A004D69CE /* typo */ = {isa = PBXFileReference; lastKnownFileType = folder; path = typo; sourceTree = "<group>"; };
 		32F18A8C14D44537004D69CE /* elephants */ = {isa = PBXFileReference; lastKnownFileType = folder; path = elephants; sourceTree = "<group>"; };
+		32F18A8E14D44540004D69CE /* bonus-ennemis */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "bonus-ennemis"; sourceTree = "<group>"; };
 		32F18A9014D44D11004D69CE /* JNPIntroBaseLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPIntroBaseLayer.mm; sourceTree = "<group>"; };
 		32F18A9114D44D11004D69CE /* JNPIntroScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPIntroScene.mm; sourceTree = "<group>"; };
 		32F18A9214D44D11004D69CE /* JNPMenuBaseLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPMenuBaseLayer.mm; sourceTree = "<group>"; };
@@ -313,6 +315,16 @@
 		BF1F162D14D468E9009481D1 /* pukeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pukeButton.png; sourceTree = "<group>"; };
 		BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPAudioManager.h; sourceTree = "<group>"; };
 		BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPAudioManager.m; sourceTree = "<group>"; };
+		BFBEF4FE14D4598B00144BDD /* Tribal_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_1.mp3; sourceTree = "<group>"; };
+		BFBEF4FF14D4598B00144BDD /* Tribal_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_2.mp3; sourceTree = "<group>"; };
+		BFBEF50014D4598B00144BDD /* Tribal_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_3.mp3; sourceTree = "<group>"; };
+		BFBEF50114D4598B00144BDD /* Tribal_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_4.mp3; sourceTree = "<group>"; };
+		BFBEF50214D4598B00144BDD /* Tribal_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_5.mp3; sourceTree = "<group>"; };
+		BFBEF50914D45FB000144BDD /* Tribal_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_1.wav; sourceTree = "<group>"; };
+		BFBEF50A14D45FB000144BDD /* Tribal_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_2.wav; sourceTree = "<group>"; };
+		BFBEF50B14D45FB000144BDD /* Tribal_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_3.wav; sourceTree = "<group>"; };
+		BFBEF50C14D45FB000144BDD /* Tribal_4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_4.wav; sourceTree = "<group>"; };
+		BFBEF50D14D45FB000144BDD /* Tribal_5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_5.wav; sourceTree = "<group>"; };
 		BFDE4D0C14D3C68700481370 /* JumpNPuke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpNPuke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFDE4D1014D3C68700481370 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BFDE4D1214D3C68700481370 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -661,6 +673,8 @@
 		BFDE4F3B14D3C80200481370 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
 		BFDE4F3C14D3C80200481370 /* tiles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tiles.plist; sourceTree = "<group>"; };
 		BFDE4F3D14D3C80200481370 /* tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiles.png; sourceTree = "<group>"; };
+		BFE60E8114D4BB430010A72B /* MyContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactListener.h; sourceTree = "<group>"; };
+		BFE60E8214D4BB430010A72B /* MyContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyContactListener.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -736,6 +750,7 @@
 		BFDE4D2214D3C68700481370 /* JumpNPuke */ = {
 			isa = PBXGroup;
 			children = (
+				BFE60E8514D4BB460010A72B /* Collisions */,
 				BFBE8FD914D3DE7800C3C94B /* Classes */,
 				BFDE4F2614D3C68900481370 /* AppDelegate.h */,
 				BFDE4F2714D3C68900481370 /* AppDelegate.mm */,
@@ -795,6 +810,7 @@
 				B50B800914D45FC700FAAEF9 /* icone.png */,
 				B50B800714D449AA00FAAEF9 /* Default-Portrait~ipad.png */,
 				B50B800414D4499800FAAEF9 /* Default.png */,
+				32F18A8E14D44540004D69CE /* bonus-ennemis */,
 				32F18A8C14D44537004D69CE /* elephants */,
 				32F18A8A14D4452A004D69CE /* typo */,
 				32F18A8714D444FC004D69CE /* serpent.png */,
@@ -813,6 +829,16 @@
 				32F18A9F14D44F7C004D69CE /* credits.png */,
 				32F18AA014D44F7D004D69CE /* start-over.png */,
 				32F18AA114D44F7D004D69CE /* start.png */,
+				BFBEF50914D45FB000144BDD /* Tribal_1.wav */,
+				BFBEF50A14D45FB000144BDD /* Tribal_2.wav */,
+				BFBEF50B14D45FB000144BDD /* Tribal_3.wav */,
+				BFBEF50C14D45FB000144BDD /* Tribal_4.wav */,
+				BFBEF50D14D45FB000144BDD /* Tribal_5.wav */,
+				BFBEF4FE14D4598B00144BDD /* Tribal_1.mp3 */,
+				BFBEF4FF14D4598B00144BDD /* Tribal_2.mp3 */,
+				BFBEF50014D4598B00144BDD /* Tribal_3.mp3 */,
+				BFBEF50114D4598B00144BDD /* Tribal_4.mp3 */,
+				BFBEF50214D4598B00144BDD /* Tribal_5.mp3 */,
 				32A7A75614D3FE8E00C54055 /* pukeButton-selected.png */,
 				32A7A75714D3FE8E00C54055 /* jumpButton-selected.png */,
 				32A7A75214D3ECCD00C54055 /* jumpButton.png */,
@@ -1337,6 +1363,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BFE60E8514D4BB460010A72B /* Collisions */ = {
+			isa = PBXGroup;
+			children = (
+				BFE60E8114D4BB430010A72B /* MyContactListener.h */,
+				BFE60E8214D4BB430010A72B /* MyContactListener.mm */,
+			);
+			name = Collisions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1425,6 +1460,16 @@
 				B50B7FFB14D4136200FAAEF9 /* fondpapier.png in Resources */,
 				B50B800514D4499800FAAEF9 /* Default.png in Resources */,
 				B50B800814D449AA00FAAEF9 /* Default-Portrait~ipad.png in Resources */,
+				BFBEF50314D4598B00144BDD /* Tribal_1.mp3 in Resources */,
+				BFBEF50414D4598B00144BDD /* Tribal_2.mp3 in Resources */,
+				BFBEF50514D4598B00144BDD /* Tribal_3.mp3 in Resources */,
+				BFBEF50614D4598B00144BDD /* Tribal_4.mp3 in Resources */,
+				BFBEF50714D4598B00144BDD /* Tribal_5.mp3 in Resources */,
+				BFBEF50E14D45FB000144BDD /* Tribal_1.wav in Resources */,
+				BFBEF50F14D45FB000144BDD /* Tribal_2.wav in Resources */,
+				BFBEF51014D45FB000144BDD /* Tribal_3.wav in Resources */,
+				BFBEF51114D45FB000144BDD /* Tribal_4.wav in Resources */,
+				BFBEF51214D45FB000144BDD /* Tribal_5.wav in Resources */,
 				B50B800A14D45FC700FAAEF9 /* icone.png in Resources */,
 				BF1F161E14D46847009481D1 /* intro.png in Resources */,
 				BF1F162614D468BB009481D1 /* credits-over.png in Resources */,
@@ -1628,6 +1673,7 @@
 				32F18A9914D44D11004D69CE /* JNPIntroScene.mm in Sources */,
 				32F18A9A14D44D11004D69CE /* JNPMenuBaseLayer.mm in Sources */,
 				32F18A9B14D44D11004D69CE /* JNPMenuScene.mm in Sources */,
+				BFE60E8314D4BB430010A72B /* MyContactListener.mm in Sources */,
 				32395E4614D4A8D9005A0288 /* JNPBasicLayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
