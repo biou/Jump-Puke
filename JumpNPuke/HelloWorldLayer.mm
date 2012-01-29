@@ -104,26 +104,58 @@ static CCScene *scene;
         NSMutableArray *tableauObjets = [bonusGroup objects];
         int nomber = [tableauObjets count];
         
-        // grande cagnotte tirage au sort parmis les positions possibles de bonus, pour obtenir un tableau de quelques points différents sur lesquels placer des cadeaux bonux
-        NSMutableArray *electedBonusPositionsInMap = [NSMutableArray arrayWithCapacity:12];
-        lesBonusDeTaMere = [NSMutableArray arrayWithCapacity:12];
-        for (int ii=0; ii<12; ii++) {
-            int kk = arc4random() % nomber;
-            [electedBonusPositionsInMap insertObject:[tableauObjets objectAtIndex:kk] atIndex:ii];
-            [tableauObjets removeObjectAtIndex:kk];
-            nomber--;
+        
+        // initiailisation des bonus collectables
+        lesBonusDeTaMere = [NSMutableArray array];
+
+        
+        JNPScore *s = [JNPScore jnpscore];
+        NSMutableArray *tmpVomis = s.vomis;
+        
+        // s'il y a trop de vomi, on en supprime jusqu'à ce qu'il ne reste plus que 23 vomis
+        if ([tmpVomis count]>20) {
+            while ([tmpVomis count]>20) {
+                [tmpVomis removeObjectAtIndex:(arc4random()%[tmpVomis count])];
+            }
         }
         
-		
-        // après le tirage au sort des positions, on y ajoute des sprites de bonus avec des images originales et également tirées au hasard! youpi super hahaha huhuhu hihihi
-        for (NSMutableDictionary *nodule in electedBonusPositionsInMap) {
-            CGPoint dasPunkt = ccp([[nodule valueForKey:@"x"] floatValue], [[nodule valueForKey:@"y"] floatValue]);
-            CCSprite *newCollectibleBonusYoupiTralalaPouetPouet = [CCSprite spriteWithFile:[@"bonus_0" stringByAppendingFormat:@"%d.png",arc4random()%6+2]];
-            newCollectibleBonusYoupiTralalaPouetPouet.position=dasPunkt;
-            [self addChild:newCollectibleBonusYoupiTralalaPouetPouet];
-            NSLog(@"Populate lesBonusDeTaMere");
-            [lesBonusDeTaMere addObject:newCollectibleBonusYoupiTralalaPouetPouet];
+        int inheritedVomiCounter = 0;
+        for (CCSprite *sprout in tmpVomis) {
+            inheritedVomiCounter++;
+            [self addChild:sprout];
+            [lesBonusDeTaMere addObject:sprout];
         }
+        
+        // S'il y a moins de 12 vomis, on ajoute des bonus aléatoirement sur la map parmis de positions prévues;
+        int maxBonus = 12;
+        maxBonus -= inheritedVomiCounter;
+        
+        
+        // grande cagnotte tirage au sort parmis les positions possibles de bonus, pour obtenir un tableau de quelques points différents sur lesquels placer des cadeaux bonux
+        NSMutableArray *electedBonusPositionsInMap = [NSMutableArray arrayWithCapacity:12];
+        if (maxBonus>0) {
+            for (int ii=0; ii<maxBonus; ii++) {
+                int kk = arc4random() % nomber;
+                [electedBonusPositionsInMap insertObject:[tableauObjets objectAtIndex:kk] atIndex:ii];
+                [tableauObjets removeObjectAtIndex:kk];
+                nomber--;
+            }
+            
+            
+            // après le tirage au sort des positions, on y ajoute des sprites de bonus avec des images originales et également tirées au hasard! youpi super hahaha huhuhu hihihi
+            for (NSMutableDictionary *nodule in electedBonusPositionsInMap) {
+                CGPoint dasPunkt = ccp([[nodule valueForKey:@"x"] floatValue], [[nodule valueForKey:@"y"] floatValue]);
+                CCSprite *newCollectibleBonusYoupiTralalaPouetPouet = [CCSprite spriteWithFile:[@"bonus_0" stringByAppendingFormat:@"%d.png",arc4random()%6+2]];
+                newCollectibleBonusYoupiTralalaPouetPouet.position=dasPunkt;
+                [self addChild:newCollectibleBonusYoupiTralalaPouetPouet];
+                NSLog(@"Populate lesBonusDeTaMere");
+                [lesBonusDeTaMere addObject:newCollectibleBonusYoupiTralalaPouetPouet];
+            }
+            
+        }
+        
+        
+		
         [lesBonusDeTaMere retain];
         
         // initialisation de textures
@@ -132,6 +164,11 @@ static CCScene *scene;
 		elephantJumpTexture = [[[CCTextureCache sharedTextureCache] addImage:@"elephant-saute.png"] retain];
         
         
+        
+        // initialisation des vomis de ta grand mere
+        lesVomisDeTaGrandMere = [NSMutableArray array];
+        [lesVomisDeTaGrandMere retain];
+
         
         // obtention des positions potentielles de super bonus ta mère
         CCTMXObjectGroup *obstaclesGroup = [_tileMap objectGroupNamed:@"obstacles"];
@@ -154,7 +191,6 @@ static CCScene *scene;
             CCSprite *newCollidableBadBoyYoupiTralalaPouetPouet = [CCSprite spriteWithFile:[@"ennemis_0" stringByAppendingFormat:@"%d.png",arc4random()%7+1]];
             newCollidableBadBoyYoupiTralalaPouetPouet.position=dasPunkt;
             [self addChild:newCollidableBadBoyYoupiTralalaPouetPouet];
-            NSLog(@"Populate ton père");
             [lesObstaclesDeTonPere addObject:newCollidableBadBoyYoupiTralalaPouetPouet];
         }
         [lesObstaclesDeTonPere retain];
@@ -179,7 +215,7 @@ static CCScene *scene;
 		// FIXME à ajuster
         CCSprite *serpent = [CCSprite spriteWithFile:@"serpent.png"];
         serpent.position=ccp(KLIMITLEVELUP-192.0, winSize.height/2);
-        [self addChild:serpent];		
+        [self addChild:serpent z:10];		
 		
 		// taille en pixels de l'éléphant : 260px
 		elephantSize = 260.0;
@@ -282,7 +318,6 @@ static CCScene *scene;
         
 	} else {
 		currentScale = 0.0;
-		NSLog(@"trop petit");
 		[self gameover];
 		
 	}
@@ -326,11 +361,10 @@ static CCScene *scene;
         if (dist < contentSize/2 +25) {
             [self removeChild:schpritz cleanup:NO];
             [lesBonusDeTaMere removeObject:schpritz];
-            NSLog(@"You just picked up an item, baby! YEAH!");
             [self playerGetBiggerBecauseHeJustAteOneBonusYeahDudeYouKnow];
 			JNPScore * s = [JNPScore jnpscore];
 			[s incrementScore:500];
-            [_audioManager play:1];
+            [_audioManager play:jnpSndBonus];
             return;
         }
     }
@@ -349,9 +383,8 @@ static CCScene *scene;
         if (dist < contentSize/2 +25) {
             [self removeChild:schpritz cleanup:NO];
             [lesObstaclesDeTonPere removeObject:schpritz];
-            NSLog(@"You just hit an obstacle! LOSER!");
             [self diminuerPlayerDeltaScale:0.035];	
-            [_audioManager play:1];
+            [_audioManager play:jnpSndMalus];
             return;
         }
     }
@@ -375,8 +408,6 @@ static CCScene *scene;
         b2Vec2 force = b2Vec2(zeForce, 0.0f);
         playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
     }
-    
-    //NSLog(@"music speed set to %f", v);
     
     if (v<KVMIN) {
         [_audioManager playMusicWithStress:1];
@@ -421,8 +452,6 @@ static CCScene *scene;
 				[self gameover];
 			}
 			
-			//NSLog(@"--%f\n", x * PTM_RATIO);
-			
 			if (x * PTM_RATIO > KLIMITLEVELUP) {
 				// on vient de passer le checkpoint !
 				// empêcher le game over
@@ -433,7 +462,9 @@ static CCScene *scene;
 				[self unscheduleAllSelectors];
 				[self unscheduleUpdate];
 
-				
+                JNPScore * s = [JNPScore jnpscore];
+				s.vomis=lesVomisDeTaGrandMere;
+
 				[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpNewLevel]]];
 			}
 			
@@ -465,12 +496,24 @@ static CCScene *scene;
 		CCSprite *ballData = (CCSprite *)b->GetUserData();
 		[ballData setTexture:elephantPukeTexture];
 		[self schedule:@selector(unpuke:) interval:0.3];
-	}
+        
+        
+        
+        
+        // ajout du vomi !
+        CGPoint dasPunkt = ccp(ballData.position.x,ballData.position.y);
+        CCSprite *vomi = [CCSprite spriteWithFile:[@"bonus_0" stringByAppendingFormat:@"%d.png",arc4random()%6+2]];
+        vomi.position=dasPunkt;
+        [self addChild:vomi];
+        NSLog(@"Populate lesVomisDeTaGrandMere");
+        [lesVomisDeTaGrandMere addObject:vomi];
+}
 
 	// son
 	[_audioManager playPuke];	
 	
-	[self diminuerPlayerDeltaScale:0.03];	
+	[self diminuerPlayerDeltaScale:0.03];
+    
 }
 
 -(void)diminuerPlayerDeltaScale:(float)deltaScale {
@@ -523,6 +566,7 @@ static CCScene *scene;
 	world = NULL;
     [lesBonusDeTaMere release];
 	[lesObstaclesDeTonPere release];
+    [lesVomisDeTaGrandMere release];
 	
 	
 	delete m_debugDraw;
@@ -554,10 +598,6 @@ static CCScene *scene;
 	
 	uint32 flags = 0;
 	flags += b2Draw::e_shapeBit;
-	//		flags += b2Draw::e_jointBit;
-	//		flags += b2Draw::e_aabbBit;
-	//		flags += b2Draw::e_pairBit;
-	//		flags += b2Draw::e_centerOfMassBit;
 	m_debugDraw->SetFlags(flags);		
 	
 	
@@ -595,8 +635,6 @@ static CCScene *scene;
         NSArray *p2 = [p2s componentsSeparatedByString:@","];
         float p2x = [[p2 objectAtIndex:0] floatValue] + x;
         float p2y = y - [[p2 objectAtIndex:1] floatValue];
-        
-        // NSLog(@"Adding a fixture x=%d y=%d p1x=%f p1y=%f p2x=%f p2y=%f, p2xstr=%@", x, y, p1x, p1y, p2x, p2y, [p2 objectAtIndex:0]);
         
         groundBox.Set(b2Vec2(p1x/PTM_RATIO,p1y/PTM_RATIO), b2Vec2(p2x/PTM_RATIO,p2y/PTM_RATIO));
         //groundBox.Set(b2Vec2(64/PTM_RATIO,64/PTM_RATIO), b2Vec2(256/PTM_RATIO,64/PTM_RATIO));
@@ -670,34 +708,12 @@ static CCScene *scene;
         b2Body *bodyB = contact.fixtureB->GetBody();
 
         CCSprite *playerSpriteA = (CCSprite*)bodyB->GetUserData();
-        /*
-        //CCSprite *playerSpriteB = (CCSprite*)bodyB->GetUserData();
-        NSLog(@"----------------------");
-        NSLog(@"%f , %f", playerSpriteA.position.x, playerSpriteA.position.y);
-        NSLog(@"%f , %f", bodyB->GetPosition().x, bodyB->GetPosition().y);
-        
-        //NSLog(@"%f , %f", playerSpriteB.position.x, playerSpriteB.position.y);
-        //NSLog(@"%@", bodyA);
-        //NSLog(@"%@", bodyB);
-        NSLog(@"----------------------");
-         */
-        
-        //particleSystem.sourcePosition = playerSpriteA.position;
-
         
         float speedFactor = [[NSString stringWithFormat:@"%d", currentSpeed] length];
         particleSystem.sourcePosition = ccp( playerSpriteA.position.x - 450 , playerSpriteA.position.y );
         particleSystem.startSizeVar = 0.9 * speedFactor;
         particleSystem.lifeVar = 3 * speedFactor;
         particleSystem.life = 2 * speedFactor;
-
-        //particleSystem.sourcePosition = ccp(bodyB->GetPosition().x, bodyB->GetPosition().y);
-        
-        //CGPoint p1 = [[CCDirector sharedDirector] convertToUI:ccp(bodyB->GetPosition().x, bodyB->GetPosition().y)];
-        //particleSystem.sourcePosition = ccp( p1.x, p1.y );
-
-        /*CGPoint p2 = [[CCDirector sharedDirector] convertToGL:playerSpriteA.position];
-        particleSystem.sourcePosition = ccp( 1024 - p2.y, 768 - p2.y );*/
 
         // not toooooo much boingboing
         if (fabs(prevPlayerPosition - currentPlayerPosition) >= 1
@@ -710,8 +726,6 @@ static CCScene *scene;
         if (bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL) {
             CCSprite *spriteA = (CCSprite *) bodyA->GetUserData();
             CCSprite *spriteB = (CCSprite *) bodyB->GetUserData();
-
-            NSLog(@"%@ , %@", spriteA, spriteB);
             
             if (spriteA.tag == 1 && spriteB.tag == 2) {
 
@@ -747,8 +761,6 @@ static CCScene *scene;
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissModalViewControllerAnimated:YES];
 }
-
-
 
 
 @synthesize tileMap = _tileMap;

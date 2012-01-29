@@ -11,7 +11,6 @@
 		320C3AD914D4EDB100403908 /* elephant-saute.png in Resources */ = {isa = PBXBuildFile; fileRef = 320C3AD714D4EDB000403908 /* elephant-saute.png */; };
 		32395E4214D4A3E1005A0288 /* elephant-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 32395E4114D4A3E1005A0288 /* elephant-normal.png */; };
 		32395E4614D4A8D9005A0288 /* JNPBasicLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32395E4514D4A8D9005A0288 /* JNPBasicLayer.mm */; };
-		32395E4814D4AD20005A0288 /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 32395E4714D4AD20005A0288 /* gameover.mp3 */; };
 		32395E4A14D4AEE2005A0288 /* gameover.png in Resources */ = {isa = PBXBuildFile; fileRef = 32395E4914D4AEE2005A0288 /* gameover.png */; };
 		32395E5614D4C187005A0288 /* creditsImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 32395E5514D4C187005A0288 /* creditsImg.png */; };
 		32A7A74814D3E8B100C54055 /* JNPControlLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */; };
@@ -242,11 +241,8 @@
 		BFDE4F2814D3C68900481370 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFDE4F2714D3C68900481370 /* AppDelegate.mm */; };
 		BFDE4F2B14D3C68900481370 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFDE4F2A14D3C68900481370 /* HelloWorldLayer.mm */; };
 		BFDE4F2E14D3C68900481370 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFDE4F2D14D3C68900481370 /* GLES-Render.mm */; };
-		BFDE4F3414D3C68900481370 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3314D3C68900481370 /* blocks.png */; };
 		BFDE4F3E14D3C80200481370 /* map.tmx in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3A14D3C80200481370 /* map.tmx */; };
-		BFDE4F3F14D3C80200481370 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3B14D3C80200481370 /* player.png */; };
 		BFDE4F4014D3C80200481370 /* tiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3C14D3C80200481370 /* tiles.plist */; };
-		BFDE4F4114D3C80200481370 /* tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3D14D3C80200481370 /* tiles.png */; };
 		BFE60E8314D4BB430010A72B /* MyContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFE60E8214D4BB430010A72B /* MyContactListener.mm */; };
 /* End PBXBuildFile section */
 
@@ -256,7 +252,6 @@
 		32395E4114D4A3E1005A0288 /* elephant-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "elephant-normal.png"; path = "elephants/elephant-normal.png"; sourceTree = "<group>"; };
 		32395E4414D4A8D9005A0288 /* JNPBasicLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPBasicLayer.h; sourceTree = "<group>"; };
 		32395E4514D4A8D9005A0288 /* JNPBasicLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPBasicLayer.mm; sourceTree = "<group>"; };
-		32395E4714D4AD20005A0288 /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
 		32395E4914D4AEE2005A0288 /* gameover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gameover.png; path = typo/gameover.png; sourceTree = "<group>"; };
 		32395E5514D4C187005A0288 /* creditsImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creditsImg.png; sourceTree = "<group>"; };
 		32A7A74614D3E8B100C54055 /* JNPControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPControlLayer.h; sourceTree = "<group>"; };
@@ -658,11 +653,8 @@
 		BFDE4F2A14D3C68900481370 /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HelloWorldLayer.mm; sourceTree = "<group>"; };
 		BFDE4F2C14D3C68900481370 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		BFDE4F2D14D3C68900481370 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
-		BFDE4F3314D3C68900481370 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
 		BFDE4F3A14D3C80200481370 /* map.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map.tmx; sourceTree = "<group>"; };
-		BFDE4F3B14D3C80200481370 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
 		BFDE4F3C14D3C80200481370 /* tiles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tiles.plist; sourceTree = "<group>"; };
-		BFDE4F3D14D3C80200481370 /* tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiles.png; sourceTree = "<group>"; };
 		BFE60E8114D4BB430010A72B /* MyContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactListener.h; sourceTree = "<group>"; };
 		BFE60E8214D4BB430010A72B /* MyContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyContactListener.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -796,7 +788,6 @@
 				32CAFEB614D4CCE800556D74 /* bonus_05.png */,
 				32CAFEB714D4CCE800556D74 /* bonus_06.png */,
 				32CAFEB814D4CCE800556D74 /* bonus_07.png */,
-				32395E4714D4AD20005A0288 /* gameover.mp3 */,
 				32395E4914D4AEE2005A0288 /* gameover.png */,
 				32395E4114D4A3E1005A0288 /* elephant-normal.png */,
 				BF1F161D14D46847009481D1 /* intro.png */,
@@ -833,10 +824,7 @@
 				B50B7FF614D40FA400FAAEF9 /* bords.png */,
 				32A7A75314D3ECCD00C54055 /* pukeButton.png */,
 				BFDE4F3A14D3C80200481370 /* map.tmx */,
-				BFDE4F3B14D3C80200481370 /* player.png */,
 				BFDE4F3C14D3C80200481370 /* tiles.plist */,
-				BFDE4F3D14D3C80200481370 /* tiles.png */,
-				BFDE4F3314D3C68900481370 /* blocks.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1411,11 +1399,8 @@
 				BFDE4D5114D3C68700481370 /* PositionTextureColor.vsh in Resources */,
 				BFDE4D5314D3C68700481370 /* PositionTextureColorAlphaTest.fsh in Resources */,
 				BFDE4E7314D3C68900481370 /* ChangeLog in Resources */,
-				BFDE4F3414D3C68900481370 /* blocks.png in Resources */,
 				BFDE4F3E14D3C80200481370 /* map.tmx in Resources */,
-				BFDE4F3F14D3C80200481370 /* player.png in Resources */,
 				BFDE4F4014D3C80200481370 /* tiles.plist in Resources */,
-				BFDE4F4114D3C80200481370 /* tiles.png in Resources */,
 				32A7A75414D3ECCD00C54055 /* jumpButton.png in Resources */,
 				32A7A75514D3ECCD00C54055 /* pukeButton.png in Resources */,
 				32A7A75814D3FE8E00C54055 /* pukeButton-selected.png in Resources */,
@@ -1436,7 +1421,6 @@
 				BF1F162E14D468E9009481D1 /* jumpButton.png in Resources */,
 				BF1F162F14D468E9009481D1 /* pukeButton.png in Resources */,
 				32395E4214D4A3E1005A0288 /* elephant-normal.png in Resources */,
-				32395E4814D4AD20005A0288 /* gameover.mp3 in Resources */,
 				32395E4A14D4AEE2005A0288 /* gameover.png in Resources */,
 				32395E5614D4C187005A0288 /* creditsImg.png in Resources */,
 				32CAFE9D14D4CCCC00556D74 /* (null) in Resources */,

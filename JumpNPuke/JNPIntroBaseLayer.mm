@@ -20,28 +20,22 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
-
+		JNPAudioManager *am = [[[JNPAudioManager alloc] init] autorelease];
+		[am preload];
         
 		// logo qui va s'animer
         CCSprite *logo = [CCSprite spriteWithFile:@"intro.png"];
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
 		
-		// fond d'écran
-		//CCSprite * bg = [CCSprite spriteWithFile:@"intro-back.png"];
-		//bg.position = ccp(winsize.width/2, winsize.height/2);
-		//[self addChild:bg z:0];
+		// fond d'écran		
 		
-		NSLog(@"winsize.width: %f\n", winsize.width);
-		NSLog(@"winsize.height: %f\n", winsize.height);	
-		
-		
-        logo.position = ccp(winsize.width/2 , winsize.height+(457/2) );
-		//logo.position = ccp(winsize.width/2 , winsize.height/2 );
+        //logo.position = ccp(winsize.width/2 , winsize.height+(457/2) );
+		logo.position = ccp(winsize.width/2 , winsize.height/2 );
 		[self addChild:logo];
         
 		// animation du logo
-		CGPoint location = ccp(winsize.width/2,winsize.height/2);
-		[logo runAction: [CCMoveTo actionWithDuration:1 position:location]];          
+		//CGPoint location = ccp(winsize.width/2,winsize.height/2);
+		//[logo runAction: [CCMoveTo actionWithDuration:1 position:location]];          
 
         // Pour éviter de saccader l'animation lors du chargement du son, on préload le son maintenant et on le schedule quand on veut. 
         // Aussi, on unload le son dans la méthode dealloc (j'imagine
@@ -59,7 +53,7 @@
 
 - (void) introSound:(ccTime) dt {
     JNPAudioManager *am = [[[JNPAudioManager alloc] init] autorelease];
-    [am preload];
+	[am play:jnpSndLevel_Up];
     [self unschedule:@selector(introSound:)];
 }
 
@@ -67,8 +61,6 @@
 - (void)dealloc {
     
     // unload des sons préchargés dont on ne se servira plus.
-    //[[SimpleAudioEngine sharedEngine] unloadEffect:@"gameboy-startup.wav"];
-
     [super dealloc];
 }
 

@@ -72,12 +72,10 @@ id pukeButtonSelected;
 
         [ref tellPlayerToJump];
         
-        NSLog(@"Jump!\n");
 	} else {
 		[pukeButton setTexture:pukeButtonSelected];		
 
-        [ref tellPlayertoPuke:location];
-		NSLog(@"Puke!\n");			
+        [ref tellPlayertoPuke:location];			
 	}	
 	
 	return YES;
