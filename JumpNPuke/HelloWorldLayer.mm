@@ -160,7 +160,7 @@ static JNPControlLayer * controlLayer;
 		// il est 5h23, je fais ce que je veux !
 		// FIXME à ajuster
         CCSprite *serpent = [CCSprite spriteWithFile:@"serpent.png"];
-        serpent.position=ccp(19000, winSize.height/2);
+        serpent.position=ccp(KLIMITLEVELUP-192.0, winSize.height/2);
         [self addChild:serpent];		
 		
 		// taille en pixels de l'éléphant : 260px
@@ -192,7 +192,9 @@ static JNPControlLayer * controlLayer;
 		[self schedule:@selector(updatePlayerSize:) interval:0.3];
         [self schedule:@selector(updateViewPoint:)];
         [self schedule:@selector(detectBonusPickup:)];
-		[self schedule:@selector(updateScore:) interval:0.5];
+        [self schedule:@selector(updateScore:) interval:0.5];
+        [self schedule:@selector(detectObstacleCollision:)];
+
 
 #if 1
 		// Use batch node. Faster
@@ -242,7 +244,9 @@ static JNPControlLayer * controlLayer;
 
 -(void)updatePlayerSize:(float)dt {
 	if (fabs(currentScale) > 0.08) {
-		currentScale -= 0.0038;
+        [self diminuerPlayerDeltaScale:0.002 withEffect:NO];
+		
+        /*currentScale -= 0.002;
         
 		if (playerBody->GetUserData() != NULL) {
             CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
@@ -256,7 +260,9 @@ static JNPControlLayer * controlLayer;
             ballShapeDef.friction = 0.2f;
             ballShapeDef.restitution = 0.8f;
             playerBody->CreateFixture(&ballShapeDef);
-		}        
+		}
+         */
+        
 	} else {
 		currentScale = 0.0;
 		[self gameover];
@@ -305,6 +311,27 @@ static JNPControlLayer * controlLayer;
             [self playerGetBiggerBecauseHeJustAteOneBonusYeahDudeYouKnow];
 			JNPScore * s = [JNPScore jnpscore];
 			[s incrementScore:500];
+            [_audioManager play:1];
+            return;
+        }
+    }
+}
+
+
+
+-(void)detectObstacleCollision:(float)dt {
+    for (CCSprite *schpritz in lesObstaclesDeTonPere) {
+        CGPoint obstaclePosition = schpritz.position;
+        CGPoint playeurPosition = ((CCSprite *)playerBody->GetUserData()).position;
+        CGPoint soubstraction = ccpSub(obstaclePosition, playeurPosition);
+        float distanceCarree = soubstraction.x * soubstraction.x + soubstraction.y * soubstraction.y;
+        float dist = sqrtf(distanceCarree);
+        float contentSize = ((CCSprite *)playerBody->GetUserData()).contentSize.width*((CCSprite *)playerBody->GetUserData()).scale;
+        if (dist < contentSize/2 +25) {
+            [self removeChild:schpritz cleanup:NO];
+            [lesObstaclesDeTonPere removeObject:schpritz];
+            NSLog(@"You just hit an obstacle! LOSER!");
+            [self diminuerPlayerDeltaScale:0.035];	
             [_audioManager play:1];
             return;
         }
@@ -366,7 +393,9 @@ static JNPControlLayer * controlLayer;
 				[self gameover];
 			}
 			
-			if (x * PTM_RATIO > 5000) {
+			//NSLog(@"--%f\n", x * PTM_RATIO);
+			
+			if (x * PTM_RATIO > KLIMITLEVELUP) {
 				// on vient de passer le checkpoint !
 				// empêcher le game over
 				hasWon=YES;
@@ -413,8 +442,21 @@ static JNPControlLayer * controlLayer;
 	// son
 	[_audioManager playPuke];	
 	
-	// diminuer taille
-	currentScale -= 0.05;
+	[self diminuerPlayerDeltaScale:0.03];	
+}
+
+-(void)diminuerPlayerDeltaScale:(float)deltaScale {
+    [self diminuerPlayerDeltaScale:deltaScale withEffect:YES];
+}
+
+-(void)diminuerPlayerDeltaScale:(float)deltaScale withEffect:(Boolean)effect {
+    // diminuer taille
+    
+    if (currentScale > deltaScale) {
+        currentScale -= deltaScale;
+    } else {
+        currentScale = 0.1f;
+    }
 	
 	if (playerBody->GetUserData() != NULL) {
 		CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
@@ -428,9 +470,10 @@ static JNPControlLayer * controlLayer;
 		ballShapeDef.friction = 0.2f;
 		ballShapeDef.restitution = 0.8f;
 		playerBody->CreateFixture(&ballShapeDef);
-		playerBody->ApplyTorque(50.0);
-		
-	}   	
+		if (effect) {
+            playerBody->ApplyTorque(50.0);
+        }
+	}   
 }
 
 -(void)unpuke:(float)dt {
@@ -559,7 +602,7 @@ static JNPControlLayer * controlLayer;
 	
 	kmGLPushMatrix();
 	
-	world->DrawDebugData();	
+	//world->DrawDebugData();	
 	
 	kmGLPopMatrix();
 }

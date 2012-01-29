@@ -16,6 +16,7 @@ JNPAudioManager * audioManager;
     self = [super init];
     if (self) {
 		[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Intro.aifc" loop:YES];
+
 		// logo qui va s'animer
         CCSprite * logo = [CCSprite spriteWithFile: @"fond-menu.png"];
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
