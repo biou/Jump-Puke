@@ -83,7 +83,7 @@
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	//[director_ pushScene: [[JNPIntroScene alloc]init]]; 
     
-    [[CCDirector sharedDirector] pushScene: [CCTransitionFade transitionWithDuration:0.5f scene:[[JNPIntroScene alloc]init]]];
+    [[CCDirector sharedDirector] pushScene: [CCTransitionFade transitionWithDuration:1.0f scene:[[JNPIntroScene alloc]init]]];
 
 	return YES;
 }

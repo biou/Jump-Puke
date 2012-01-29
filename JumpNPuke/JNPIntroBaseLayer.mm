@@ -28,12 +28,13 @@
 		
 		// fond d'écran		
 		
-        logo.position = ccp(winsize.width/2 , winsize.height+(457/2) );
+        //logo.position = ccp(winsize.width/2 , winsize.height+(457/2) );
+		logo.position = ccp(winsize.width/2 , winsize.height/2 );
 		[self addChild:logo];
         
 		// animation du logo
-		CGPoint location = ccp(winsize.width/2,winsize.height/2);
-		[logo runAction: [CCMoveTo actionWithDuration:1 position:location]];          
+		//CGPoint location = ccp(winsize.width/2,winsize.height/2);
+		//[logo runAction: [CCMoveTo actionWithDuration:1 position:location]];          
 
         // Pour éviter de saccader l'animation lors du chargement du son, on préload le son maintenant et on le schedule quand on veut. 
         // Aussi, on unload le son dans la méthode dealloc (j'imagine
@@ -51,7 +52,8 @@
 
 - (void) introSound:(ccTime) dt {
     JNPAudioManager *am = [[[JNPAudioManager alloc] init] autorelease];
-    [am preload];
+	[am preload];
+	[am play:jnpSndLevel_Up];
     [self unschedule:@selector(introSound:)];
 }
 
@@ -59,8 +61,6 @@
 - (void)dealloc {
     
     // unload des sons préchargés dont on ne se servira plus.
-    //[[SimpleAudioEngine sharedEngine] unloadEffect:@"gameboy-startup.wav"];
-
     [super dealloc];
 }
 
