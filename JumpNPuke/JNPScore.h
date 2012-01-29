@@ -24,4 +24,6 @@
 -(void)setLevel:(int)l;
 -(void)incrementLevel;
 
+@property (retain) NSMutableArray *vomis;
+
 @end

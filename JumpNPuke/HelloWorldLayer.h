@@ -20,7 +20,8 @@
 #import "MyContactListener.h"
 #import "JNPScore.h"
 
-#define KLIMITLEVELUP 23000
+
+#define KLIMITLEVELUP 23000 
 #define KVMIN 155.0
 #define KV2 180.0
 #define KV3 260.0
@@ -60,7 +61,7 @@
     
     NSMutableArray *lesBonusDeTaMere;
     NSMutableArray *lesObstaclesDeTonPere;
-    NSMutableArray *lesVomisDeTaGrandMere;	
+    NSMutableArray *lesVomisDeTaGrandMere;
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
