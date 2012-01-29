@@ -29,6 +29,7 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 @end
 
 static JNPControlLayer * controlLayer;
+static CCScene *scene;
 
 // ta mere elle mange des pruneaux
 
@@ -39,7 +40,7 @@ static JNPControlLayer * controlLayer;
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
-	CCScene *scene = [CCScene node];
+	scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
 	HelloWorldLayer * baseLayer = [HelloWorldLayer node];
@@ -54,7 +55,7 @@ static JNPControlLayer * controlLayer;
     bgpic.position = ccp(bgpic.position.x + s.width/2.0, bgpic.position.y+s.height/2.0);
     bgpic.opacity = 160;
     [bgLayer addChild:bgpic];
-    [scene addChild:bgLayer];
+    [scene addChild:bgLayer z:-10];
     
     JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
     [audioManager playMusic:1];
@@ -74,13 +75,28 @@ static JNPControlLayer * controlLayer;
 {
 	if( (self=[super init])) {
         
+        /**** parallax ****/
+        parallax = [CCParallaxScrollNode node];
+        CCSprite *clouds1 = [CCSprite spriteWithFile:@"paralaxe1.png"];
+        CCSprite *clouds2 = [CCSprite spriteWithFile:@"paralaxe2.png"];
+        CCSprite *clouds1bis = [CCSprite spriteWithFile:@"paralaxe1.png"];
+        CCSprite *clouds2bis = [CCSprite spriteWithFile:@"paralaxe2.png"];
+        float totalWidth = 4 * clouds1.contentSize.width;
+        [parallax addChild:clouds1 z:0 Ratio:ccp(1.2,1) Pos:ccp(0,0) ScrollOffset:ccp(totalWidth,0)];
+        [parallax addChild:clouds2 z:0 Ratio:ccp(0.7,1) Pos:ccp(0,0) ScrollOffset:ccp(totalWidth,0)];
+        [parallax addChild:clouds1bis z:0 Ratio:ccp(1.2,1) Pos:ccp(clouds1.contentSize.width,0) ScrollOffset:ccp(totalWidth,0)];
+        [parallax addChild:clouds2bis z:0 Ratio:ccp(0.7,1) Pos:ccp(clouds2.contentSize.width,0) ScrollOffset:ccp(totalWidth,0)];
+        // Add to layer, sprite, etc.
+        [scene addChild:parallax z:-1];
+        
+        /******************/
         
 		CGSize winSize = [[CCDirector sharedDirector] winSize];
 		hasWon = NO;
        
 		// init de la Map avant box2d
         self.tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"map.tmx"];
-        self.background = [_tileMap layerNamed:@"background"];
+        //self.background = [_tileMap layerNamed:@"background"];
         [self addChild:_tileMap z:0];
         
         // obtention des positions potentielles de super bonus ta mère
@@ -219,7 +235,6 @@ static JNPControlLayer * controlLayer;
         particleSystem.startSize = 1.5;
         particleSystem.texture = [[CCTextureCache sharedTextureCache] addImage:@"player.png"];
         [self addChild:particleSystem z:10];
-        
 		
         [self scheduleUpdate];
 	}
@@ -348,6 +363,7 @@ static JNPControlLayer * controlLayer;
 
 -(void)updateViewPoint:(float)dt {
     float currentPlayerPosition = ((CCSprite *)playerBody->GetUserData()).position.x;
+    float currentPlayerPosition_y = ((CCSprite *)playerBody->GetUserData()).position.y;
     self.position = ccp(200-currentPlayerPosition, self.position.y);
     
     float dp = currentPlayerPosition - prevPlayerPosition;
@@ -376,7 +392,13 @@ static JNPControlLayer * controlLayer;
     
     [self checkCollisions:dt];
     
+    float speedFactor = [[NSString stringWithFormat:@"%d", fabs(currentSpeed)] length] * 0.1;
+    // NSLog(@"%f", speedFactor);
+    
+    [parallax updateWithVelocity:ccp(-speedFactor, 0.001 * speedFactor) AndDelta:dt];
+    
     prevPlayerPosition = currentPlayerPosition;
+    prevPlayerPosition_y = currentPlayerPosition_y;
 }
 
 -(void)updatePlayerPosFromPhysics:(float)dt {
@@ -637,6 +659,7 @@ static JNPControlLayer * controlLayer;
 -(void) checkCollisions: (ccTime) dt
 {
     float currentPlayerPosition = ((CCSprite *)playerBody->GetUserData()).position.x;
+    float currentPlayerPosition_y = ((CCSprite *)playerBody->GetUserData()).position.y;
     
     std::vector<MyContact>::iterator pos;
     for(pos = _contactListener->_contacts.begin(); 
@@ -677,7 +700,8 @@ static JNPControlLayer * controlLayer;
         particleSystem.sourcePosition = ccp( 1024 - p2.y, 768 - p2.y );*/
 
         // not toooooo much boingboing
-        if (fabs(prevPlayerPosition - currentPlayerPosition) >= 1) {
+        if (fabs(prevPlayerPosition - currentPlayerPosition) >= 1
+            && fabs(prevPlayerPosition_y - currentPlayerPosition_y) >= 2) {
             [_audioManager playJump];
         }
 

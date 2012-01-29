@@ -70,6 +70,11 @@
 		BF1F162B14D468BB009481D1 /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1F162514D468BB009481D1 /* start.png */; };
 		BF1F162E14D468E9009481D1 /* jumpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1F162C14D468E9009481D1 /* jumpButton.png */; };
 		BF1F162F14D468E9009481D1 /* pukeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1F162D14D468E9009481D1 /* pukeButton.png */; };
+		BF90FBA814D54F7500AC8C65 /* CCParallaxScrollNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF90FBA414D54F7500AC8C65 /* CCParallaxScrollNode.mm */; };
+		BF90FBA914D54F7500AC8C65 /* CCParallaxScrollOffset.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF90FBA614D54F7500AC8C65 /* CCParallaxScrollOffset.mm */; };
+		BF90FBAA14D54F7500AC8C65 /* README in Resources */ = {isa = PBXBuildFile; fileRef = BF90FBA714D54F7500AC8C65 /* README */; };
+		BF90FBBF14D5689800AC8C65 /* paralaxe1.png in Resources */ = {isa = PBXBuildFile; fileRef = BF90FBBD14D5689800AC8C65 /* paralaxe1.png */; };
+		BF90FBC014D5689800AC8C65 /* paralaxe2.png in Resources */ = {isa = PBXBuildFile; fileRef = BF90FBBE14D5689800AC8C65 /* paralaxe2.png */; };
 		BFBE8FDD14D3DE8A00C3C94B /* JNPAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */; };
 		BFDE4D1114D3C68700481370 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1014D3C68700481370 /* QuartzCore.framework */; };
 		BFDE4D1314D3C68700481370 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1214D3C68700481370 /* OpenGLES.framework */; };
@@ -312,6 +317,13 @@
 		BF1F162514D468BB009481D1 /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
 		BF1F162C14D468E9009481D1 /* jumpButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpButton.png; sourceTree = "<group>"; };
 		BF1F162D14D468E9009481D1 /* pukeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pukeButton.png; sourceTree = "<group>"; };
+		BF90FBA314D54F7500AC8C65 /* CCParallaxScrollNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCParallaxScrollNode.h; sourceTree = "<group>"; };
+		BF90FBA414D54F7500AC8C65 /* CCParallaxScrollNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCParallaxScrollNode.mm; sourceTree = "<group>"; };
+		BF90FBA514D54F7500AC8C65 /* CCParallaxScrollOffset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCParallaxScrollOffset.h; sourceTree = "<group>"; };
+		BF90FBA614D54F7500AC8C65 /* CCParallaxScrollOffset.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCParallaxScrollOffset.mm; sourceTree = "<group>"; };
+		BF90FBA714D54F7500AC8C65 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		BF90FBBD14D5689800AC8C65 /* paralaxe1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paralaxe1.png; sourceTree = "<group>"; };
+		BF90FBBE14D5689800AC8C65 /* paralaxe2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paralaxe2.png; sourceTree = "<group>"; };
 		BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPAudioManager.h; sourceTree = "<group>"; };
 		BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPAudioManager.m; sourceTree = "<group>"; };
 		BFDE4D0C14D3C68700481370 /* JumpNPuke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpNPuke.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -675,6 +687,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF90FBAC14D54F7A00AC8C65 /* Parallax */ = {
+			isa = PBXGroup;
+			children = (
+				BF90FBA314D54F7500AC8C65 /* CCParallaxScrollNode.h */,
+				BF90FBA414D54F7500AC8C65 /* CCParallaxScrollNode.mm */,
+				BF90FBA514D54F7500AC8C65 /* CCParallaxScrollOffset.h */,
+				BF90FBA614D54F7500AC8C65 /* CCParallaxScrollOffset.mm */,
+				BF90FBA714D54F7500AC8C65 /* README */,
+			);
+			name = Parallax;
+			sourceTree = "<group>";
+		};
 		BFBE8FD914D3DE7800C3C94B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -730,6 +754,7 @@
 		BFDE4D2214D3C68700481370 /* JumpNPuke */ = {
 			isa = PBXGroup;
 			children = (
+				BF90FBAC14D54F7A00AC8C65 /* Parallax */,
 				BFE60E8514D4BB460010A72B /* Collisions */,
 				BFBE8FD914D3DE7800C3C94B /* Classes */,
 				BFDE4F2614D3C68900481370 /* AppDelegate.h */,
@@ -753,6 +778,8 @@
 		BFDE4D2314D3C68700481370 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BF90FBBD14D5689800AC8C65 /* paralaxe1.png */,
+				BF90FBBE14D5689800AC8C65 /* paralaxe2.png */,
 				32FFE1C414D51EE000CD40F9 /* musique */,
 				32CAFEAB14D4CCE700556D74 /* ennemis_07.png */,
 				32CAFEAC14D4CCE700556D74 /* ennemis_04.png */,
@@ -1445,6 +1472,9 @@
 				32FFE1BE14D515E600CD40F9 /* levelup.png in Resources */,
 				32FFE1C314D51BF300CD40F9 /* sons-events in Resources */,
 				32FFE1C514D51EE000CD40F9 /* musique in Resources */,
+				BF90FBAA14D54F7500AC8C65 /* README in Resources */,
+				BF90FBBF14D5689800AC8C65 /* paralaxe1.png in Resources */,
+				BF90FBC014D5689800AC8C65 /* paralaxe2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1607,6 +1637,8 @@
 				BFE60E8314D4BB430010A72B /* MyContactListener.mm in Sources */,
 				32395E4614D4A8D9005A0288 /* JNPBasicLayer.mm in Sources */,
 				32B6741D14D52FE7001DE545 /* JNPScore.mm in Sources */,
+				BF90FBA814D54F7500AC8C65 /* CCParallaxScrollNode.mm in Sources */,
+				BF90FBA914D54F7500AC8C65 /* CCParallaxScrollOffset.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

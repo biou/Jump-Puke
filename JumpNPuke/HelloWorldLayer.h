@@ -19,6 +19,7 @@
 #import "JNPScore.h"
 #import "MyContactListener.h"
 #import "JNPScore.h"
+#import "CCParallaxScrollNode.h"
 
 #define KLIMITLEVELUP 23000
 #define KVMIN 155.0
@@ -50,6 +51,7 @@
     b2Body *playerBody;
 
     float prevPlayerPosition;
+    float prevPlayerPosition_y;
     float currentSpeed;
 	float currentScale;
 	float elephantSize;
@@ -57,6 +59,7 @@
 	b2CircleShape * currentCircle;
 
     JNPAudioManager *_audioManager;
+    CCParallaxScrollNode *parallax;
     
     NSMutableArray *lesBonusDeTaMere;
     NSMutableArray *lesObstaclesDeTonPere;
