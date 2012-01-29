@@ -14,6 +14,7 @@
 #define jnpGameover 0
 #define jnpCredits 1
 #define jnpNewLevel 2
+#define jnpHelp 3
 
 @interface JNPBasicLayer : CCLayer {
     NSMutableArray *lesVomisDeTaGrandMere;

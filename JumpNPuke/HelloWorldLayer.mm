@@ -404,7 +404,7 @@ static CCScene *scene;
     currentSpeed=v;
     
     JNPScore *s = [JNPScore jnpscore];
-    float leveldifficulty = 120.0+40.0*[s getLevel];
+    float leveldifficulty = 100.0+45.0*[s getLevel];
     
     if (v<leveldifficulty) {
         float zeForce = (leveldifficulty - v)/200;
