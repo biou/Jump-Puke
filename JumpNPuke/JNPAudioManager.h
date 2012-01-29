@@ -13,6 +13,12 @@
 #define jnpSndDummy 0
 #define jnpSndJump 1
 #define jnpSndDie 2
+#define jnpSndBile 3
+#define jnpSndBonus 4
+#define jnpSndCollision 5
+#define jnpSndLevel_Up 6
+#define jnpSndMenu 7
+#define jnpSndObstacle 8
 
 @interface JNPAudioManager : CCNode {
     int counter;

@@ -15,6 +15,7 @@
 #import "GLES-Render.h"
 #import "JNPControlLayer.h"
 #import "JNPAudioManager.h"
+#import "JNPBasicLayer.h"
 
 #import "MyContactListener.h"
 
@@ -54,6 +55,8 @@
 	b2CircleShape * currentCircle;
 
     JNPAudioManager *_audioManager;
+    
+    NSMutableArray *lesBonusDeTaMere;
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;

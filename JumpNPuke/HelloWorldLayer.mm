@@ -11,6 +11,7 @@
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
+#import "JNPBasicLayer.h"
 
 enum {
 	kTagParentNode = 1,
@@ -76,6 +77,31 @@ enum {
         self.tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"map.tmx"];
         self.background = [_tileMap layerNamed:@"background"];
         [self addChild:_tileMap z:0];
+        
+        // obtention des positions potentielles de super bonus ta mère
+        CCTMXObjectGroup *bonusGroup = [_tileMap objectGroupNamed:@"bonus"];
+        NSMutableArray *tableauObjets = [bonusGroup objects];
+        int nomber = [tableauObjets count];
+       
+        // grande cagnotte tirage au sort parmis les positions possibles de bonus, pour obtenir un tableau de quelques points différents sur lesquels placer des cadeaux bonux
+        NSMutableArray *electedBonusPositionsInMap = [NSMutableArray arrayWithCapacity:5];
+        lesBonusDeTaMere = [NSMutableArray arrayWithCapacity:5];
+        for (int ii=0; ii<5; ii++) {
+            int kk = arc4random() % nomber;
+            [electedBonusPositionsInMap insertObject:[tableauObjets objectAtIndex:kk] atIndex:ii];
+            [tableauObjets removeObjectAtIndex:kk];
+            nomber--;
+        }
+        
+        // après le tirage au sort des positions, on y ajoute des sprites de bonus avec des images originales et également tirées au hasard! youpi super hahaha huhuhu hihihi
+        for (NSMutableDictionary *nodule in electedBonusPositionsInMap) {
+            CGPoint dasPunkt = ccp([[nodule valueForKey:@"x"] floatValue], [[nodule valueForKey:@"y"] floatValue]);
+            CCSprite *newCollectibleBonusYoupiTralalaPouetPouet = [CCSprite spriteWithFile:[@"bonus_0" stringByAppendingFormat:@"%d.png",arc4random()%6+2]];
+            newCollectibleBonusYoupiTralalaPouetPouet.position=dasPunkt;
+            [self addChild:newCollectibleBonusYoupiTralalaPouetPouet];
+            [lesBonusDeTaMere addObject:newCollectibleBonusYoupiTralalaPouetPouet];
+        }
+        
         
         
 		// enable events
@@ -150,9 +176,16 @@ enum {
 	return self;
 }
 
+
+-(void)gameover
+{
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpGameover]]];
+	
+}
+
 -(void)updatePlayerSize:(float)dt {
-	if (fabs(currentScale) > 0.05) {
-		currentScale -= 0.001;
+	if (fabs(currentScale) > 0.08) {
+		currentScale -= 0.005;
 
 		if (playerBody->GetUserData() != NULL) {
             CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
@@ -170,6 +203,7 @@ enum {
 	} else {
 		currentScale = 0.0;
 		NSLog(@"trop petit");
+		[self gameover];
 		
 	}
 	

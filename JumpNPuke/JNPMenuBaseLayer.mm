@@ -59,6 +59,7 @@
 
 -(void)menu2 {
 	NSLog(@"menu2");
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpCredits]]];
 }
 
 @end
