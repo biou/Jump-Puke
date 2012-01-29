@@ -347,6 +347,8 @@ static JNPControlLayer * controlLayer;
         [_audioManager playMusicWithStress:5];
     }
     
+    [self checkCollisions:dt];
+    
     prevPlayerPosition = currentPlayerPosition;
 }
 
@@ -392,7 +394,6 @@ static JNPControlLayer * controlLayer;
 }
 
 -(void)tellPlayerToJump {
-	[_audioManager playJump];
     b2Vec2 force = b2Vec2(7.2f, 27.0);
     playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
 	
@@ -590,12 +591,12 @@ static JNPControlLayer * controlLayer;
 	// Instruct the world to perform a single step of simulation. It is
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);
-    
-    [self checkCollisions];
 }
 
--(void) checkCollisions
+-(void) checkCollisions: (ccTime) dt
 {
+    float currentPlayerPosition = ((CCSprite *)playerBody->GetUserData()).position.x;
+    
     std::vector<MyContact>::iterator pos;
     for(pos = _contactListener->_contacts.begin(); 
         pos != _contactListener->_contacts.end(); ++pos) {
@@ -605,6 +606,7 @@ static JNPControlLayer * controlLayer;
         b2Body *bodyB = contact.fixtureB->GetBody();
 
         CCSprite *playerSpriteA = (CCSprite*)bodyB->GetUserData();
+        /*
         //CCSprite *playerSpriteB = (CCSprite*)bodyB->GetUserData();
         NSLog(@"----------------------");
         NSLog(@"%f , %f", playerSpriteA.position.x, playerSpriteA.position.y);
@@ -614,6 +616,7 @@ static JNPControlLayer * controlLayer;
         //NSLog(@"%@", bodyA);
         //NSLog(@"%@", bodyB);
         NSLog(@"----------------------");
+         */
         
         //particleSystem.sourcePosition = playerSpriteA.position;
 
@@ -632,7 +635,11 @@ static JNPControlLayer * controlLayer;
         /*CGPoint p2 = [[CCDirector sharedDirector] convertToGL:playerSpriteA.position];
         particleSystem.sourcePosition = ccp( 1024 - p2.y, 768 - p2.y );*/
 
-        
+        // not toooooo much boingboing
+        if (fabs(prevPlayerPosition - currentPlayerPosition) >= 1) {
+            [_audioManager playJump];
+        }
+
         [particleSystem resetSystem];
         
         if (bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL) {
