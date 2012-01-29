@@ -121,7 +121,21 @@
 
 // preload files
 -(void) preload {
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"calm.mp3"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Bile.caf"];			
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Bonus.caf"];			
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Collision.caf"];		
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Game_Over.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Jump_1.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Jump_2.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Level_Up.caf"];				
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Malus.caf"];			
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Menu.caf"];			
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Obstacle.caf"];			
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke_1.caf"];			
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke_2.caf"];			
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke_3.caf"];			
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke_4.caf"];			
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/OPuke_5.caf"];
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_1.aifc"];
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_2.aifc"];
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_3.aifc"];

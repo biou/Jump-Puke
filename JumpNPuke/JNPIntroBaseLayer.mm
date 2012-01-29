@@ -20,7 +20,8 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
-
+		JNPAudioManager *am = [[[JNPAudioManager alloc] init] autorelease];
+		[am preload];
         
 		// logo qui va s'animer
         CCSprite *logo = [CCSprite spriteWithFile:@"intro.png"];
@@ -52,7 +53,6 @@
 
 - (void) introSound:(ccTime) dt {
     JNPAudioManager *am = [[[JNPAudioManager alloc] init] autorelease];
-	[am preload];
 	[am play:jnpSndLevel_Up];
     [self unschedule:@selector(introSound:)];
 }
