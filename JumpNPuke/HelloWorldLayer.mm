@@ -20,6 +20,8 @@ enum {
 
 #pragma mark - HelloWorldLayer
 
+id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
+
 @interface HelloWorldLayer()
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
@@ -102,7 +104,10 @@ enum {
             [lesBonusDeTaMere addObject:newCollectibleBonusYoupiTralalaPouetPouet];
         }
         
-        
+        // initialisation de textures
+		elephantNormalTexture = [[[CCTextureCache sharedTextureCache] addImage:@"elephant-normal.png"] retain];
+		elephantPukeTexture = [[[CCTextureCache sharedTextureCache] addImage:@"elephant-puke.png"] retain];	
+		elephantJumpTexture = [[[CCTextureCache sharedTextureCache] addImage:@"elephant-saute.png"] retain];
         
 		// enable events
 		
@@ -260,7 +265,46 @@ enum {
 -(void)tellPlayerToJump {
     b2Vec2 force = b2Vec2(3.0f, 27.0f);
     playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
+	
+	b2Body * b = playerBody;
+	if (b->GetUserData() != NULL) {
+		CCSprite *ballData = (CCSprite *)b->GetUserData();
+		[ballData setTexture:elephantJumpTexture];
+		[self schedule:@selector(unpuke:) interval:0.3];
+	}	
 }
+
+
+
+-(void)tellPlayertoPuke:(CGPoint)position {
+	//FIXME Noliv dropper un objet ici
+	
+	// animation
+	b2Body * b = playerBody;
+	if (b->GetUserData() != NULL) {
+		CCSprite *ballData = (CCSprite *)b->GetUserData();
+		[ballData setTexture:elephantPukeTexture];
+		[self schedule:@selector(unpuke:) interval:0.3];
+	}
+	
+	// FIXME changer le son
+	[_audioManager play:7];
+	// son
+	
+	// diminuer taille
+	
+}
+
+-(void)unpuke:(float)dt {
+	b2Body * b = playerBody;
+		if (b->GetUserData() != NULL) {
+		CCSprite *ballData = (CCSprite *)b->GetUserData();
+		[ballData setTexture:elephantNormalTexture];
+	}
+	[self unschedule:@selector(unpuke:)];	
+}
+
+
 
 // il y a vraiment des commentaires de merde dans ce code
 
