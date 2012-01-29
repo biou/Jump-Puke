@@ -82,10 +82,10 @@ static CCScene *scene;
         CCSprite *clouds1bis = [CCSprite spriteWithFile:@"paralaxe1.png"];
         CCSprite *clouds2bis = [CCSprite spriteWithFile:@"paralaxe2.png"];
         float totalWidth = 4 * clouds1.contentSize.width;
-        [parallax addChild:clouds1 z:0 Ratio:ccp(1.2,1) Pos:ccp(0,0) ScrollOffset:ccp(totalWidth,0)];
-        [parallax addChild:clouds2 z:0 Ratio:ccp(0.7,1) Pos:ccp(0,0) ScrollOffset:ccp(totalWidth,0)];
-        [parallax addChild:clouds1bis z:0 Ratio:ccp(1.2,1) Pos:ccp(clouds1.contentSize.width,0) ScrollOffset:ccp(totalWidth,0)];
-        [parallax addChild:clouds2bis z:0 Ratio:ccp(0.7,1) Pos:ccp(clouds2.contentSize.width,0) ScrollOffset:ccp(totalWidth,0)];
+        [parallax addChild:clouds1 z:0 Ratio:ccp(1.3,1) Pos:ccp(0,0) ScrollOffset:ccp(totalWidth,0)];
+        [parallax addChild:clouds2 z:0 Ratio:ccp(0.6,1) Pos:ccp(0,0) ScrollOffset:ccp(totalWidth,0)];
+        [parallax addChild:clouds1bis z:0 Ratio:ccp(1.3,1) Pos:ccp(clouds1.contentSize.width,0) ScrollOffset:ccp(totalWidth,0)];
+        [parallax addChild:clouds2bis z:0 Ratio:ccp(0.6,1) Pos:ccp(clouds2.contentSize.width,0) ScrollOffset:ccp(totalWidth,0)];
         // Add to layer, sprite, etc.
         [scene addChild:parallax z:-1];
         
@@ -719,10 +719,9 @@ static CCScene *scene;
         if (fabs(prevPlayerPosition - currentPlayerPosition) >= 1
             && fabs(prevPlayerPosition_y - currentPlayerPosition_y) >= 2) {
             [_audioManager playJump];
+            [particleSystem resetSystem];
         }
 
-        [particleSystem resetSystem];
-        
         if (bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL) {
             CCSprite *spriteA = (CCSprite *) bodyA->GetUserData();
             CCSprite *spriteB = (CCSprite *) bodyB->GetUserData();
