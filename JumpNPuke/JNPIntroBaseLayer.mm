@@ -26,17 +26,9 @@
         CCSprite *logo = [CCSprite spriteWithFile:@"intro.png"];
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
 		
-		// fond d'écran
-		//CCSprite * bg = [CCSprite spriteWithFile:@"intro-back.png"];
-		//bg.position = ccp(winsize.width/2, winsize.height/2);
-		//[self addChild:bg z:0];
-		
-		NSLog(@"winsize.width: %f\n", winsize.width);
-		NSLog(@"winsize.height: %f\n", winsize.height);	
-		
+		// fond d'écran		
 		
         logo.position = ccp(winsize.width/2 , winsize.height+(457/2) );
-		//logo.position = ccp(winsize.width/2 , winsize.height/2 );
 		[self addChild:logo];
         
 		// animation du logo

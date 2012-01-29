@@ -330,7 +330,6 @@ static JNPControlLayer * controlLayer;
         if (dist < contentSize/2 +25) {
             [self removeChild:schpritz cleanup:NO];
             [lesObstaclesDeTonPere removeObject:schpritz];
-            NSLog(@"You just hit an obstacle! LOSER!");
             [self diminuerPlayerDeltaScale:0.035];	
             [_audioManager play:1];
             return;
@@ -392,8 +391,6 @@ static JNPControlLayer * controlLayer;
 			if (y* PTM_RATIO > size.height) {
 				[self gameover];
 			}
-			
-			//NSLog(@"--%f\n", x * PTM_RATIO);
 			
 			if (x * PTM_RATIO > KLIMITLEVELUP) {
 				// on vient de passer le checkpoint !
