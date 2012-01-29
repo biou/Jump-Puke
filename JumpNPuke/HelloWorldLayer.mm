@@ -161,7 +161,7 @@ static JNPControlLayer * controlLayer;
 		// FIXME à ajuster
         CCSprite *serpent = [CCSprite spriteWithFile:@"serpent.png"];
         serpent.position=ccp(KLIMITLEVELUP-192.0, winSize.height/2);
-        [self addChild:serpent];		
+        [self addChild:serpent z:10];		
 		
 		// taille en pixels de l'éléphant : 260px
 		elephantSize = 260.0;
