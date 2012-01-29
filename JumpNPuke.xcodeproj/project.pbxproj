@@ -78,16 +78,6 @@
 		BFDE4D1D14D3C68700481370 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1C14D3C68700481370 /* Foundation.framework */; };
 		BFDE4D1F14D3C68700481370 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D1E14D3C68700481370 /* CoreGraphics.framework */; };
 		BFDE4D2114D3C68700481370 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE4D2014D3C68700481370 /* GameKit.framework */; };
-		BFDE4D2514D3C68700481370 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D2414D3C68700481370 /* Default.png */; };
-		BFDE4D2714D3C68700481370 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D2614D3C68700481370 /* fps_images.png */; };
-		BFDE4D2914D3C68700481370 /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D2814D3C68700481370 /* fps_images-hd.png */; };
-		BFDE4D2B14D3C68700481370 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D2A14D3C68700481370 /* Icon-72.png */; };
-		BFDE4D2D14D3C68700481370 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D2C14D3C68700481370 /* Icon-Small-50.png */; };
-		BFDE4D2F14D3C68700481370 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D2E14D3C68700481370 /* Icon-Small.png */; };
-		BFDE4D3114D3C68700481370 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D3014D3C68700481370 /* Icon-Small@2x.png */; };
-		BFDE4D3314D3C68700481370 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D3214D3C68700481370 /* Icon.png */; };
-		BFDE4D3514D3C68700481370 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D3414D3C68700481370 /* Icon@2x.png */; };
-		BFDE4D3814D3C68700481370 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D3714D3C68700481370 /* iTunesArtwork */; };
 		BFDE4D3B14D3C68700481370 /* Position_uColor.fsh in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D3A14D3C68700481370 /* Position_uColor.fsh */; };
 		BFDE4D3D14D3C68700481370 /* Position_uColor.vsh in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D3C14D3C68700481370 /* Position_uColor.vsh */; };
 		BFDE4D3F14D3C68700481370 /* PositionColor.fsh in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4D3E14D3C68700481370 /* PositionColor.fsh */; };
@@ -319,16 +309,6 @@
 		BF1F162D14D468E9009481D1 /* pukeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pukeButton.png; sourceTree = "<group>"; };
 		BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPAudioManager.h; sourceTree = "<group>"; };
 		BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPAudioManager.m; sourceTree = "<group>"; };
-		BFBEF4FE14D4598B00144BDD /* Tribal_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_1.mp3; sourceTree = "<group>"; };
-		BFBEF4FF14D4598B00144BDD /* Tribal_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_2.mp3; sourceTree = "<group>"; };
-		BFBEF50014D4598B00144BDD /* Tribal_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_3.mp3; sourceTree = "<group>"; };
-		BFBEF50114D4598B00144BDD /* Tribal_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_4.mp3; sourceTree = "<group>"; };
-		BFBEF50214D4598B00144BDD /* Tribal_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tribal_5.mp3; sourceTree = "<group>"; };
-		BFBEF50914D45FB000144BDD /* Tribal_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_1.wav; sourceTree = "<group>"; };
-		BFBEF50A14D45FB000144BDD /* Tribal_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_2.wav; sourceTree = "<group>"; };
-		BFBEF50B14D45FB000144BDD /* Tribal_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_3.wav; sourceTree = "<group>"; };
-		BFBEF50C14D45FB000144BDD /* Tribal_4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_4.wav; sourceTree = "<group>"; };
-		BFBEF50D14D45FB000144BDD /* Tribal_5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tribal_5.wav; sourceTree = "<group>"; };
 		BFDE4D0C14D3C68700481370 /* JumpNPuke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpNPuke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFDE4D1014D3C68700481370 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BFDE4D1214D3C68700481370 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -339,17 +319,6 @@
 		BFDE4D1C14D3C68700481370 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BFDE4D1E14D3C68700481370 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		BFDE4D2014D3C68700481370 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		BFDE4D2414D3C68700481370 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
-		BFDE4D2614D3C68700481370 /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = Resources/fps_images.png; sourceTree = "<group>"; };
-		BFDE4D2814D3C68700481370 /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-hd.png"; path = "Resources/fps_images-hd.png"; sourceTree = "<group>"; };
-		BFDE4D2A14D3C68700481370 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Resources/Icon-72.png"; sourceTree = "<group>"; };
-		BFDE4D2C14D3C68700481370 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "Resources/Icon-Small-50.png"; sourceTree = "<group>"; };
-		BFDE4D2E14D3C68700481370 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "Resources/Icon-Small.png"; sourceTree = "<group>"; };
-		BFDE4D3014D3C68700481370 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "Resources/Icon-Small@2x.png"; sourceTree = "<group>"; };
-		BFDE4D3214D3C68700481370 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/Icon.png; sourceTree = "<group>"; };
-		BFDE4D3414D3C68700481370 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/Icon@2x.png"; sourceTree = "<group>"; };
-		BFDE4D3614D3C68700481370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
-		BFDE4D3714D3C68700481370 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
 		BFDE4D3A14D3C68700481370 /* Position_uColor.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Position_uColor.fsh; path = Shaders/Position_uColor.fsh; sourceTree = "<group>"; };
 		BFDE4D3C14D3C68700481370 /* Position_uColor.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Position_uColor.vsh; path = Shaders/Position_uColor.vsh; sourceTree = "<group>"; };
 		BFDE4D3E14D3C68700481370 /* PositionColor.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = PositionColor.fsh; path = Shaders/PositionColor.fsh; sourceTree = "<group>"; };
@@ -701,6 +670,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B5396F8B14D4C56F00C32B27 /* bonus-ennemis */ = {
+			isa = PBXGroup;
+			children = (
+				B5396F8C14D4C56F00C32B27 /* bonus_02.png */,
+				B5396F8D14D4C56F00C32B27 /* bonus_03.png */,
+				B5396F8E14D4C56F00C32B27 /* bonus_04.png */,
+				B5396F8F14D4C56F00C32B27 /* bonus_05.png */,
+				B5396F9014D4C56F00C32B27 /* bonus_06.png */,
+				B5396F9114D4C56F00C32B27 /* bonus_07.png */,
+				B5396F9214D4C56F00C32B27 /* ennemis_01.png */,
+				B5396F9314D4C56F00C32B27 /* ennemis_02.png */,
+				B5396F9414D4C56F00C32B27 /* ennemis_03.png */,
+				B5396F9514D4C56F00C32B27 /* ennemis_04.png */,
+				B5396F9614D4C56F00C32B27 /* ennemis_05.png */,
+				B5396F9714D4C56F00C32B27 /* ennemis_06.png */,
+				B5396F9814D4C56F00C32B27 /* ennemis_07.png */,
+			);
+			path = "bonus-ennemis";
+			sourceTree = "<group>";
+		};
+		B5396FAC14D4C57F00C32B27 /* elephants */ = {
+			isa = PBXGroup;
+			children = (
+				B5396FAD14D4C57F00C32B27 /* elephant-normal.png */,
+				B5396FAE14D4C57F00C32B27 /* elephant-puke.png */,
+				B5396FAF14D4C57F00C32B27 /* elephant-saute.png */,
+			);
+			path = elephants;
+			sourceTree = "<group>";
+		};
 		BFBE8FD914D3DE7800C3C94B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1414,16 +1413,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFDE4D2514D3C68700481370 /* Default.png in Resources */,
-				BFDE4D2714D3C68700481370 /* fps_images.png in Resources */,
-				BFDE4D2914D3C68700481370 /* fps_images-hd.png in Resources */,
-				BFDE4D2B14D3C68700481370 /* Icon-72.png in Resources */,
-				BFDE4D2D14D3C68700481370 /* Icon-Small-50.png in Resources */,
-				BFDE4D2F14D3C68700481370 /* Icon-Small.png in Resources */,
-				BFDE4D3114D3C68700481370 /* Icon-Small@2x.png in Resources */,
-				BFDE4D3314D3C68700481370 /* Icon.png in Resources */,
-				BFDE4D3514D3C68700481370 /* Icon@2x.png in Resources */,
-				BFDE4D3814D3C68700481370 /* iTunesArtwork in Resources */,
 				BFDE4D3B14D3C68700481370 /* Position_uColor.fsh in Resources */,
 				BFDE4D3D14D3C68700481370 /* Position_uColor.vsh in Resources */,
 				BFDE4D3F14D3C68700481370 /* PositionColor.fsh in Resources */,
