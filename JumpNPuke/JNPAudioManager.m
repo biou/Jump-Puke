@@ -62,9 +62,6 @@
         case jnpSndJump:
             [[SimpleAudioEngine sharedEngine] playEffect:@"jump.mp3"];
             break;
-        case jnpSndDie:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Game_Over.caf"];
-            break;
 		case jnpSndBile:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Bile.caf"];			
 			break;
@@ -72,8 +69,11 @@
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Bonus.caf"];			
 			break;
 		case jnpSndCollision:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Collision.caf"];			
-			break;		
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Collision.caf"];		
+			break;	
+        case jnpSndDie:
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Game_Over.caf"];
+            break;			
 		case jnpSndLevel_Up:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Level_Up.caf"];				
 			break;
