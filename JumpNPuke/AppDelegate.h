@@ -21,7 +21,7 @@
 	CCDirectorIOS	*director_;							// weak ref
 
     JNPIntroScene *introScene;
-    JNPIntroScene *introLayer;
+    JNPIntroBaseLayer *introLayer;
 	NSOperationQueue *queue;
 }
 

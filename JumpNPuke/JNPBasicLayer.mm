@@ -43,6 +43,10 @@ static int mode;
 				image = @"creditsImg.png";
 				son = 9;
 				break;
+			case jnpNewLevel:
+				image = @"levelup.png";
+				son = jnpSndLevel_Up;
+				break;				
 			default:
 				break;
 		}
@@ -85,7 +89,22 @@ static int mode;
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPMenuScene node]]];
+	switch (mode) {
+		case jnpGameover:
+			[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPMenuScene node]]];
+			break;
+		case jnpCredits:
+			[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPMenuScene node]]];
+			break;
+		case jnpNewLevel:
+			[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HelloWorldLayer scene]]];
+			break;				
+		default:
+			break;
+	}
+
+	
+
 }
 
 

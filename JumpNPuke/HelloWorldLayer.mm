@@ -28,6 +28,7 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 -(void) createMenu;
 @end
 
+static JNPControlLayer * controlLayer;
 
 // ta mere elle mange des pruneaux
 
@@ -42,8 +43,8 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 	
 	// 'layer' is an autorelease object.
 	HelloWorldLayer * baseLayer = [HelloWorldLayer node];
-	JNPControlLayer * controlLayer = [JNPControlLayer node];
-    [controlLayer assignGameLayer:baseLayer];
+	controlLayer = [JNPControlLayer node];
+	[controlLayer assignGameLayer:baseLayer];
 	
     CCLayer *bgLayer = [CCLayer node];
     CGSize s = [CCDirector sharedDirector].winSize;
@@ -63,7 +64,7 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
     
 	// add layer as a child to scene
 	[scene addChild: baseLayer];
-	[scene addChild: controlLayer];
+	[scene addChild: controlLayer z:5 tag:2];
 	
 	// return the scene
 	return scene;
@@ -74,8 +75,10 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 	if( (self=[super init])) {
         
         
-        
-        // init de la Map avant box2d
+		CGSize winSize = [[CCDirector sharedDirector] winSize];
+		hasWon = NO;
+       
+		// init de la Map avant box2d
         self.tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"map.tmx"];
         self.background = [_tileMap layerNamed:@"background"];
         [self addChild:_tileMap z:0];
@@ -95,6 +98,7 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
             nomber--;
         }
         
+		
         // après le tirage au sort des positions, on y ajoute des sprites de bonus avec des images originales et également tirées au hasard! youpi super hahaha huhuhu hihihi
         for (NSMutableDictionary *nodule in electedBonusPositionsInMap) {
             CGPoint dasPunkt = ccp([[nodule valueForKey:@"x"] floatValue], [[nodule valueForKey:@"y"] floatValue]);
@@ -143,18 +147,24 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 		// enable events
 		
 		self.isTouchEnabled = YES;
-		self.isAccelerometerEnabled = YES;
 		
 		// init physics
 		[self initPhysics];
 		
 		// create reset button
-		[self createMenu];
+		//[self createMenu];
 		
 		//Set up sprite
         //[self initPlayer];
         
-       
+     
+		// ajout de la tete de serpent
+		// il est 5h23, je fais ce que je veux !
+		// FIXME à ajuster
+        CCSprite *serpent = [CCSprite spriteWithFile:@"serpent.png"];
+        serpent.position=ccp(19000, winSize.height/2);
+        [self addChild:serpent];		
+		
 		// taille en pixels de l'éléphant : 260px
 		elephantSize = 260.0;
 		currentScale = 0.4;
@@ -216,7 +226,9 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 
 -(void)gameover
 {
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpGameover]]];
+	if (!hasWon) {
+		[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpGameover]]];
+	}
 	
 }
 
@@ -336,6 +348,30 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
             ballData.position = ccp(b->GetPosition().x * PTM_RATIO,
                                     b->GetPosition().y * PTM_RATIO);
             ballData.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+			float y = b->GetPosition().y;
+			float x = b->GetPosition().x;
+			if (y < 0) {
+				[self gameover];
+			}
+			
+			CGSize size = [[CCDirector sharedDirector] winSize];
+			
+			if (y* PTM_RATIO > size.height) {
+				[self gameover];
+			}
+			
+			NSLog(@"--%f\n", x * PTM_RATIO);
+			
+			if (x * PTM_RATIO > 1000) {
+				// on vient de passer le checkpoint !
+				// empêcher le game over
+				hasWon=YES;
+				[controlLayer setVisible:NO];
+				[controlLayer setIsTouchEnabled:NO];
+				// transition vers niveau suivant (voir comment on peut faire sans tout réinitialiser
+				[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpNewLevel]]];
+			}
+			
         }        
     //}
     
@@ -365,13 +401,29 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 		[ballData setTexture:elephantPukeTexture];
 		[self schedule:@selector(unpuke:) interval:0.3];
 	}
-	
-	// FIXME changer le son
-	[_audioManager play:7];
+
 	// son
+	// FIXME changer le son
+	[_audioManager play:7];	
 	
 	// diminuer taille
+	currentScale -= 0.05;
 	
+	if (playerBody->GetUserData() != NULL) {
+		CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
+		ballData.scale=currentScale;
+		playerBody->DestroyFixture(playerBody->GetFixtureList());
+		b2CircleShape circle;
+		circle.m_radius = elephantSize*currentScale/2/PTM_RATIO;
+		b2FixtureDef ballShapeDef;
+		ballShapeDef.shape = &circle;
+		ballShapeDef.density = 0.5f * currentScale;
+		ballShapeDef.friction = 0.2f;
+		ballShapeDef.restitution = 0.8f;
+		playerBody->CreateFixture(&ballShapeDef);
+		playerBody->ApplyTorque(50.0);
+		
+	}   	
 }
 
 -(void)unpuke:(float)dt {
@@ -392,6 +444,8 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 	delete world;
 	world = NULL;
     [lesBonusDeTaMere release];
+	[lesObstaclesDeTonPere release];
+	
 	
 	delete m_debugDraw;
 	m_debugDraw = NULL;
@@ -401,50 +455,6 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 
 // c'est toi le commentaire
 
--(void) createMenu
-{
-	// Default font size will be 22 points.
-	[CCMenuItemFont setFontSize:22];
-	
-	// Reset Button
-	CCMenuItemLabel *reset = [CCMenuItemFont itemWithString:@"Reset" block:^(id sender){
-		[[CCDirector sharedDirector] replaceScene: [HelloWorldLayer scene]];
-	}];
-	
-	// Achievement Menu Item using blocks
-	CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
-		
-		
-		GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
-		achivementViewController.achievementDelegate = self;
-		
-		AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-		
-		[[app navController] presentModalViewController:achivementViewController animated:YES];
-	}];
-	
-	// Leaderboard Menu Item using blocks
-	CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-		
-		
-		GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-		leaderboardViewController.leaderboardDelegate = self;
-		
-		AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-		
-		[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-	}];
-	
-	CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, reset, nil];
-	
-	[menu alignItemsVertically];
-	
-	CGSize size = [[CCDirector sharedDirector] winSize];
-	[menu setPosition:ccp( size.width/2, size.height/2)];
-	
-	
-	[self addChild: menu z:-1];	
-}
 
 -(void) initPhysics
 {

@@ -54,12 +54,13 @@
 		NSLog(@"winsize.height: %f\n", winsize.height);	
 		
 		
-        logo.position = ccp(winsize.width/2 , winsize.height+(457/2) );
+        //logo.position = ccp(winsize.width/2 , winsize.height+(457/2) );
+		logo.position = ccp(winsize.width/2 , winsize.height/2 );
 		[self addChild:logo];
         
 		// animation du logo
-		CGPoint location = ccp(winsize.width/2,winsize.height/2);
-		[logo runAction: [CCMoveTo actionWithDuration:1 position:location]];          
+		//CGPoint location = ccp(winsize.width/2,winsize.height/2);
+		//[logo runAction: [CCMoveTo actionWithDuration:1 position:location]];          
 
         JNPIntroBaseLayerLoader *loader = [[JNPIntroBaseLayerLoader alloc] init];
 		loader.introLayer = self;

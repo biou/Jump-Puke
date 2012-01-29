@@ -52,12 +52,14 @@
     float currentSpeed;
 	float currentScale;
 	float elephantSize;
+	BOOL hasWon;
 	b2CircleShape * currentCircle;
 
     JNPAudioManager *_audioManager;
     
     NSMutableArray *lesBonusDeTaMere;
     NSMutableArray *lesObstaclesDeTonPere;
+    NSMutableArray *lesVomisDeTaGrandMere;	
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;

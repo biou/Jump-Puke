@@ -13,12 +13,13 @@
 
 #define jnpGameover 0
 #define jnpCredits 1
+#define jnpNewLevel 2
 
 @interface JNPBasicLayer : CCLayer {
 
 }
 
-// returns a CCScene that contains the JNPDeath layer as the only child
+// returns a CCScene that contains the JNPBasicLayer layer as the only child
 +(CCScene *) scene:(int)m;
 
 @end
