@@ -13,6 +13,7 @@
 		32395E4614D4A8D9005A0288 /* JNPBasicLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32395E4514D4A8D9005A0288 /* JNPBasicLayer.mm */; };
 		32395E4A14D4AEE2005A0288 /* gameover.png in Resources */ = {isa = PBXBuildFile; fileRef = 32395E4914D4AEE2005A0288 /* gameover.png */; };
 		32395E5614D4C187005A0288 /* creditsImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 32395E5514D4C187005A0288 /* creditsImg.png */; };
+		3247F19314D584B7002312A1 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3247F19214D584B7002312A1 /* LICENSE */; };
 		32A7A74814D3E8B100C54055 /* JNPControlLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */; };
 		32A7A75414D3ECCD00C54055 /* jumpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75214D3ECCD00C54055 /* jumpButton.png */; };
 		32A7A75514D3ECCD00C54055 /* pukeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A75314D3ECCD00C54055 /* pukeButton.png */; };
@@ -254,6 +255,7 @@
 		32395E4514D4A8D9005A0288 /* JNPBasicLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPBasicLayer.mm; sourceTree = "<group>"; };
 		32395E4914D4AEE2005A0288 /* gameover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gameover.png; path = typo/gameover.png; sourceTree = "<group>"; };
 		32395E5514D4C187005A0288 /* creditsImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creditsImg.png; sourceTree = "<group>"; };
+		3247F19214D584B7002312A1 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		32A7A74614D3E8B100C54055 /* JNPControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPControlLayer.h; sourceTree = "<group>"; };
 		32A7A74714D3E8B100C54055 /* JNPControlLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPControlLayer.mm; sourceTree = "<group>"; };
 		32A7A75214D3ECCD00C54055 /* jumpButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpButton.png; sourceTree = "<group>"; };
@@ -746,6 +748,7 @@
 		BFDE4D2214D3C68700481370 /* JumpNPuke */ = {
 			isa = PBXGroup;
 			children = (
+				3247F19214D584B7002312A1 /* LICENSE */,
 				BF90FBAC14D54F7A00AC8C65 /* Parallax */,
 				BFE60E8514D4BB460010A72B /* Collisions */,
 				BFBE8FD914D3DE7800C3C94B /* Classes */,
@@ -1459,6 +1462,7 @@
 				BF90FBAA14D54F7500AC8C65 /* README in Resources */,
 				BF90FBBF14D5689800AC8C65 /* paralaxe1.png in Resources */,
 				BF90FBC014D5689800AC8C65 /* paralaxe2.png in Resources */,
+				3247F19314D584B7002312A1 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
