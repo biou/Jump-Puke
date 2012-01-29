@@ -16,7 +16,7 @@ JNPAudioManager * audioManager;
     self = [super init];
     if (self) {
 		[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Intro.aifc" loop:YES];
-
+        
 		// logo qui va s'animer
         CCSprite * logo = [CCSprite spriteWithFile: @"fond-menu.png"];
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
@@ -29,14 +29,19 @@ JNPAudioManager * audioManager;
         // [self setUpMenus];
         
 		CCMenuItemImage *menuItem1 = [CCMenuItemImage itemWithNormalImage:@"start-over.png"
-															selectedImage: @"start.png"
-																   target:self
-																 selector:@selector(menu1)];
+            selectedImage: @"start.png"
+            target:self
+            selector:@selector(menu1)];
         CCMenuItemImage *menuItem2 = [CCMenuItemImage itemWithNormalImage:@"credits-over.png"
-															selectedImage: @"credits.png"
-																   target:self
-																 selector:@selector(menu2)];        
- 
+        selectedImage: @"credits.png"
+        target:self
+        selector:@selector(menu2)];
+        
+        CCMenuItemImage *menuItem3 = [CCMenuItemImage itemWithNormalImage:@"help.png"
+            selectedImage: @"help-on.png"
+            target:self
+            selector:@selector(menu3)];
+        
         
 		CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, menuItem2, nil];
         
@@ -46,6 +51,14 @@ JNPAudioManager * audioManager;
         
         // add the menu to your scene
         [self addChild:myMenu];
+        
+        
+        
+		CCMenu * myMenu2 = [CCMenu menuWithItems:menuItem3, nil];
+        myMenu2.position = ccp(70, 113);
+        [self addChild:myMenu2];
+        
+        
 		// increment level
 		JNPScore * sc = [JNPScore jnpscore];
 		[sc setLevel:1];
@@ -65,7 +78,7 @@ JNPAudioManager * audioManager;
 	JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
 	[audioManager play:jnpSndMenu];	
 	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HelloWorldLayer scene]]];
-
+    
 }
 
 -(void)menu2 {
@@ -73,9 +86,15 @@ JNPAudioManager * audioManager;
 	[self unscheduleUpdate];
 	JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
 	[audioManager play:jnpSndMenu];	
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpCredits]]];
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpCredits]]];    
+}
 
-
+-(void)menu3 {
+	[self unscheduleAllSelectors];
+	[self unscheduleUpdate];
+	JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
+	[audioManager play:jnpSndMenu];	
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpHelp]]];    
 }
 
 @end

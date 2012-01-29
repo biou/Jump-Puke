@@ -403,8 +403,11 @@ static CCScene *scene;
     float v = dp/dt;
     currentSpeed=v;
     
-    if (v<140) {
-        float zeForce = (140 - v)/200;
+    JNPScore *s = [JNPScore jnpscore];
+    float leveldifficulty = 100.0+45.0*[s getLevel];
+    
+    if (v<leveldifficulty) {
+        float zeForce = (leveldifficulty - v)/200;
         b2Vec2 force = b2Vec2(zeForce, 0.0f);
         playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
     }
@@ -512,7 +515,7 @@ static CCScene *scene;
 	// son
 	[_audioManager playPuke];	
 	
-	[self diminuerPlayerDeltaScale:0.03];
+	[self diminuerPlayerDeltaScale:0.055];
     
 }
 

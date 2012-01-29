@@ -46,6 +46,10 @@ static int mode;
 			case jnpNewLevel:
 				image = @"levelup.png";
 				son = jnpSndLevel_Up;
+				break;
+			case jnpHelp:
+				image = @"faq.png";
+				son = 9;
 				break;				
 			default:
 				break;
@@ -57,7 +61,8 @@ static int mode;
 		[self addChild:bgpic];
 		
 		
-		if (mode != jnpCredits)
+		if (mode != jnpCredits && mode != jnpHelp`
+            )
 		{
 			JNPScore * s = [JNPScore jnpscore];
 			int t = [s getScore];
@@ -123,6 +128,9 @@ static int mode;
 			break;
 		case jnpCredits:
 			[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPMenuScene node]]];
+			break;
+		case jnpHelp:
+            [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HelloWorldLayer scene]]];
 			break;
 		case jnpNewLevel:
 			[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HelloWorldLayer scene]]];
