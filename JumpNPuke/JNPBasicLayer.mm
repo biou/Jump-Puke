@@ -18,8 +18,9 @@ static int mode;
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	JNPBasicLayer * baseLayer = [[JNPBasicLayer alloc] init];
 	mode = m;
+	JNPBasicLayer * baseLayer = [[JNPBasicLayer alloc] init];
+
 	[scene addChild: baseLayer];
 	
 	// return the scene
