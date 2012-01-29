@@ -224,6 +224,7 @@
 		BFDE4F3F14D3C80200481370 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3B14D3C80200481370 /* player.png */; };
 		BFDE4F4014D3C80200481370 /* tiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3C14D3C80200481370 /* tiles.plist */; };
 		BFDE4F4114D3C80200481370 /* tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3D14D3C80200481370 /* tiles.png */; };
+		BFE60E8314D4BB430010A72B /* MyContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFE60E8214D4BB430010A72B /* MyContactListener.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -627,6 +628,8 @@
 		BFDE4F3B14D3C80200481370 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
 		BFDE4F3C14D3C80200481370 /* tiles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tiles.plist; sourceTree = "<group>"; };
 		BFDE4F3D14D3C80200481370 /* tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiles.png; sourceTree = "<group>"; };
+		BFE60E8114D4BB430010A72B /* MyContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactListener.h; sourceTree = "<group>"; };
+		BFE60E8214D4BB430010A72B /* MyContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyContactListener.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -702,6 +705,7 @@
 		BFDE4D2214D3C68700481370 /* JumpNPuke */ = {
 			isa = PBXGroup;
 			children = (
+				BFE60E8514D4BB460010A72B /* Collisions */,
 				BFBE8FD914D3DE7800C3C94B /* Classes */,
 				BFDE4F2614D3C68900481370 /* AppDelegate.h */,
 				BFDE4F2714D3C68900481370 /* AppDelegate.mm */,
@@ -1279,6 +1283,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BFE60E8514D4BB460010A72B /* Collisions */ = {
+			isa = PBXGroup;
+			children = (
+				BFE60E8114D4BB430010A72B /* MyContactListener.h */,
+				BFE60E8214D4BB430010A72B /* MyContactListener.mm */,
+			);
+			name = Collisions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1547,6 +1560,7 @@
 				32F18A9914D44D11004D69CE /* JNPIntroScene.mm in Sources */,
 				32F18A9A14D44D11004D69CE /* JNPMenuBaseLayer.mm in Sources */,
 				32F18A9B14D44D11004D69CE /* JNPMenuScene.mm in Sources */,
+				BFE60E8314D4BB430010A72B /* MyContactListener.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
