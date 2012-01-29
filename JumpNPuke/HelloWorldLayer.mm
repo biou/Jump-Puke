@@ -227,6 +227,8 @@ static JNPControlLayer * controlLayer;
 -(void)gameover
 {
 	if (!hasWon) {
+		[self unscheduleAllSelectors];
+		[self unscheduleUpdate];
 		[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpGameover]]];
 	}
 	
@@ -339,9 +341,7 @@ static JNPControlLayer * controlLayer;
 }
 
 -(void)updatePlayerPosFromPhysics:(float)dt {
-    
-    // world->Step(dt, 10, 10);
-    //for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {    
+       
 	b2Body * b = playerBody;
 		if (b->GetUserData() != NULL) {
             CCSprite *ballData = (CCSprite *)b->GetUserData();
@@ -360,15 +360,19 @@ static JNPControlLayer * controlLayer;
 				[self gameover];
 			}
 			
-			NSLog(@"--%f\n", x * PTM_RATIO);
+			//NSLog(@"--%f\n", x * PTM_RATIO);
 			
-			if (x * PTM_RATIO > 1000) {
+			if (x * PTM_RATIO > 5000) {
 				// on vient de passer le checkpoint !
 				// empêcher le game over
 				hasWon=YES;
 				[controlLayer setVisible:NO];
 				[controlLayer setIsTouchEnabled:NO];
 				// transition vers niveau suivant (voir comment on peut faire sans tout réinitialiser
+				[self unscheduleAllSelectors];
+				[self unscheduleUpdate];
+
+				
 				[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpNewLevel]]];
 			}
 			
@@ -378,6 +382,7 @@ static JNPControlLayer * controlLayer;
 }
 
 -(void)tellPlayerToJump {
+	[_audioManager playJump];
     b2Vec2 force = b2Vec2(7.2f, 27.0);
     playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
 	
@@ -403,8 +408,7 @@ static JNPControlLayer * controlLayer;
 	}
 
 	// son
-	// FIXME changer le son
-	[_audioManager play:7];	
+	[_audioManager playPuke];	
 	
 	// diminuer taille
 	currentScale -= 0.05;

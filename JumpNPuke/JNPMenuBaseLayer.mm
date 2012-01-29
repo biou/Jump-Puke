@@ -15,7 +15,7 @@ JNPAudioManager * audioManager;
 - (id)init {
     self = [super init];
     if (self) {
-		audioManager = [[[JNPAudioManager alloc] init] autorelease];		
+		[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Intro.aifc" loop:YES];
 		// logo qui va s'animer
         CCSprite * logo = [CCSprite spriteWithFile: @"fond-menu.png"];
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
@@ -58,17 +58,24 @@ JNPAudioManager * audioManager;
 
 
 -(void)menu1 {
-	NSLog(@"menu1");	
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HelloWorldLayer scene]]];
+	NSLog(@"menu1");
+	[self unscheduleAllSelectors];
+	[self unscheduleUpdate];
 	JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
-	[audioManager play:jnpSndMenu];
+	[audioManager play:jnpSndMenu];	
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HelloWorldLayer scene]]];
+
 }
 
 -(void)menu2 {
 	NSLog(@"menu2");
+	[self unscheduleAllSelectors];
+	[self unscheduleUpdate];
+	JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
+	[audioManager play:jnpSndMenu];	
 	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpCredits]]];
 
-	[audioManager play:jnpSndMenu];
+
 }
 
 @end

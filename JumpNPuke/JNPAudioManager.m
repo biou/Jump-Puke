@@ -17,6 +17,7 @@
 -(id) init
 {
 	if( (self=[super init])) {
+		NSLog(@"$$$$ KIKOU $$$$$\n");
         self.counter = 0;
         self.nextMusicStress = -1;
         [self preload];
@@ -53,15 +54,21 @@
     self.nextMusicStress = stress;
 }
 
+-(void) playJump {
+	int r = arc4random() % 2;
+	r+=4;
+	[self play:r];
+}
+
+-(void) playPuke {
+	int r = arc4random() % 5;
+	r+=10;
+	[self play:r];
+}
+
 // play
 -(void) play:(int)soundType {
-    switch (soundType) {
-        case jnpSndDummy:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"gameboy-startup.wav"];
-            break;
-        case jnpSndJump:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"jump.mp3"];
-            break;
+    switch (soundType) {			
 		case jnpSndBile:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Bile.caf"];			
 			break;
@@ -73,9 +80,18 @@
 			break;	
         case jnpSndDie:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Game_Over.caf"];
+            break;	
+        case jnpSndJump1:
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Jump_1.caf"];
+            break;
+        case jnpSndJump2:
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Jump_2.caf"];
             break;			
 		case jnpSndLevel_Up:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Level_Up.caf"];				
+			break;
+		case jnpSndMalus:
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Malus.caf"];			
 			break;
 		case jnpSndMenu:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Menu.caf"];			
@@ -83,6 +99,22 @@
 		case jnpSndObstacle:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Obstacle.caf"];			
 			break;
+		case jnpSndPuke1:
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke_1.caf"];			
+			break;
+		case jnpSndPuke2:
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke_2.caf"];			
+			break;
+		case jnpSndPuke3:
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke_3.caf"];			
+			break;
+		case jnpSndPuke4:
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke_4.caf"];			
+			break;
+		case jnpSndPuke5:
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/OPuke_5.caf"];			
+			break;
+
         default:
             break;
     }
@@ -91,12 +123,12 @@
 // preload files
 -(void) preload {
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"calm.mp3"];
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"calm.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_1.aifc"];
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_2.aifc"];
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_3.aifc"];
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_4.aifc"];
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_5.aifc"];
+    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Intro.aifc"];	
 }
 
 // called every 0.5 sec
@@ -110,6 +142,7 @@
         [self playMusic:stress];
     }
 }
+
 
 
 @end
