@@ -50,6 +50,7 @@
     JNPAudioManager *_audioManager;
     
     NSMutableArray *lesBonusDeTaMere;
+    NSMutableArray *lesObstaclesDeTonPere;
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;

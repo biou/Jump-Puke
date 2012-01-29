@@ -82,11 +82,11 @@ enum {
         CCTMXObjectGroup *bonusGroup = [_tileMap objectGroupNamed:@"bonus"];
         NSMutableArray *tableauObjets = [bonusGroup objects];
         int nomber = [tableauObjets count];
-       
+        
         // grande cagnotte tirage au sort parmis les positions possibles de bonus, pour obtenir un tableau de quelques points différents sur lesquels placer des cadeaux bonux
-        NSMutableArray *electedBonusPositionsInMap = [NSMutableArray arrayWithCapacity:5];
-        lesBonusDeTaMere = [NSMutableArray arrayWithCapacity:5];
-        for (int ii=0; ii<5; ii++) {
+        NSMutableArray *electedBonusPositionsInMap = [NSMutableArray arrayWithCapacity:12];
+        lesBonusDeTaMere = [NSMutableArray arrayWithCapacity:12];
+        for (int ii=0; ii<12; ii++) {
             int kk = arc4random() % nomber;
             [electedBonusPositionsInMap insertObject:[tableauObjets objectAtIndex:kk] atIndex:ii];
             [tableauObjets removeObjectAtIndex:kk];
@@ -99,9 +99,39 @@ enum {
             CCSprite *newCollectibleBonusYoupiTralalaPouetPouet = [CCSprite spriteWithFile:[@"bonus_0" stringByAppendingFormat:@"%d.png",arc4random()%6+2]];
             newCollectibleBonusYoupiTralalaPouetPouet.position=dasPunkt;
             [self addChild:newCollectibleBonusYoupiTralalaPouetPouet];
+            NSLog(@"Populate lesBonusDeTaMere");
             [lesBonusDeTaMere addObject:newCollectibleBonusYoupiTralalaPouetPouet];
         }
+        [lesBonusDeTaMere retain];
         
+        
+        
+        
+        // obtention des positions potentielles de super bonus ta mère
+        CCTMXObjectGroup *obstaclesGroup = [_tileMap objectGroupNamed:@"obstacles"];
+        NSMutableArray *tableauObstacles = [obstaclesGroup objects];
+        nomber = [tableauObstacles count];
+        
+        // grande cagnotte tirage au sort parmis les positions possibles d'obstacles, pour obtenir un tableau de quelques points différents sur lesquels placer des badboys
+        NSMutableArray *electedObstaclesPositionsInMap = [NSMutableArray arrayWithCapacity:9];
+        lesObstaclesDeTonPere = [NSMutableArray arrayWithCapacity:9];
+        for (int ii=0; ii<9; ii++) {
+            int kk = arc4random() % nomber;
+            [electedObstaclesPositionsInMap insertObject:[tableauObstacles objectAtIndex:kk] atIndex:ii];
+            [tableauObstacles removeObjectAtIndex:kk];
+            nomber--;
+        }
+        
+        // après le tirage au sort des positions, on y ajoute des sprites de méchants connards avec des images originales et également tirées au hasard! youpi super hahaha huhuhu hihihi
+        for (NSMutableDictionary *nodule in electedObstaclesPositionsInMap) {
+            CGPoint dasPunkt = ccp([[nodule valueForKey:@"x"] floatValue], [[nodule valueForKey:@"y"] floatValue]);
+            CCSprite *newCollidableBadBoyYoupiTralalaPouetPouet = [CCSprite spriteWithFile:[@"ennemis_0" stringByAppendingFormat:@"%d.png",arc4random()%7+1]];
+            newCollidableBadBoyYoupiTralalaPouetPouet.position=dasPunkt;
+            [self addChild:newCollidableBadBoyYoupiTralalaPouetPouet];
+            NSLog(@"Populate ton père");
+            [lesObstaclesDeTonPere addObject:newCollidableBadBoyYoupiTralalaPouetPouet];
+        }
+        [lesObstaclesDeTonPere retain];
         
         
 		// enable events
@@ -146,7 +176,9 @@ enum {
         playerBody->CreateFixture(&ballShapeDef);
         [self schedule:@selector(updatePlayerPosFromPhysics:)];
 		[self schedule:@selector(updatePlayerSize:) interval:0.3];
-		
+        [self schedule:@selector(updateViewPoint:)];
+        [self schedule:@selector(detectBonusPickup:)];
+
 #if 1
 		// Use batch node. Faster
 		CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"blocks.png" capacity:100];
@@ -159,7 +191,6 @@ enum {
 		[self addChild:parent z:0 tag:kTagParentNode];
 		
         [self scheduleUpdate];
-        [self schedule:@selector(updateViewPoint:)];
 	}
 	return self;
 }
@@ -173,21 +204,21 @@ enum {
 
 -(void)updatePlayerSize:(float)dt {
 	if (fabs(currentScale) > 0.08) {
-		currentScale -= 0.005;
-
+		currentScale -= 0.0038;
+        
 		if (playerBody->GetUserData() != NULL) {
-				CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
-				ballData.scale=currentScale;
-				playerBody->DestroyFixture(playerBody->GetFixtureList());
-				b2CircleShape circle;
-				circle.m_radius = elephantSize*currentScale/2/PTM_RATIO;
-				b2FixtureDef ballShapeDef;
-				ballShapeDef.shape = &circle;
-				ballShapeDef.density = 0.5f * currentScale;
-				ballShapeDef.friction = 0.2f;
-				ballShapeDef.restitution = 0.8f;
-				playerBody->CreateFixture(&ballShapeDef);
-			 
+            CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
+            ballData.scale=currentScale;
+            playerBody->DestroyFixture(playerBody->GetFixtureList());
+            b2CircleShape circle;
+            circle.m_radius = elephantSize*currentScale/2/PTM_RATIO;
+            b2FixtureDef ballShapeDef;
+            ballShapeDef.shape = &circle;
+            ballShapeDef.density = 0.5f * currentScale;
+            ballShapeDef.friction = 0.2f;
+            ballShapeDef.restitution = 0.8f;
+            playerBody->CreateFixture(&ballShapeDef);
+            
 		}        
 	} else {
 		currentScale = 0.0;
@@ -197,6 +228,53 @@ enum {
 	}
 	
 }
+
+
+
+-(void)playerGetBiggerBecauseHeJustAteOneBonusYeahDudeYouKnow {
+		currentScale += 0.15;
+        
+		if (playerBody->GetUserData() != NULL) {
+            CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
+            ballData.scale=currentScale;
+            playerBody->DestroyFixture(playerBody->GetFixtureList());
+            b2CircleShape circle;
+            circle.m_radius = elephantSize*currentScale/2/PTM_RATIO;
+            b2FixtureDef ballShapeDef;
+            ballShapeDef.shape = &circle;
+            ballShapeDef.density = 0.5f * currentScale;
+            ballShapeDef.friction = 0.2f;
+            ballShapeDef.restitution = 0.8f;
+            playerBody->CreateFixture(&ballShapeDef);
+            
+		}        
+
+	
+}
+
+
+
+
+-(void)detectBonusPickup:(float)dt {
+    for (CCSprite *schpritz in lesBonusDeTaMere) {
+        CGPoint bonusPosition = schpritz.position;
+        CGPoint playeurPosition = ((CCSprite *)playerBody->GetUserData()).position;
+        CGPoint soubstraction = ccpSub(bonusPosition, playeurPosition);
+        float distanceCarree = soubstraction.x * soubstraction.x + soubstraction.y * soubstraction.y;
+        float dist = sqrtf(distanceCarree);
+        float contentSize = ((CCSprite *)playerBody->GetUserData()).contentSize.width*((CCSprite *)playerBody->GetUserData()).scale;
+        if (dist < contentSize/2 +25) {
+            [self removeChild:schpritz cleanup:NO];
+            [lesBonusDeTaMere removeObject:schpritz];
+            NSLog(@"You just picked up an item, baby! YEAH!");
+            [self playerGetBiggerBecauseHeJustAteOneBonusYeahDudeYouKnow];
+            [_audioManager play:1];
+            return;
+        }
+    }
+}
+
+
 
 // c'est toi Soyouz !!!
 
@@ -247,7 +325,7 @@ enum {
 }
 
 -(void)tellPlayerToJump {
-    b2Vec2 force = b2Vec2(3.0f, 27.0f);
+    b2Vec2 force = b2Vec2(7.2f, 27.0);
     playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
 }
 
@@ -257,6 +335,7 @@ enum {
 {
 	delete world;
 	world = NULL;
+    [lesBonusDeTaMere release];
 	
 	delete m_debugDraw;
 	m_debugDraw = NULL;
