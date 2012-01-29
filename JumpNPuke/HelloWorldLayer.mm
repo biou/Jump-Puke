@@ -175,7 +175,6 @@ static JNPControlLayer * controlLayer;
             CCSprite *newCollidableBadBoyYoupiTralalaPouetPouet = [CCSprite spriteWithFile:[@"ennemis_0" stringByAppendingFormat:@"%d.png",arc4random()%7+1]];
             newCollidableBadBoyYoupiTralalaPouetPouet.position=dasPunkt;
             [self addChild:newCollidableBadBoyYoupiTralalaPouetPouet];
-            NSLog(@"Populate ton père");
             [lesObstaclesDeTonPere addObject:newCollidableBadBoyYoupiTralalaPouetPouet];
         }
         [lesObstaclesDeTonPere retain];
@@ -200,7 +199,7 @@ static JNPControlLayer * controlLayer;
 		// FIXME à ajuster
         CCSprite *serpent = [CCSprite spriteWithFile:@"serpent.png"];
         serpent.position=ccp(KLIMITLEVELUP-192.0, winSize.height/2);
-        [self addChild:serpent];		
+        [self addChild:serpent z:10];		
 		
 		// taille en pixels de l'éléphant : 260px
 		elephantSize = 260.0;
@@ -304,7 +303,6 @@ static JNPControlLayer * controlLayer;
         
 	} else {
 		currentScale = 0.0;
-		NSLog(@"trop petit");
 		[self gameover];
 		
 	}
@@ -348,7 +346,6 @@ static JNPControlLayer * controlLayer;
         if (dist < contentSize/2 +25) {
             [self removeChild:schpritz cleanup:NO];
             [lesBonusDeTaMere removeObject:schpritz];
-            NSLog(@"You just picked up an item, baby! YEAH!");
             [self playerGetBiggerBecauseHeJustAteOneBonusYeahDudeYouKnow];
 			JNPScore * s = [JNPScore jnpscore];
 			[s incrementScore:500];
@@ -371,7 +368,6 @@ static JNPControlLayer * controlLayer;
         if (dist < contentSize/2 +25) {
             [self removeChild:schpritz cleanup:NO];
             [lesObstaclesDeTonPere removeObject:schpritz];
-            NSLog(@"You just hit an obstacle! LOSER!");
             [self diminuerPlayerDeltaScale:0.035];	
             [_audioManager play:1];
             return;
@@ -396,8 +392,6 @@ static JNPControlLayer * controlLayer;
         b2Vec2 force = b2Vec2(zeForce, 0.0f);
         playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
     }
-    
-    //NSLog(@"music speed set to %f", v);
     
     if (v<KVMIN) {
         [_audioManager playMusicWithStress:1];
@@ -435,8 +429,6 @@ static JNPControlLayer * controlLayer;
 			if (y* PTM_RATIO > size.height) {
 				[self gameover];
 			}
-			
-			//NSLog(@"--%f\n", x * PTM_RATIO);
 			
 			if (x * PTM_RATIO > KLIMITLEVELUP) {
 				// on vient de passer le checkpoint !
@@ -584,10 +576,6 @@ static JNPControlLayer * controlLayer;
 	
 	uint32 flags = 0;
 	flags += b2Draw::e_shapeBit;
-	//		flags += b2Draw::e_jointBit;
-	//		flags += b2Draw::e_aabbBit;
-	//		flags += b2Draw::e_pairBit;
-	//		flags += b2Draw::e_centerOfMassBit;
 	m_debugDraw->SetFlags(flags);		
 	
 	
@@ -625,8 +613,6 @@ static JNPControlLayer * controlLayer;
         NSArray *p2 = [p2s componentsSeparatedByString:@","];
         float p2x = [[p2 objectAtIndex:0] floatValue] + x;
         float p2y = y - [[p2 objectAtIndex:1] floatValue];
-        
-        // NSLog(@"Adding a fixture x=%d y=%d p1x=%f p1y=%f p2x=%f p2y=%f, p2xstr=%@", x, y, p1x, p1y, p2x, p2y, [p2 objectAtIndex:0]);
         
         groundBox.Set(b2Vec2(p1x/PTM_RATIO,p1y/PTM_RATIO), b2Vec2(p2x/PTM_RATIO,p2y/PTM_RATIO));
         //groundBox.Set(b2Vec2(64/PTM_RATIO,64/PTM_RATIO), b2Vec2(256/PTM_RATIO,64/PTM_RATIO));
@@ -699,34 +685,12 @@ static JNPControlLayer * controlLayer;
         b2Body *bodyB = contact.fixtureB->GetBody();
 
         CCSprite *playerSpriteA = (CCSprite*)bodyB->GetUserData();
-        /*
-        //CCSprite *playerSpriteB = (CCSprite*)bodyB->GetUserData();
-        NSLog(@"----------------------");
-        NSLog(@"%f , %f", playerSpriteA.position.x, playerSpriteA.position.y);
-        NSLog(@"%f , %f", bodyB->GetPosition().x, bodyB->GetPosition().y);
-        
-        //NSLog(@"%f , %f", playerSpriteB.position.x, playerSpriteB.position.y);
-        //NSLog(@"%@", bodyA);
-        //NSLog(@"%@", bodyB);
-        NSLog(@"----------------------");
-         */
-        
-        //particleSystem.sourcePosition = playerSpriteA.position;
-
         
         float speedFactor = [[NSString stringWithFormat:@"%d", currentSpeed] length];
         particleSystem.sourcePosition = ccp( playerSpriteA.position.x - 450 , playerSpriteA.position.y );
         particleSystem.startSizeVar = 0.9 * speedFactor;
         particleSystem.lifeVar = 3 * speedFactor;
         particleSystem.life = 2 * speedFactor;
-
-        //particleSystem.sourcePosition = ccp(bodyB->GetPosition().x, bodyB->GetPosition().y);
-        
-        //CGPoint p1 = [[CCDirector sharedDirector] convertToUI:ccp(bodyB->GetPosition().x, bodyB->GetPosition().y)];
-        //particleSystem.sourcePosition = ccp( p1.x, p1.y );
-
-        /*CGPoint p2 = [[CCDirector sharedDirector] convertToGL:playerSpriteA.position];
-        particleSystem.sourcePosition = ccp( 1024 - p2.y, 768 - p2.y );*/
 
         // not toooooo much boingboing
         if (fabs(prevPlayerPosition - currentPlayerPosition) >= 1) {
@@ -738,8 +702,6 @@ static JNPControlLayer * controlLayer;
         if (bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL) {
             CCSprite *spriteA = (CCSprite *) bodyA->GetUserData();
             CCSprite *spriteB = (CCSprite *) bodyB->GetUserData();
-
-            NSLog(@"%@ , %@", spriteA, spriteB);
             
             if (spriteA.tag == 1 && spriteB.tag == 2) {
 
@@ -775,8 +737,6 @@ static JNPControlLayer * controlLayer;
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissModalViewControllerAnimated:YES];
 }
-
-
 
 
 @synthesize tileMap = _tileMap;

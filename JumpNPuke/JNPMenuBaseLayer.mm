@@ -16,6 +16,7 @@ JNPAudioManager * audioManager;
     self = [super init];
     if (self) {
 		[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Intro.aifc" loop:YES];
+
 		// logo qui va s'animer
         CCSprite * logo = [CCSprite spriteWithFile: @"fond-menu.png"];
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
@@ -50,8 +51,6 @@ JNPAudioManager * audioManager;
 		[sc setLevel:1];
 		[sc setScore:0];
 		
-		NSLog(@"plop");
-		
         // Il ne sert à rien d'activer le "Touch" sur ce Layer car le menu, lui, est TouchEnabled.
         // self.isTouchEnabled = YES;		
     }
@@ -61,7 +60,6 @@ JNPAudioManager * audioManager;
 
 
 -(void)menu1 {
-	NSLog(@"menu1");
 	[self unscheduleAllSelectors];
 	[self unscheduleUpdate];
 	JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
@@ -71,7 +69,6 @@ JNPAudioManager * audioManager;
 }
 
 -(void)menu2 {
-	NSLog(@"menu2");
 	[self unscheduleAllSelectors];
 	[self unscheduleUpdate];
 	JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
