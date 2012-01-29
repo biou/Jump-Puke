@@ -63,25 +63,25 @@
             [[SimpleAudioEngine sharedEngine] playEffect:@"jump.mp3"];
             break;
         case jnpSndDie:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Game_Over.mp3"];
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Game_Over.caf"];
             break;
 		case jnpSndBile:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Bile.mp3"];			
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Bile.caf"];			
 			break;
 		case jnpSndBonus:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Bonus.mp3"];			
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Bonus.caf"];			
 			break;
 		case jnpSndCollision:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Collision.mp3"];			
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Collision.caf"];			
 			break;		
 		case jnpSndLevel_Up:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Level_Up.mp3"];				
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Level_Up.caf"];				
 			break;
 		case jnpSndMenu:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Menu.mp3"];			
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Menu.caf"];			
 			break;		
 		case jnpSndObstacle:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Obstacle.mp3"];			
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Obstacle.caf"];			
 			break;
         default:
             break;
@@ -92,11 +92,11 @@
 -(void) preload {
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"calm.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"calm.mp3"];
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_1.wav"];
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_2.wav"];
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_3.wav"];
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_4.wav"];
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_5.wav"];
+    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_1.aifc"];
+    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_2.aifc"];
+    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_3.aifc"];
+    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_4.aifc"];
+    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_5.aifc"];
 }
 
 // called every 0.5 sec

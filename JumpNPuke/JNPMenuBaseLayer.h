@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "CCMenu.h"
 #import "HelloWorldLayer.h"
+#import "JNPAudioManager.h"
 
 @interface JNPMenuBaseLayer : CCLayer {
     
