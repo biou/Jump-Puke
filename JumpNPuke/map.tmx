@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="360" height="12" tilewidth="64" tileheight="64">
+<map version="1.0" orientation="orthogonal" width="378" height="12" tilewidth="64" tileheight="64">
  <tileset firstgid="1" name="bords" tilewidth="64" tileheight="64" spacing="2" margin="2">
   <image source="bords.png" width="256" height="512"/>
  </tileset>
- <layer name="background" width="360" height="12">
+ <layer name="background" width="378" height="12">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <objectgroup color="#a41d16" name="objets" width="360" height="12">
+ <objectgroup color="#a41d16" name="objets" width="378" height="12">
   <object name="spawn" x="202" y="344"/>
  </objectgroup>
- <objectgroup name="box" width="360" height="12">
+ <objectgroup name="box" width="378" height="12">
   <object x="11" y="357">
    <polyline points="0,0 127,-280"/>
   </object>
@@ -1518,8 +1518,14 @@
   <object x="20935" y="156">
    <polyline points="0,0 2096,-1"/>
   </object>
+  <object x="21692" y="127">
+   <polyline points="0,0 55,101"/>
+  </object>
+  <object x="21747" y="228">
+   <polyline points="0,0 1285,-5"/>
+  </object>
  </objectgroup>
- <objectgroup color="#c8cd00" name="bonus" width="360" height="12">
+ <objectgroup color="#c8cd00" name="bonus" width="378" height="12">
   <object x="1027" y="124"/>
   <object x="1691" y="628"/>
   <object x="2727" y="308"/>
@@ -1555,7 +1561,7 @@
   <object x="13165" y="311"/>
   <object x="16645" y="699"/>
  </objectgroup>
- <objectgroup color="#2d7af1" name="obstacles" width="360" height="12">
+ <objectgroup color="#2d7af1" name="obstacles" width="378" height="12">
   <object x="2119" y="580"/>
   <object x="3371" y="588"/>
   <object x="2419" y="657"/>
