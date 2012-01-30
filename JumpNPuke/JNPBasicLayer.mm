@@ -49,7 +49,7 @@ static int mode;
 				break;
 			case jnpHelp:
 				image = @"faq.png";
-				son = 9;
+				son = 15;
 				break;				
 			default:
 				break;

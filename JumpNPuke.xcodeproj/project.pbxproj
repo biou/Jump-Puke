@@ -657,7 +657,7 @@
 		BFDE4F2414D3C68900481370 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BFDE4F2614D3C68900481370 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BFDE4F2714D3C68900481370 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		BFDE4F2914D3C68900481370 /* JNPGameLayer.h */ = {isa = PBXFileReference; path = JNPGameLayer.h; sourceTree = "<group>"; };
+		BFDE4F2914D3C68900481370 /* JNPGameLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JNPGameLayer.h; sourceTree = "<group>"; };
 		BFDE4F2A14D3C68900481370 /* JNPGameLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPGameLayer.mm; sourceTree = "<group>"; };
 		BFDE4F2C14D3C68900481370 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		BFDE4F2D14D3C68900481370 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
@@ -1350,9 +1350,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BFDE4D0B14D3C68700481370 /* JumpNPuke */ = {
+		BFDE4D0B14D3C68700481370 /* Jump&Puke */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BFDE4F3714D3C68900481370 /* Build configuration list for PBXNativeTarget "JumpNPuke" */;
+			buildConfigurationList = BFDE4F3714D3C68900481370 /* Build configuration list for PBXNativeTarget "Jump&Puke" */;
 			buildPhases = (
 				BFDE4D0814D3C68700481370 /* Sources */,
 				BFDE4D0914D3C68700481370 /* Frameworks */,
@@ -1362,7 +1362,7 @@
 			);
 			dependencies = (
 			);
-			name = JumpNPuke;
+			name = "Jump&Puke";
 			productName = JumpNPuke;
 			productReference = BFDE4D0C14D3C68700481370 /* JumpNPuke.app */;
 			productType = "com.apple.product-type.application";
@@ -1387,7 +1387,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BFDE4D0B14D3C68700481370 /* JumpNPuke */,
+				BFDE4D0B14D3C68700481370 /* Jump&Puke */,
 			);
 		};
 /* End PBXProject section */
@@ -1735,7 +1735,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BFDE4F3714D3C68900481370 /* Build configuration list for PBXNativeTarget "JumpNPuke" */ = {
+		BFDE4F3714D3C68900481370 /* Build configuration list for PBXNativeTarget "Jump&Puke" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BFDE4F3814D3C68900481370 /* Debug */,
