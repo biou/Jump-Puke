@@ -36,6 +36,14 @@ We are:
 * Music: Olivier 'Butch' Buchheit
 * Code: Olivier 'Noliv' Poncin, Vincent 'Allyouneedisgnu' Lark, Alain 'Biou' Vagner
 
+Libraries
+---------
+
+* [Cocos2d-iphone](http://www.cocos2d-iphone.org/)
+* [Box2d](http://box2d.org/)
+* [Parallax by Aram Kocharyan](http://ak.net84.net/)
+* [Collisions by Ray Wenderlich](http://www.raywenderlich.com/606/how-to-use-box2d-for-just-collision-detection-with-cocos2d-iphone)
+
 Thanks
 ------
 
