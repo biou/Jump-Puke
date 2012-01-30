@@ -61,8 +61,7 @@ static int mode;
 		[self addChild:bgpic];
 		
 		
-		if (mode != jnpCredits && mode != jnpHelp`
-            )
+		if (mode != jnpCredits && mode != jnpHelp)
 		{
 			JNPScore * s = [JNPScore jnpscore];
 			int t = [s getScore];
