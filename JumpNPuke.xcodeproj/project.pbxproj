@@ -329,7 +329,7 @@
 		BF90FBBE14D5689800AC8C65 /* paralaxe2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paralaxe2.png; sourceTree = "<group>"; };
 		BFBE8FDB14D3DE8A00C3C94B /* JNPAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNPAudioManager.h; sourceTree = "<group>"; };
 		BFBE8FDC14D3DE8A00C3C94B /* JNPAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNPAudioManager.m; sourceTree = "<group>"; };
-		BFDE4D0C14D3C68700481370 /* Jump&Puke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jump&Puke.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDE4D0C14D3C68700481370 /* JumpNPuke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpNPuke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFDE4D1014D3C68700481370 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BFDE4D1214D3C68700481370 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BFDE4D1414D3C68700481370 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -730,7 +730,7 @@
 		BFDE4D0D14D3C68700481370 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BFDE4D0C14D3C68700481370 /* Jump&Puke.app */,
+				BFDE4D0C14D3C68700481370 /* JumpNPuke.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1350,9 +1350,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BFDE4D0B14D3C68700481370 /* Jump&Puke */ = {
+		BFDE4D0B14D3C68700481370 /* JumpNPuke */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BFDE4F3714D3C68900481370 /* Build configuration list for PBXNativeTarget "Jump&Puke" */;
+			buildConfigurationList = BFDE4F3714D3C68900481370 /* Build configuration list for PBXNativeTarget "JumpNPuke" */;
 			buildPhases = (
 				BFDE4D0814D3C68700481370 /* Sources */,
 				BFDE4D0914D3C68700481370 /* Frameworks */,
@@ -1362,9 +1362,9 @@
 			);
 			dependencies = (
 			);
-			name = "Jump&Puke";
+			name = JumpNPuke;
 			productName = JumpNPuke;
-			productReference = BFDE4D0C14D3C68700481370 /* Jump&Puke.app */;
+			productReference = BFDE4D0C14D3C68700481370 /* JumpNPuke.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1387,7 +1387,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BFDE4D0B14D3C68700481370 /* Jump&Puke */,
+				BFDE4D0B14D3C68700481370 /* JumpNPuke */,
 			);
 		};
 /* End PBXProject section */
@@ -1735,7 +1735,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BFDE4F3714D3C68900481370 /* Build configuration list for PBXNativeTarget "Jump&Puke" */ = {
+		BFDE4F3714D3C68900481370 /* Build configuration list for PBXNativeTarget "JumpNPuke" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BFDE4F3814D3C68900481370 /* Debug */,
