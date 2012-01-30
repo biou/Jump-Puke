@@ -1,5 +1,5 @@
 //
-//  HelloWorldLayer.h
+//  JNPGameLayer.h
 //  plop
 //
 //  Created by Alain Vagner on 04/01/12.
@@ -14,7 +14,7 @@
 #import "JNPMenuScene.h"
 #import "SimpleAudioEngine.h"
 
-// HelloWorldLayer
+// JNPGameLayer
 @interface JNPIntroBaseLayer : CCLayer
 {
 }

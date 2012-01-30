@@ -77,7 +77,7 @@ JNPAudioManager * audioManager;
 	[self unscheduleUpdate];
 	JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
 	[audioManager play:jnpSndMenu];	
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HelloWorldLayer scene]]];
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPGameLayer scene]]];
     
 }
 

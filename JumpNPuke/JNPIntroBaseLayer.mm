@@ -1,5 +1,5 @@
 //
-//  HelloWorldLayer.m
+//  JNPGameLayer.m
 //  plop
 //
 //  Created by Alain Vagner on 04/01/12.

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "CCMenu.h"
-#import "HelloWorldLayer.h"
+#import "JNPGameLayer.h"
 #import "JNPAudioManager.h"
 
 @interface JNPMenuBaseLayer : CCLayer {
