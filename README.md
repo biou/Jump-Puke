@@ -17,9 +17,9 @@ Enjoy!
 Links
 -----
 
-[Project Website]: <http://globalgamejam.org/2012/jump-puke>
-[Project Source]: <https://github.com/biou/Jump-Puke>
-[Demo on Youtube]: <http://www.youtube.com/watch?v=RqXsY6ZrnGM>
+* [Project Website](http://globalgamejam.org/2012/jump-puke)
+* [Project Source](https://github.com/biou/Jump-Puke)
+* [Demo on Youtube](http://www.youtube.com/watch?v=RqXsY6ZrnGM)
 
 
 License
@@ -29,7 +29,11 @@ This game is available under the terms of the MIT license. See LICENSE file.
 Credits
 -------
 
-[Graphism]: Laurence 'Hellgy' Vagner
-[Music]: Olivier 'Butch' Buchheit
-[Code]: Olivier 'Noliv' Poncin, Vincent 'Allyouneedisgnu' Lark, Alain 'Biou' Vager
+* Graphism: Laurence 'Hellgy' Vagner
+* Music: Olivier 'Butch' Buchheit
+* Code: Olivier 'Noliv' Poncin, Vincent 'Allyouneedisgnu' Lark, Alain 'Biou' Vager
 
+Thanks
+------
+
+Many thanks to the organization team of the global game jam, more particularly to Thomas 'MrHelmut' Altenburger.
