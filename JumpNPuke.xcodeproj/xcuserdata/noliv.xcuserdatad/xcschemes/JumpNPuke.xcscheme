@@ -14,8 +14,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BFDE4D0B14D3C68700481370"
-               BuildableName = "JumpNPuke.app"
-               BlueprintName = "JumpNPuke"
+               BuildableName = "Jump&amp;Puke.app"
+               BlueprintName = "Jump&amp;Puke"
                ReferencedContainer = "container:JumpNPuke.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,8 +32,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BFDE4D0B14D3C68700481370"
-            BuildableName = "JumpNPuke.app"
-            BlueprintName = "JumpNPuke"
+            BuildableName = "Jump&amp;Puke.app"
+            BlueprintName = "Jump&amp;Puke"
             ReferencedContainer = "container:JumpNPuke.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -50,8 +50,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BFDE4D0B14D3C68700481370"
-            BuildableName = "JumpNPuke.app"
-            BlueprintName = "JumpNPuke"
+            BuildableName = "Jump&amp;Puke.app"
+            BlueprintName = "Jump&amp;Puke"
             ReferencedContainer = "container:JumpNPuke.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -68,8 +68,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BFDE4D0B14D3C68700481370"
-            BuildableName = "JumpNPuke.app"
-            BlueprintName = "JumpNPuke"
+            BuildableName = "Jump&amp;Puke.app"
+            BlueprintName = "Jump&amp;Puke"
             ReferencedContainer = "container:JumpNPuke.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

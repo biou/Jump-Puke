@@ -243,7 +243,7 @@
 		BFDE4F1F14D3C68900481370 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDE4F1E14D3C68900481370 /* b2Rope.cpp */; };
 		BFDE4F2514D3C68900481370 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDE4F2414D3C68900481370 /* main.m */; };
 		BFDE4F2814D3C68900481370 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFDE4F2714D3C68900481370 /* AppDelegate.mm */; };
-		BFDE4F2B14D3C68900481370 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFDE4F2A14D3C68900481370 /* HelloWorldLayer.mm */; };
+		BFDE4F2B14D3C68900481370 /* JNPGameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFDE4F2A14D3C68900481370 /* JNPGameLayer.mm */; };
 		BFDE4F2E14D3C68900481370 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFDE4F2D14D3C68900481370 /* GLES-Render.mm */; };
 		BFDE4F3E14D3C80200481370 /* map.tmx in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3A14D3C80200481370 /* map.tmx */; };
 		BFDE4F4014D3C80200481370 /* tiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFDE4F3C14D3C80200481370 /* tiles.plist */; };
@@ -657,8 +657,8 @@
 		BFDE4F2414D3C68900481370 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BFDE4F2614D3C68900481370 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BFDE4F2714D3C68900481370 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		BFDE4F2914D3C68900481370 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		BFDE4F2A14D3C68900481370 /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HelloWorldLayer.mm; sourceTree = "<group>"; };
+		BFDE4F2914D3C68900481370 /* JNPGameLayer.h */ = {isa = PBXFileReference; path = JNPGameLayer.h; sourceTree = "<group>"; };
+		BFDE4F2A14D3C68900481370 /* JNPGameLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = JNPGameLayer.mm; sourceTree = "<group>"; };
 		BFDE4F2C14D3C68900481370 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		BFDE4F2D14D3C68900481370 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		BFDE4F3A14D3C80200481370 /* map.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map.tmx; sourceTree = "<group>"; };
@@ -760,8 +760,8 @@
 				BFBE8FD914D3DE7800C3C94B /* Classes */,
 				BFDE4F2614D3C68900481370 /* AppDelegate.h */,
 				BFDE4F2714D3C68900481370 /* AppDelegate.mm */,
-				BFDE4F2914D3C68900481370 /* HelloWorldLayer.h */,
-				BFDE4F2A14D3C68900481370 /* HelloWorldLayer.mm */,
+				BFDE4F2914D3C68900481370 /* JNPGameLayer.h */,
+				BFDE4F2A14D3C68900481370 /* JNPGameLayer.mm */,
 				32395E4414D4A8D9005A0288 /* JNPBasicLayer.h */,
 				32395E4514D4A8D9005A0288 /* JNPBasicLayer.mm */,
 				BFDE4F2C14D3C68900481370 /* GLES-Render.h */,
@@ -1626,7 +1626,7 @@
 				BFDE4F1F14D3C68900481370 /* b2Rope.cpp in Sources */,
 				BFDE4F2514D3C68900481370 /* main.m in Sources */,
 				BFDE4F2814D3C68900481370 /* AppDelegate.mm in Sources */,
-				BFDE4F2B14D3C68900481370 /* HelloWorldLayer.mm in Sources */,
+				BFDE4F2B14D3C68900481370 /* JNPGameLayer.mm in Sources */,
 				BFDE4F2E14D3C68900481370 /* GLES-Render.mm in Sources */,
 				BFBE8FDD14D3DE8A00C3C94B /* JNPAudioManager.m in Sources */,
 				32A7A74814D3E8B100C54055 /* JNPControlLayer.mm in Sources */,

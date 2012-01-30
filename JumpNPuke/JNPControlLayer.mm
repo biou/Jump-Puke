@@ -90,7 +90,7 @@ id pukeButtonSelected;
 	[pukeButton setTexture:pukeButtonNormal]; 
 }
 
--(void)assignGameLayer:(HelloWorldLayer *)gameLayer{
+-(void)assignGameLayer:(JNPGameLayer *)gameLayer{
     ref=gameLayer;
 }
 
