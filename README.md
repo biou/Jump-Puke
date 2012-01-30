@@ -29,9 +29,11 @@ This game is available under the terms of the MIT license. See LICENSE file.
 Credits
 -------
 
+We were identified as 'Team Mario' during the Jam.
+We are:
 * Graphism: Laurence 'Hellgy' Vagner
 * Music: Olivier 'Butch' Buchheit
-* Code: Olivier 'Noliv' Poncin, Vincent 'Allyouneedisgnu' Lark, Alain 'Biou' Vager
+* Code: Olivier 'Noliv' Poncin, Vincent 'Allyouneedisgnu' Lark, Alain 'Biou' Vagner
 
 Thanks
 ------
