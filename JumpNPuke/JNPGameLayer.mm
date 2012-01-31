@@ -349,21 +349,35 @@ static CCScene *scene;
 
 
 
-
+// Détection du ramassage des bonus par parcours de la liste des bonus présents dans le level et calcul de la distance entre le joueur et le bonus.
 -(void)detectBonusPickup:(float)dt {
+    
+    // Pour chaque bonus existant
     for (CCSprite *schpritz in lesBonusDeTaMere) {
+        
+        // Calcul des distances
         CGPoint bonusPosition = schpritz.position;
         CGPoint playeurPosition = ((CCSprite *)playerBody->GetUserData()).position;
         CGPoint soubstraction = ccpSub(bonusPosition, playeurPosition);
         float distanceCarree = soubstraction.x * soubstraction.x + soubstraction.y * soubstraction.y;
         float dist = sqrtf(distanceCarree);
         float contentSize = ((CCSprite *)playerBody->GetUserData()).contentSize.width*((CCSprite *)playerBody->GetUserData()).scale;
-        if (dist < contentSize/2 +25) {
+        
+        // Condition de ramassage du bonus. Le contenu du "if" est l'action en cas de ramassage
+        if (dist < contentSize/2 + RAYONITEMS) {
+            
+            // Suppression du bonus de la carte et de la liste des bonus
             [self removeChild:schpritz cleanup:NO];
             [lesBonusDeTaMere removeObject:schpritz];
+            
+            // Action sur le sprite du joueur
             [self playerGetBiggerBecauseHeJustAteOneBonusYeahDudeYouKnow];
+            
+            // Action sur le score
 			JNPScore * s = [JNPScore jnpscore];
 			[s incrementScore:500];
+            
+            // Son de ramassage du bonus
             [_audioManager play:jnpSndBonus];
             return;
         }
@@ -371,7 +385,7 @@ static CCScene *scene;
 }
 
 
-
+// Détection du ramassage d'un obstacle par parcours de la liste des obstacles présents dans le level et calcul de la distance entre le joueur et l'item. Code identique au bonus juste au dessus.
 -(void)detectObstacleCollision:(float)dt {
     for (CCSprite *schpritz in lesObstaclesDeTonPere) {
         CGPoint obstaclePosition = schpritz.position;
@@ -380,10 +394,11 @@ static CCScene *scene;
         float distanceCarree = soubstraction.x * soubstraction.x + soubstraction.y * soubstraction.y;
         float dist = sqrtf(distanceCarree);
         float contentSize = ((CCSprite *)playerBody->GetUserData()).contentSize.width*((CCSprite *)playerBody->GetUserData()).scale;
-        if (dist < contentSize/2 +25) {
+        
+        if (dist < contentSize/2 + RAYONITEMS) {
             [self removeChild:schpritz cleanup:NO];
             [lesObstaclesDeTonPere removeObject:schpritz];
-            [self diminuerPlayerDeltaScale:0.035];	
+            [self diminuerPlayerDeltaScale:0.04];	
             [_audioManager play:jnpSndMalus];
             return;
         }
@@ -545,10 +560,42 @@ static CCScene *scene;
 		ballShapeDef.restitution = 0.8f;
 		playerBody->CreateFixture(&ballShapeDef);
 		if (effect) {
+            
             playerBody->ApplyTorque(50.0);
+            
+            // Effets visuels
+            // Création d'un sprite avec l'image de l'éléphant, puis scale et alpha animés
+            CGPoint currentPlayerPosition = ballData.position;
+            CCSprite *effetVisuel = [CCSprite spriteWithFile:@"elephant-normal.png"];
+            effetVisuel.position = currentPlayerPosition;
+            effetVisuel.rotation = ballData.rotation;
+            effetVisuel.color = ccc3(255.0, 180.0, 180.0);
+            effetVisuel.opacity = 90.0;
+            [self addChild:effetVisuel];
+            
+            float newScale = ballData.scale * 1.5;
+            if (newScale>1.0) {
+                newScale *= 0.7;
+            }
+            if (newScale>2.0) {
+                newScale *= 0.7;
+            }
+            
+            id actionScale = [CCScaleBy actionWithDuration:0.4 scale:ballData.scale];
+            id actionOpacity = [CCActionTween actionWithDuration:0.25 key:@"opacity" from:90 to:0];
+            id actionDone = [CCCallFuncN actionWithTarget:self 
+                                                 selector:@selector(delSprite:)];
+            
+            [effetVisuel runAction:actionOpacity];
+            [effetVisuel runAction:[CCSequence actions:actionScale, actionDone, nil]];
         }
 	}   
 }
+
+-(void)delSprite:(id)sender {
+    [self removeChild:sender cleanup:YES];
+}
+
 
 -(void)unpuke:(float)dt {
 	b2Body * b = playerBody;

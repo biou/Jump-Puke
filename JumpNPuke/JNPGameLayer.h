@@ -27,6 +27,7 @@
 #define KV2 180.0
 #define KV3 260.0
 #define KV4 400.0
+#define RAYONITEMS 21
 
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
