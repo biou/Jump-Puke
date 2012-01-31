@@ -39,6 +39,8 @@
 -(void) playMusicWithStress:(int)stress;
 -(void) playMusic:(int)stress;
 -(void) play:(int)soundType;
+-(void) preload;
++(JNPAudioManager *) sharedAM;
 
 @property (nonatomic) int counter;
 @property (nonatomic) int nextMusicStress;
