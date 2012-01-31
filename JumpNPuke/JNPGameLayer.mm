@@ -57,7 +57,7 @@ static CCScene *scene;
     [bgLayer addChild:bgpic];
     [scene addChild:bgLayer z:-10];
     
-    JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
+    JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
     [audioManager playMusic:1];
     
     [scene addChild:audioManager];

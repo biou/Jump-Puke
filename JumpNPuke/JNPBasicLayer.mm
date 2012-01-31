@@ -87,7 +87,7 @@ static int mode;
 		
 		
 		
-		JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
+        JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
 		[audioManager play:son];
 		self.isTouchEnabled = YES;
 

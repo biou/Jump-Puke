@@ -75,7 +75,7 @@ JNPAudioManager * audioManager;
 -(void)menu1 {
 	[self unscheduleAllSelectors];
 	[self unscheduleUpdate];
-	JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
+	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
 	[audioManager play:jnpSndMenu];	
 	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPGameLayer scene]]];
     
@@ -84,7 +84,7 @@ JNPAudioManager * audioManager;
 -(void)menu2 {
 	[self unscheduleAllSelectors];
 	[self unscheduleUpdate];
-	JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
+	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
 	[audioManager play:jnpSndMenu];	
 	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpCredits]]];    
 }
@@ -92,7 +92,7 @@ JNPAudioManager * audioManager;
 -(void)menu3 {
 	[self unscheduleAllSelectors];
 	[self unscheduleUpdate];
-	JNPAudioManager *audioManager = [[[JNPAudioManager alloc] init] autorelease];
+	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
 	[audioManager play:jnpSndMenu];	
 	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpHelp]]];    
 }

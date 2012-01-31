@@ -14,6 +14,47 @@
 @synthesize counter;
 @synthesize nextMusicStress;
 
+
+
+#pragma mark Singleton
+
+static JNPAudioManager *sharedAM = nil;
+
+// Init
++ (JNPAudioManager *) sharedAM
+{
+	@synchronized(self)     {
+		if (!sharedAM)
+			sharedAM = [[JNPAudioManager alloc] init];
+	}
+	return sharedAM;
+}
+
++ (id) alloc
+{
+	@synchronized(self)     {
+		NSAssert(sharedAM == nil, @"Attempted to allocate a second instance of a singleton.");
+		return [super alloc];
+	}
+	return nil;
+}
+
+// Memory
+- (void) dealloc
+{
+	sharedAM = nil;
+	[super dealloc];
+}
+
++(void) end
+{
+	sharedAM = nil;
+}
+
+
+
+#pragma mark AudioManager
+
 -(id) init
 {
 	if( (self=[super init])) {
