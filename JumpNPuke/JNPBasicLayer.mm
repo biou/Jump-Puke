@@ -66,7 +66,7 @@ static int mode;
 			JNPScore * s = [JNPScore jnpscore];
 			int t = [s getScore];
 			NSString * str = [NSString stringWithFormat:@"Score: %d", t]; 
-			CCLabelTTF *label = [CCLabelTTF labelWithString:str fontName:@"Arial" fontSize:64];
+			CCLabelTTF *label = [CCLabelTTF labelWithString:str fontName:@"Chalkduster" fontSize:64];
 			[label setPosition: ccp(winsize.width/2, winsize.height-50)];
 			[self addChild: label];
 		}
@@ -77,7 +77,7 @@ static int mode;
 			[s incrementLevel];
 			int t = [s getLevel];
 			NSString * str = [NSString stringWithFormat:@"Level %d", t]; 
-			CCLabelTTF *label = [CCLabelTTF labelWithString:str fontName:@"Arial" fontSize:64];
+			CCLabelTTF *label = [CCLabelTTF labelWithString:str fontName:@"Chalkduster" fontSize:64];
 			[label setPosition: ccp(winsize.width/2, 50)];
 			[self addChild: label];
 		}

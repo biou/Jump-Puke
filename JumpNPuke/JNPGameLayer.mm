@@ -371,7 +371,8 @@ static CCScene *scene;
 {
 	JNPScore * s = [JNPScore jnpscore];
 	[s incrementScore:10];
-	
+    [controlLayer showScore:[s getScore]];
+
 }
 
 -(void)updatePlayerSize:(float)dt {
@@ -413,6 +414,7 @@ static CCScene *scene;
             // Action sur le score
 			JNPScore * s = [JNPScore jnpscore];
 			[s incrementScore:500];
+            [controlLayer showScore:[s getScore]];
             
             // Son de ramassage du bonus
             [_audioManager play:jnpSndBonus];

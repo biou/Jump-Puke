@@ -37,10 +37,36 @@ id pukeButtonSelected;
         pukeButton.position = ccp(winSize.width - 100, 100);
         [self addChild:pukeButton];	
 		
+        
+        JNPScore * s = [JNPScore jnpscore];
+        int t = [s getScore];
+        t += 0;
+        NSString * str = [NSString stringWithFormat:@"Score: %d", t];
+        CGSize labelSize;
+        labelSize.width = 400;
+        labelSize.height= 50;
+        label = [CCLabelTTF labelWithString:str dimensions:labelSize alignment:UITextAlignmentLeft fontName:@"Chalkduster" fontSize:42];
+        [label setColor:ccc3(240, 0, 0)];
+        [label setPosition: ccp(213, winSize.height - 30)];
+        labelShadow = [CCLabelTTF labelWithString:str dimensions:labelSize alignment:UITextAlignmentLeft fontName:@"Chalkduster" fontSize:42];
+        [labelShadow setColor:ccc3(0, 0, 0)];
+        [labelShadow setPosition: ccp(215, winSize.height - 31)];
+
+        
+        [self addChild: labelShadow];
+        [self addChild: label];
+        
 		self.isTouchEnabled = YES;
 	}
     return self;
 }
+
+- (void)showScore: (int)score {
+    NSString * str = [NSString stringWithFormat:@"Score: %d", score];
+    [labelShadow setString:str];
+    [label setString:str];
+}
+
 
 - (void)onEnter
 {
