@@ -22,12 +22,14 @@
 #import "CCParallaxScrollNode.h"
 
 
-#define KLIMITLEVELUP 23000 
+#define KLIMITLEVELUP 24150 
 #define KVMIN 155.0
 #define KV2 180.0
 #define KV3 260.0
 #define KV4 400.0
 #define RAYONITEMS 21
+#define KREBONDISSEMENT 0.55
+#define KFRICTION 0.2
 
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
@@ -68,19 +70,22 @@
     NSMutableArray *lesVomisDeTaGrandMere;
 }
 
-@property (nonatomic, retain) CCTMXTiledMap *tileMap;
-@property (nonatomic, retain) CCTMXLayer *background;
-
-@property (nonatomic) b2Body *playerBody;
 
 -(void)setAudioManager:(JNPAudioManager *)audioM;
 -(void)tellPlayerToJump;
+-(void)tellPlayerToPuke:(CGPoint)position;
 -(void)unpuke:(float)dt;
--(void)tellPlayertoPuke:(CGPoint)position;
 -(void)diminuerPlayerDeltaScale:(float)deltaScale;
 -(void)diminuerPlayerDeltaScale:(float)deltaScale withEffect:(Boolean)effect;
+-(void)checkCollisions: (ccTime) dt;
+
 
 // returns a CCScene that contains the JNPGameLayer as the only child
 +(CCScene *) scene;
+
+
+@property (nonatomic, retain) CCTMXTiledMap *tileMap;
+@property (nonatomic, retain) CCTMXLayer *background;
+@property (nonatomic) b2Body *playerBody;
 
 @end

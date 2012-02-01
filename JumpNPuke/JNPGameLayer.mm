@@ -24,8 +24,6 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 
 @interface JNPGameLayer()
 -(void) initPhysics;
--(void) addNewSpriteAtPosition:(CGPoint)p;
--(void) createMenu;
 @end
 
 static JNPControlLayer * controlLayer;
@@ -112,7 +110,7 @@ static CCScene *scene;
         JNPScore *s = [JNPScore jnpscore];
         NSMutableArray *tmpVomis = s.vomis;
         
-        // s'il y a trop de vomi, on en supprime jusqu'à ce qu'il ne reste plus que 23 vomis
+        // s'il y a trop de vomi, on en supprime jusqu'à ce qu'il ne reste plus que 20 vomis
         if ([tmpVomis count]>20) {
             while ([tmpVomis count]>20) {
                 [tmpVomis removeObjectAtIndex:(arc4random()%[tmpVomis count])];
@@ -148,7 +146,7 @@ static CCScene *scene;
                 CCSprite *newCollectibleBonusYoupiTralalaPouetPouet = [CCSprite spriteWithFile:[@"bonus_0" stringByAppendingFormat:@"%d.png",arc4random()%6+2]];
                 newCollectibleBonusYoupiTralalaPouetPouet.position=dasPunkt;
                 [self addChild:newCollectibleBonusYoupiTralalaPouetPouet];
-                NSLog(@"Populate lesBonusDeTaMere");
+                
                 [lesBonusDeTaMere addObject:newCollectibleBonusYoupiTralalaPouetPouet];
             }
             
@@ -238,9 +236,9 @@ static CCScene *scene;
         currentCircle = &circle;
         b2FixtureDef ballShapeDef;
         ballShapeDef.shape = &circle;
-        ballShapeDef.density = 1.0f;
-        ballShapeDef.friction = 0.2f;
-        ballShapeDef.restitution = 0.8f;
+        ballShapeDef.density = 0.50/currentScale;
+        ballShapeDef.friction = RAYONITEMS;
+        ballShapeDef.restitution = KREBONDISSEMENT;
         playerBody->CreateFixture(&ballShapeDef);
         [self schedule:@selector(updatePlayerPosFromPhysics:)];
 		[self schedule:@selector(updatePlayerSize:) interval:0.3];
@@ -299,23 +297,6 @@ static CCScene *scene;
 	if (fabs(currentScale) > 0.08) {
         [self diminuerPlayerDeltaScale:0.002 withEffect:NO];
 		
-        /*currentScale -= 0.002;
-        
-		if (playerBody->GetUserData() != NULL) {
-            CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
-            ballData.scale=currentScale;
-            playerBody->DestroyFixture(playerBody->GetFixtureList());
-            b2CircleShape circle;
-            circle.m_radius = elephantSize*currentScale/2/PTM_RATIO;
-            b2FixtureDef ballShapeDef;
-            ballShapeDef.shape = &circle;
-            ballShapeDef.density = 0.5f * currentScale;
-            ballShapeDef.friction = 0.2f;
-            ballShapeDef.restitution = 0.8f;
-            playerBody->CreateFixture(&ballShapeDef);
-		}
-         */
-        
 	} else {
 		currentScale = 0.0;
 		[self gameover];
@@ -337,9 +318,9 @@ static CCScene *scene;
             circle.m_radius = elephantSize*currentScale/2/PTM_RATIO;
             b2FixtureDef ballShapeDef;
             ballShapeDef.shape = &circle;
-            ballShapeDef.density = 0.5f * currentScale;
-            ballShapeDef.friction = 0.2f;
-            ballShapeDef.restitution = 0.8f;
+            ballShapeDef.density = 0.50/currentScale; //0.5f * currentScale;
+            ballShapeDef.friction = RAYONITEMS;
+            ballShapeDef.restitution = KREBONDISSEMENT;
             playerBody->CreateFixture(&ballShapeDef);
             
 		}        
@@ -491,8 +472,12 @@ static CCScene *scene;
     
 }
 
+
 -(void)tellPlayerToJump {
-    b2Vec2 force = b2Vec2(7.2f, 27.0);
+    float adjustedForce = 44.0 + (140.0 * currentScale);
+    // NSLog(@"CURRENTSCALE = %f  ADJUSTED FORCE = %f",currentScale, adjustedForce);
+    
+    b2Vec2 force = b2Vec2(0.25*adjustedForce, adjustedForce); //18
     playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
 	
 	b2Body * b = playerBody;
@@ -505,9 +490,7 @@ static CCScene *scene;
 
 
 
--(void)tellPlayertoPuke:(CGPoint)position {
-	//FIXME Noliv dropper un objet ici
-	
+-(void)tellPlayerToPuke:(CGPoint)position {	
 	// animation
 	b2Body * b = playerBody;
 	if (b->GetUserData() != NULL) {
@@ -515,15 +498,11 @@ static CCScene *scene;
 		[ballData setTexture:elephantPukeTexture];
 		[self schedule:@selector(unpuke:) interval:0.3];
         
-        
-        
-        
         // ajout du vomi !
         CGPoint dasPunkt = ccp(ballData.position.x,ballData.position.y);
         CCSprite *vomi = [CCSprite spriteWithFile:[@"bonus_0" stringByAppendingFormat:@"%d.png",arc4random()%6+2]];
         vomi.position=dasPunkt;
         [self addChild:vomi];
-        NSLog(@"Populate lesVomisDeTaGrandMere");
         [lesVomisDeTaGrandMere addObject:vomi];
 }
 
@@ -555,9 +534,9 @@ static CCScene *scene;
 		circle.m_radius = elephantSize*currentScale/2/PTM_RATIO;
 		b2FixtureDef ballShapeDef;
 		ballShapeDef.shape = &circle;
-		ballShapeDef.density = 0.5f * currentScale;
-		ballShapeDef.friction = 0.2f;
-		ballShapeDef.restitution = 0.8f;
+		ballShapeDef.density = 0.50/currentScale; //0.5f * currentScale;
+        ballShapeDef.friction = RAYONITEMS;
+        ballShapeDef.restitution = KREBONDISSEMENT;
 		playerBody->CreateFixture(&ballShapeDef);
 		if (effect) {
             
@@ -753,7 +732,7 @@ static CCScene *scene;
     for(pos = _contactListener->_contacts.begin(); 
         pos != _contactListener->_contacts.end(); ++pos) {
         MyContact contact = *pos;
-
+        
         b2Body *bodyA = contact.fixtureA->GetBody();
         b2Body *bodyB = contact.fixtureB->GetBody();
 
@@ -766,8 +745,9 @@ static CCScene *scene;
         particleSystem.life = 2 * speedFactor;
 
         // not toooooo much boingboing
-        if (fabs(prevPlayerPosition - currentPlayerPosition) >= 1
-            && fabs(prevPlayerPosition_y - currentPlayerPosition_y) >= 2) {
+        if (fabs(prevPlayerPosition - currentPlayerPosition) >= 2
+            && fabs(prevPlayerPosition_y - currentPlayerPosition_y) >= 1) {
+
             [_audioManager playJump];
             [particleSystem resetSystem];
         }

@@ -21,7 +21,7 @@
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 		JNPAudioManager *am = [JNPAudioManager sharedAM];
-		// [am preload];
+		[am preload];
         
 		// logo qui va s'animer
         CCSprite *logo = [CCSprite spriteWithFile:@"intro.png"];

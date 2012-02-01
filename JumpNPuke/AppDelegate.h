@@ -30,6 +30,4 @@
 @property (readonly) CCDirectorIOS *director;
 @property (nonatomic, retain) NSOperationQueue *queue;
 
--(void) showMenuScene;
-
 @end

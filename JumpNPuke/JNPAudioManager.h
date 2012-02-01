@@ -40,6 +40,8 @@
 -(void) playMusic:(int)stress;
 -(void) play:(int)soundType;
 -(void) preload;
+-(void) playJump;
+-(void) playPuke;
 +(JNPAudioManager *) sharedAM;
 
 @property (nonatomic) int counter;

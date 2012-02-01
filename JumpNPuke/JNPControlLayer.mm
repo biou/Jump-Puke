@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "JNPControlLayer.h"
+#import "JNPGameLayer.h"
 
 CCSprite * jumpButton;
 CCSprite * pukeButton;
@@ -75,7 +76,7 @@ id pukeButtonSelected;
 	} else {
 		[pukeButton setTexture:pukeButtonSelected];		
 
-        [ref tellPlayertoPuke:location];			
+        [ref tellPlayerToPuke:location];			
 	}	
 	
 	return YES;
