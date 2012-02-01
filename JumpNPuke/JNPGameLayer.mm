@@ -18,13 +18,10 @@ enum {
 };
 
 
-#pragma mark - JNPGameLayer
+#pragma mark JNPGameLayer
+#pragma mark -
 
 id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
-
-@interface JNPGameLayer()
--(void) initPhysics;
-@end
 
 static JNPControlLayer * controlLayer;
 static CCScene *scene;
@@ -33,8 +30,7 @@ static CCScene *scene;
 
 @implementation JNPGameLayer
 
-@synthesize playerBody;
-
+#pragma mark Scene (conteneur de ce Layer)
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
@@ -68,6 +64,10 @@ static CCScene *scene;
 	// return the scene
 	return scene;
 }
+
+
+#pragma mark -
+#pragma mark Création du Layer
 
 -(id) init
 {
@@ -267,7 +267,7 @@ static CCScene *scene;
         particleSystem.lifeVar = 1;
         particleSystem.angleVar = 50;
         particleSystem.startSize = 1.5;
-        particleSystem.texture = [[CCTextureCache sharedTextureCache] addImage:@"player.png"];
+        particleSystem.texture = [[CCTextureCache sharedTextureCache] addImage:@"particle.png"];
         [self addChild:particleSystem z:10];
 		
         [self scheduleUpdate];
@@ -276,15 +276,96 @@ static CCScene *scene;
 }
 
 
--(void)gameover
+
+-(void) initPhysics
 {
-	if (!hasWon) {
-		[self unscheduleAllSelectors];
-		[self unscheduleUpdate];
-		[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpGameover]]];
-	}
 	
+	CGSize s = [[CCDirector sharedDirector] winSize];
+	
+	b2Vec2 gravity;
+	gravity.Set(0.0f, -30.0f);
+	world = new b2World(gravity);
+	
+	
+	// Do we want to let bodies sleep?
+	world->SetAllowSleeping(true);
+	
+	world->SetContinuousPhysics(true);
+	
+	m_debugDraw = new GLESDebugDraw( PTM_RATIO );
+	world->SetDebugDraw(m_debugDraw);
+	
+	uint32 flags = 0;
+	flags += b2Draw::e_shapeBit;
+	m_debugDraw->SetFlags(flags);		
+	
+	
+	// Define the ground body.
+	b2BodyDef groundBodyDef;
+	groundBodyDef.position.Set(0, 0); // bottom-left corner
+	
+	// Call the body factory which allocates memory for the ground body
+	// from a pool and creates the ground box shape (also from a pool).
+	// The body is also added to the world.
+	b2Body* groundBody = world->CreateBody(&groundBodyDef);
+	
+	// Define the ground box shape.
+	b2EdgeShape groundBox;		
+    
+    /*****************************************************************/
+    
+	CCTMXObjectGroup *objects = [_tileMap objectGroupNamed:@"box"];
+	NSMutableDictionary * objPoint;
+    
+	int x, y;	
+	for (objPoint in [objects objects]) {
+        x = [[objPoint valueForKey:@"x"] intValue];
+		y = [[objPoint valueForKey:@"y"] intValue];
+        
+        NSString *poly = [objPoint objectForKey:@"polylinePoints"];
+        NSArray *points = [poly componentsSeparatedByString:@" "];
+        
+        NSString *p1s = [points objectAtIndex:0];
+        NSArray *p1 = [p1s componentsSeparatedByString:@","];
+        float p1x = x + [[p1 objectAtIndex:0] floatValue];
+        float p1y = y - [[p1 objectAtIndex:1] floatValue];
+        
+        NSString *p2s = [points objectAtIndex:1];
+        NSArray *p2 = [p2s componentsSeparatedByString:@","];
+        float p2x = [[p2 objectAtIndex:0] floatValue] + x;
+        float p2y = y - [[p2 objectAtIndex:1] floatValue];
+        
+        groundBox.Set(b2Vec2(p1x/PTM_RATIO,p1y/PTM_RATIO), b2Vec2(p2x/PTM_RATIO,p2y/PTM_RATIO));
+        //groundBox.Set(b2Vec2(64/PTM_RATIO,64/PTM_RATIO), b2Vec2(256/PTM_RATIO,64/PTM_RATIO));
+        groundBody->CreateFixture(&groundBox,0);
+        
+        
+    }
+    
+	// bottom
+	groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO,0));
+	groundBody->CreateFixture(&groundBox,0);
+	
+	// top
+	groundBox.Set(b2Vec2(0,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO));
+	groundBody->CreateFixture(&groundBox,0);
+    
+    /*****************************************************************/
+    // Create contact listener
+    _contactListener = new MyContactListener();
+    world->SetContactListener(_contactListener);
+    
+    
 }
+
+-(void)setAudioManager:(JNPAudioManager *)audioM {
+    _audioManager = audioM;
+}
+
+
+
+
+#pragma mark Méthodes schedulées dans l'init
 
 -(void)updateScore:(float)dt
 {
@@ -304,31 +385,6 @@ static CCScene *scene;
 	}
 	
 }
-
-
-
--(void)playerGetBiggerBecauseHeJustAteOneBonusYeahDudeYouKnow {
-		currentScale += 0.15;
-        
-		if (playerBody->GetUserData() != NULL) {
-            CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
-            ballData.scale=currentScale;
-            playerBody->DestroyFixture(playerBody->GetFixtureList());
-            b2CircleShape circle;
-            circle.m_radius = elephantSize*currentScale/2/PTM_RATIO;
-            b2FixtureDef ballShapeDef;
-            ballShapeDef.shape = &circle;
-            ballShapeDef.density = 0.50/currentScale; //0.5f * currentScale;
-            ballShapeDef.friction = RAYONITEMS;
-            ballShapeDef.restitution = KREBONDISSEMENT;
-            playerBody->CreateFixture(&ballShapeDef);
-            
-		}        
-
-	
-}
-
-
 
 // Détection du ramassage des bonus par parcours de la liste des bonus présents dans le level et calcul de la distance entre le joueur et le bonus.
 -(void)detectBonusPickup:(float)dt {
@@ -352,7 +408,7 @@ static CCScene *scene;
             [lesBonusDeTaMere removeObject:schpritz];
             
             // Action sur le sprite du joueur
-            [self playerGetBiggerBecauseHeJustAteOneBonusYeahDudeYouKnow];
+            [self playerGrowWithBonus];
             
             // Action sur le score
 			JNPScore * s = [JNPScore jnpscore];
@@ -388,8 +444,7 @@ static CCScene *scene;
 
 
 
-// c'est toi Soyouz !!!
-
+// Auto scroll selon la position
 -(void)updateViewPoint:(float)dt {
     float currentPlayerPosition = ((CCSprite *)playerBody->GetUserData()).position.x;
     float currentPlayerPosition_y = ((CCSprite *)playerBody->GetUserData()).position.y;
@@ -432,45 +487,112 @@ static CCScene *scene;
 }
 
 -(void)updatePlayerPosFromPhysics:(float)dt {
-       
+    
 	b2Body * b = playerBody;
-		if (b->GetUserData() != NULL) {
-            CCSprite *ballData = (CCSprite *)b->GetUserData();
-            ballData.position = ccp(b->GetPosition().x * PTM_RATIO,
-                                    b->GetPosition().y * PTM_RATIO);
-            ballData.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
-			float y = b->GetPosition().y;
-			float x = b->GetPosition().x;
-			if (y < 0) {
-				[self gameover];
-			}
-			
-			CGSize size = [[CCDirector sharedDirector] winSize];
-			
-			if (y* PTM_RATIO > size.height) {
-				[self gameover];
-			}
-			
-			if (x * PTM_RATIO > KLIMITLEVELUP) {
-				// on vient de passer le checkpoint !
-				// empêcher le game over
-				hasWon=YES;
-				[controlLayer setVisible:NO];
-				[controlLayer setIsTouchEnabled:NO];
-				// transition vers niveau suivant (voir comment on peut faire sans tout réinitialiser
-				[self unscheduleAllSelectors];
-				[self unscheduleUpdate];
-
-                JNPScore * s = [JNPScore jnpscore];
-				s.vomis=lesVomisDeTaGrandMere;
-
-				[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpNewLevel]]];
-			}
-			
-        }        
+    if (b->GetUserData() != NULL) {
+        CCSprite *ballData = (CCSprite *)b->GetUserData();
+        ballData.position = ccp(b->GetPosition().x * PTM_RATIO,
+                                b->GetPosition().y * PTM_RATIO);
+        ballData.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+        float y = b->GetPosition().y;
+        float x = b->GetPosition().x;
+        if (y < 0) {
+            [self gameover];
+        }
+        
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        
+        if (y* PTM_RATIO > size.height) {
+            [self gameover];
+        }
+        
+        if (x * PTM_RATIO > KLIMITLEVELUP) {
+            // on vient de passer le checkpoint !
+            // empêcher le game over
+            hasWon=YES;
+            [controlLayer setVisible:NO];
+            [controlLayer setIsTouchEnabled:NO];
+            // transition vers niveau suivant (voir comment on peut faire sans tout réinitialiser
+            [self unscheduleAllSelectors];
+            [self unscheduleUpdate];
+            
+            JNPScore * s = [JNPScore jnpscore];
+            s.vomis=lesVomisDeTaGrandMere;
+            
+            [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpNewLevel]]];
+        }
+        
+    }        
     //}
     
 }
+
+
+
+-(void) update: (ccTime) dt
+{
+	//It is recommended that a fixed time step is used with Box2D for stability
+	//of the simulation, however, we are using a variable time step here.
+	//You need to make an informed choice, the following URL is useful
+	//http://gafferongames.com/game-physics/fix-your-timestep/
+	
+	int32 velocityIterations = 8;
+	int32 positionIterations = 1;
+	
+	// Instruct the world to perform a single step of simulation. It is
+	// generally best to keep the time step and iterations fixed.
+	world->Step(dt, velocityIterations, positionIterations);
+}
+
+-(void) checkCollisions: (ccTime) dt
+{
+    float currentPlayerPosition = ((CCSprite *)playerBody->GetUserData()).position.x;
+    float currentPlayerPosition_y = ((CCSprite *)playerBody->GetUserData()).position.y;
+        
+    std::vector<MyContact>::iterator pos;
+    for(pos = _contactListener->_contacts.begin(); 
+        pos != _contactListener->_contacts.end(); ++pos) {
+        MyContact contact = *pos;
+        
+        b2Body *bodyA = contact.fixtureA->GetBody();
+        b2Body *bodyB = contact.fixtureB->GetBody();
+        
+        CCSprite *playerSpriteA = (CCSprite*)bodyB->GetUserData();
+        
+        float speedFactor = [[NSString stringWithFormat:@"%d", currentSpeed] length];        
+        
+        particleSystem.sourcePosition = ccp( playerSpriteA.position.x - 450 , playerSpriteA.position.y );
+        particleSystem.startSizeVar = 0.9 * speedFactor;
+        particleSystem.lifeVar = 3 * speedFactor;
+        particleSystem.life = 2 * speedFactor;
+        
+                
+        // not toooooo much boingboing
+        if (fabs(prevPlayerPosition - currentPlayerPosition) >= 1
+            && fabs(prevPlayerPosition_y - currentPlayerPosition_y) >= 1) {
+
+            [_audioManager playJump];
+            [particleSystem resetSystem];
+        }
+        
+        if (bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL) {
+            CCSprite *spriteA = (CCSprite *) bodyA->GetUserData();
+            CCSprite *spriteB = (CCSprite *) bodyB->GetUserData();
+            
+            if (spriteA.tag == 1 && spriteB.tag == 2) {
+                
+            } else if (spriteA.tag == 2 && spriteB.tag == 1) {
+                
+            } 
+        }        
+    }
+    
+}
+
+
+
+#pragma mark -
+#pragma mark Gestion du Sprite Player
 
 
 -(void)tellPlayerToJump {
@@ -484,10 +606,10 @@ static CCScene *scene;
 	if (b->GetUserData() != NULL) {
 		CCSprite *ballData = (CCSprite *)b->GetUserData();
 		[ballData setTexture:elephantJumpTexture];
-		[self schedule:@selector(unpuke:) interval:0.3];
+        [self unschedule:@selector(restorePlayerTexture:)];
+		[self schedule:@selector(restorePlayerTexture:) interval:0.3];
 	}	
 }
-
 
 
 -(void)tellPlayerToPuke:(CGPoint)position {	
@@ -496,7 +618,8 @@ static CCScene *scene;
 	if (b->GetUserData() != NULL) {
 		CCSprite *ballData = (CCSprite *)b->GetUserData();
 		[ballData setTexture:elephantPukeTexture];
-		[self schedule:@selector(unpuke:) interval:0.3];
+        [self unschedule:@selector(restorePlayerTexture:)];	
+		[self schedule:@selector(restorePlayerTexture:) interval:0.3];
         
         // ajout du vomi !
         CGPoint dasPunkt = ccp(ballData.position.x,ballData.position.y);
@@ -504,14 +627,50 @@ static CCScene *scene;
         vomi.position=dasPunkt;
         [self addChild:vomi];
         [lesVomisDeTaGrandMere addObject:vomi];
-}
-
+    }
+    
 	// son
 	[_audioManager playPuke];	
 	
 	[self diminuerPlayerDeltaScale:0.055];
     
 }
+
+
+-(void)restorePlayerTexture:(float)dt {
+	b2Body * b = playerBody;
+    if (b->GetUserData() != NULL) {
+		CCSprite *ballData = (CCSprite *)b->GetUserData();
+		[ballData setTexture:elephantNormalTexture];
+	}
+	[self unschedule:@selector(restorePlayerTexture:)];	
+}
+
+
+
+-(void)playerGrowWithBonus {
+		currentScale += 0.15;
+        
+		if (playerBody->GetUserData() != NULL) {
+            CCSprite *ballData = (CCSprite *)playerBody->GetUserData();
+            ballData.scale=currentScale;
+            playerBody->DestroyFixture(playerBody->GetFixtureList());
+            b2CircleShape circle;
+            circle.m_radius = elephantSize*currentScale/2/PTM_RATIO;
+            b2FixtureDef ballShapeDef;
+            ballShapeDef.shape = &circle;
+            ballShapeDef.density = 0.50/currentScale; //0.5f * currentScale;
+            ballShapeDef.friction = RAYONITEMS;
+            ballShapeDef.restitution = KREBONDISSEMENT;
+            playerBody->CreateFixture(&ballShapeDef);
+            
+		}        
+
+	
+}
+
+
+
 
 -(void)diminuerPlayerDeltaScale:(float)deltaScale {
     [self diminuerPlayerDeltaScale:deltaScale withEffect:YES];
@@ -576,117 +735,22 @@ static CCScene *scene;
 }
 
 
--(void)unpuke:(float)dt {
-	b2Body * b = playerBody;
-		if (b->GetUserData() != NULL) {
-		CCSprite *ballData = (CCSprite *)b->GetUserData();
-		[ballData setTexture:elephantNormalTexture];
+
+
+-(void)gameover
+{
+	if (!hasWon) {
+		[self unscheduleAllSelectors];
+		[self unscheduleUpdate];
+		[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpGameover]]];
 	}
-	[self unschedule:@selector(unpuke:)];	
+	
 }
 
 
 
-// il y a vraiment des commentaires de merde dans ce code
+#pragma mark -
 
--(void) dealloc
-{
-	delete world;
-	world = NULL;
-    [lesBonusDeTaMere release];
-	[lesObstaclesDeTonPere release];
-    [lesVomisDeTaGrandMere release];
-	
-	
-	delete m_debugDraw;
-	m_debugDraw = NULL;
-	
-	[super dealloc];
-}	
-
-// c'est toi le commentaire
-
-
--(void) initPhysics
-{
-	
-	CGSize s = [[CCDirector sharedDirector] winSize];
-	
-	b2Vec2 gravity;
-	gravity.Set(0.0f, -30.0f);
-	world = new b2World(gravity);
-	
-	
-	// Do we want to let bodies sleep?
-	world->SetAllowSleeping(true);
-	
-	world->SetContinuousPhysics(true);
-	
-	m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-	world->SetDebugDraw(m_debugDraw);
-	
-	uint32 flags = 0;
-	flags += b2Draw::e_shapeBit;
-	m_debugDraw->SetFlags(flags);		
-	
-	
-	// Define the ground body.
-	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0, 0); // bottom-left corner
-	
-	// Call the body factory which allocates memory for the ground body
-	// from a pool and creates the ground box shape (also from a pool).
-	// The body is also added to the world.
-	b2Body* groundBody = world->CreateBody(&groundBodyDef);
-	
-	// Define the ground box shape.
-	b2EdgeShape groundBox;		
-
-    /*****************************************************************/
-    
-	CCTMXObjectGroup *objects = [_tileMap objectGroupNamed:@"box"];
-	NSMutableDictionary * objPoint;
-    
-	int x, y;	
-	for (objPoint in [objects objects]) {
-        x = [[objPoint valueForKey:@"x"] intValue];
-		y = [[objPoint valueForKey:@"y"] intValue];
-        
-        NSString *poly = [objPoint objectForKey:@"polylinePoints"];
-        NSArray *points = [poly componentsSeparatedByString:@" "];
-
-        NSString *p1s = [points objectAtIndex:0];
-        NSArray *p1 = [p1s componentsSeparatedByString:@","];
-        float p1x = x + [[p1 objectAtIndex:0] floatValue];
-        float p1y = y - [[p1 objectAtIndex:1] floatValue];
-        
-        NSString *p2s = [points objectAtIndex:1];
-        NSArray *p2 = [p2s componentsSeparatedByString:@","];
-        float p2x = [[p2 objectAtIndex:0] floatValue] + x;
-        float p2y = y - [[p2 objectAtIndex:1] floatValue];
-        
-        groundBox.Set(b2Vec2(p1x/PTM_RATIO,p1y/PTM_RATIO), b2Vec2(p2x/PTM_RATIO,p2y/PTM_RATIO));
-        //groundBox.Set(b2Vec2(64/PTM_RATIO,64/PTM_RATIO), b2Vec2(256/PTM_RATIO,64/PTM_RATIO));
-        groundBody->CreateFixture(&groundBox,0);
-        
-        
-    }
-
-	// bottom
-	groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO,0));
-	groundBody->CreateFixture(&groundBox,0);
-	
-	// top
-	groundBox.Set(b2Vec2(0,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO));
-	groundBody->CreateFixture(&groundBox,0);
-
-    /*****************************************************************/
-    // Create contact listener
-    _contactListener = new MyContactListener();
-    world->SetContactListener(_contactListener);
-    
-    
-}
 
 
 #pragma mark DRAW DEBUG DATA ICI !!!
@@ -697,7 +761,7 @@ static CCScene *scene;
 	// This is only for debug purposes
 	// It is recommend to disable it
 	//
-	[super draw];
+	// [super draw];
     
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
 	
@@ -708,73 +772,8 @@ static CCScene *scene;
 	kmGLPopMatrix();
 }
 
--(void) update: (ccTime) dt
-{
-	//It is recommended that a fixed time step is used with Box2D for stability
-	//of the simulation, however, we are using a variable time step here.
-	//You need to make an informed choice, the following URL is useful
-	//http://gafferongames.com/game-physics/fix-your-timestep/
-	
-	int32 velocityIterations = 8;
-	int32 positionIterations = 1;
-	
-	// Instruct the world to perform a single step of simulation. It is
-	// generally best to keep the time step and iterations fixed.
-	world->Step(dt, velocityIterations, positionIterations);
-}
-
--(void) checkCollisions: (ccTime) dt
-{
-    float currentPlayerPosition = ((CCSprite *)playerBody->GetUserData()).position.x;
-    float currentPlayerPosition_y = ((CCSprite *)playerBody->GetUserData()).position.y;
-    
-    std::vector<MyContact>::iterator pos;
-    for(pos = _contactListener->_contacts.begin(); 
-        pos != _contactListener->_contacts.end(); ++pos) {
-        MyContact contact = *pos;
-        
-        b2Body *bodyA = contact.fixtureA->GetBody();
-        b2Body *bodyB = contact.fixtureB->GetBody();
-
-        CCSprite *playerSpriteA = (CCSprite*)bodyB->GetUserData();
-        
-        float speedFactor = [[NSString stringWithFormat:@"%d", currentSpeed] length];
-        particleSystem.sourcePosition = ccp( playerSpriteA.position.x - 450 , playerSpriteA.position.y );
-        particleSystem.startSizeVar = 0.9 * speedFactor;
-        particleSystem.lifeVar = 3 * speedFactor;
-        particleSystem.life = 2 * speedFactor;
-
-        // not toooooo much boingboing
-        if (fabs(prevPlayerPosition - currentPlayerPosition) >= 2
-            && fabs(prevPlayerPosition_y - currentPlayerPosition_y) >= 1) {
-
-            [_audioManager playJump];
-            [particleSystem resetSystem];
-        }
-
-        if (bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL) {
-            CCSprite *spriteA = (CCSprite *) bodyA->GetUserData();
-            CCSprite *spriteB = (CCSprite *) bodyB->GetUserData();
-            
-            if (spriteA.tag == 1 && spriteB.tag == 2) {
-
-            } else if (spriteA.tag == 2 && spriteB.tag == 1) {
-
-            } 
-        }        
-    }
-    
-}
-
-- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-}
 
 
-
--(void)setAudioManager:(JNPAudioManager *)audioM {
-    _audioManager = audioM;
-}
 
 
 #pragma mark GameKit delegate
@@ -792,6 +791,30 @@ static CCScene *scene;
 }
 
 
+#pragma mark -
+#pragma mark dealloc, getters, setters
+
+
+
+// il y a vraiment des commentaires de merde dans ce code
+
+-(void) dealloc
+{
+	delete world;
+	world = NULL;
+    [lesBonusDeTaMere release];
+	[lesObstaclesDeTonPere release];
+    [lesVomisDeTaGrandMere release];
+
+	
+	delete m_debugDraw;
+	m_debugDraw = NULL;
+	
+	[super dealloc];
+}	
+
+
+@synthesize playerBody;
 @synthesize tileMap = _tileMap;
 @synthesize background = _background;
 

@@ -74,10 +74,13 @@
 -(void)setAudioManager:(JNPAudioManager *)audioM;
 -(void)tellPlayerToJump;
 -(void)tellPlayerToPuke:(CGPoint)position;
--(void)unpuke:(float)dt;
+-(void)restorePlayerTexture:(float)dt;
 -(void)diminuerPlayerDeltaScale:(float)deltaScale;
 -(void)diminuerPlayerDeltaScale:(float)deltaScale withEffect:(Boolean)effect;
 -(void)checkCollisions: (ccTime) dt;
+-(void)initPhysics;
+-(void)playerGrowWithBonus;
+-(void)gameover;
 
 
 // returns a CCScene that contains the JNPGameLayer as the only child
