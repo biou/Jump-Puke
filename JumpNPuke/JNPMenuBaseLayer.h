@@ -12,7 +12,7 @@
 #import "JNPGameLayer.h"
 #import "JNPAudioManager.h"
 
-@interface JNPMenuBaseLayer : CCLayer {
+@interface JNPMenuBaseLayer : CCLayer <GKLeaderboardViewControllerDelegate> {
     
 }
 

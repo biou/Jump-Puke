@@ -7,6 +7,8 @@
 //
 
 #import "JNPMenuBaseLayer.h"
+#import "AppDelegate.h"
+#import "GCHelper.h"
 
 JNPAudioManager * audioManager;
 
@@ -41,6 +43,12 @@ JNPAudioManager * audioManager;
             selectedImage: @"help-on.png"
             target:self
             selector:@selector(menu3)];
+		
+		// FIXME changer le graphisme du bouton leaderboard
+		CCMenuItemImage *menuItem4 = [CCMenuItemImage itemWithNormalImage:@"help.png"
+			selectedImage: @"help-on.png"
+			target:self
+			selector:@selector(menu4)];
         
         
 		CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, menuItem2, nil];
@@ -52,10 +60,14 @@ JNPAudioManager * audioManager;
         // add the menu to your scene
         [self addChild:myMenu];
         
-        
-        
-		CCMenu * myMenu2 = [CCMenu menuWithItems:menuItem3, nil];
-        myMenu2.position = ccp(70, 113);
+        CCMenu * myMenu2 = [CCMenu menuWithItems:menuItem3, nil];
+		BOOL userAuth = [[GCHelper sharedInstance] isUserAuthenticated];
+        if (userAuth) {
+			NSLog(@"user authenticated, we add the menu item\n");
+			[myMenu2 addChild:menuItem4];
+		}
+        [myMenu2 alignItemsHorizontally];		
+        myMenu2.position = ccp(winsize.width/2, 113);
         [self addChild:myMenu2];
         
         
@@ -96,5 +108,27 @@ JNPAudioManager * audioManager;
 	[audioManager play:jnpSndMenu];	
 	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpHelp]]];    
 }
+
+-(void)menu4 {
+	[self unscheduleAllSelectors];
+	[self unscheduleUpdate];
+	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
+	[audioManager play:jnpSndMenu];
+	AppController * delegate = (AppController *)[UIApplication sharedApplication].delegate; 
+    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];	
+    if (leaderboardController != nil)		
+    {
+        leaderboardController.leaderboardDelegate = self;
+         
+		[delegate.viewController presentModalViewController: leaderboardController animated: YES];
+    }	
+}
+
+- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
+{
+	AppController * delegate = (AppController *)[UIApplication sharedApplication].delegate;
+	[delegate.viewController dismissModalViewControllerAnimated:YES];
+}
+
 
 @end

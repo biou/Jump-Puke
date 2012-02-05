@@ -16,6 +16,7 @@
 @synthesize window=window_, navController=navController_, director=director_;
 
 @synthesize queue;
+@synthesize viewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -63,6 +64,7 @@
 	// set the Navigation Controller as the root view controller
 	//	[window_ setRootViewController:rootViewController_];
 	[window_ addSubview:navController_.view];
+	viewController = (UIViewController *) navController_;
 	
 	// make main window visible
 	[window_ makeKeyAndVisible];
@@ -82,6 +84,8 @@
 	
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	//[director_ pushScene: [[JNPIntroScene alloc]init]]; 
+	
+	[[GCHelper sharedInstance] authenticateLocalUser];
     
     [[CCDirector sharedDirector] pushScene: [CCTransitionFade transitionWithDuration:1.0f scene:[JNPIntroScene node]]];
 

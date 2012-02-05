@@ -61,6 +61,13 @@ static int mode;
 		[self addChild:bgpic];
 		
 		
+		if (mode == jnpGameover) {
+			JNPScore * s = [JNPScore jnpscore];
+			int t = [s getScore];
+			//[s loadCategoryTitles];
+			[s reportScore:t forCategory:@"JNPScore1"];			
+		}
+		
 		if (mode != jnpCredits && mode != jnpHelp)
 		{
 			JNPScore * s = [JNPScore jnpscore];
