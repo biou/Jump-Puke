@@ -23,6 +23,8 @@
 + (GCHelper *)sharedInstance;
 - (void)authenticateLocalUser;
 -(BOOL)isUserAuthenticated;
+-(void)reportScore: (int64_t) score forCategory: (NSString*) category;
+- (void) loadCategoryTitles;
 -(void)displayLeaderboard;
 
 @end

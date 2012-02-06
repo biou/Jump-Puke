@@ -64,8 +64,7 @@ static int mode;
 		if (mode == jnpGameover) {
 			JNPScore * s = [JNPScore jnpscore];
 			int t = [s getScore];
-			//[s loadCategoryTitles];
-			[s reportScore:t forCategory:@"JNPScore1"];			
+			[[GCHelper sharedInstance] reportScore:t forCategory:@"JNPScore1"];			
 		}
 		
 		if (mode != jnpCredits && mode != jnpHelp)

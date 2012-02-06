@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "JNPAudioManager.h"
 #import "JNPMenuScene.h"
+#import "GCHelper.h"
 
 #define jnpGameover 0
 #define jnpCredits 1

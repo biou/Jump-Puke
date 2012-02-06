@@ -24,8 +24,6 @@
 -(int)getLevel;
 -(void)setLevel:(int)l;
 -(void)incrementLevel;
--(void)reportScore: (int64_t) score forCategory: (NSString*) category;
-- (void) loadCategoryTitles;
 
 @property (retain) NSMutableArray *vomis;
 

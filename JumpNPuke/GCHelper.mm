@@ -84,6 +84,44 @@ static GCHelper *sharedHelper = nil;
     }
 }
 
+- (void) loadCategoryTitles
+{
+	
+    [GKLeaderboard loadCategoriesWithCompletionHandler:^(NSArray *categories, NSArray *titles, NSError *error) {
+        if (error != nil)
+        {
+			NSLog(@"Error: %@\n", error);
+            // handle the error
+        }
+		NSLog(@"begin categories:\n");
+		for(id i in categories) {
+			NSLog(i);
+		}
+		NSLog(@"end categories\n");
+        // use the category and title information
+		
+	}];
+	
+}
+
+- (void) reportScore: (int64_t)score forCategory: (NSString*)category
+{
+    GKScore * scoreReporter = [[[GKScore alloc] initWithCategory:category] autorelease];	
+    scoreReporter.value = score;
+	
+    [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
+		NSLog(@"---Score Sent Successfully\n");
+		if (error != nil)
+		{
+            NSLog(@"error reportScore: %@", error);
+			// handle the reporting error
+			/*  FIXME
+			 If your application receives a network error, you should not discard the score. Instead, store the score object and attempt to report the player’s process at a later time. GKScore objects support the NSCoding protocol, so if necessary, they can be archived when your application terminates and unarchived after it launches.
+			 */
+        }
+    }];
+}
+
 -(void)displayLeaderboard {
 	
     if (!gameCenterAvailable) return;
