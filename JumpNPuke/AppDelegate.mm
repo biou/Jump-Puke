@@ -16,7 +16,6 @@
 @synthesize window=window_, navController=navController_, director=director_;
 
 @synthesize queue;
-@synthesize viewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -64,7 +63,7 @@
 	// set the Navigation Controller as the root view controller
 	//	[window_ setRootViewController:rootViewController_];
 	[window_ addSubview:navController_.view];
-	viewController = (UIViewController *) navController_;
+	[[GCHelper sharedInstance] setViewController:(UIViewController *) navController_];
 	
 	// make main window visible
 	[window_ makeKeyAndVisible];

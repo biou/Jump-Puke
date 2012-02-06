@@ -5,14 +5,16 @@
 //  Created by Alain Vagner on 05/02/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
+// Attention: je n'ai pas ajouté de paramètre à l'init pour régler la valeur de la propriété viewController pour ne pas alourdir le
+// code. Ceci est cependant nécessaire pour l'appel à displayLeaderboard.
 
 #import "GCHelper.h"
-
-
 
 @implementation GCHelper
 
 @synthesize gameCenterAvailable;
+@synthesize viewController;
+@synthesize authenticationChanged;
 
 static GCHelper *sharedHelper = nil;
 
@@ -48,7 +50,7 @@ static GCHelper *sharedHelper = nil;
             NSNotificationCenter *nc = 
             [NSNotificationCenter defaultCenter];
             [nc addObserver:self 
-                   selector:@selector(authenticationChanged) 
+                   selector:@selector(basicAuthenticationChanged)
                        name:GKPlayerAuthenticationDidChangeNotificationName 
                      object:nil];
         }
@@ -56,15 +58,17 @@ static GCHelper *sharedHelper = nil;
     return self;
 }
 
-- (void)authenticationChanged {    
+- (void)basicAuthenticationChanged {    
 	
     if ([GKLocalPlayer localPlayer].isAuthenticated && !userAuthenticated) {
 		NSLog(@"Authentication changed: player authenticated.");
-		userAuthenticated = TRUE;           
+		userAuthenticated = TRUE;
+
     } else if (![GKLocalPlayer localPlayer].isAuthenticated && userAuthenticated) {
 		NSLog(@"Authentication changed: player not authenticated");
 		userAuthenticated = FALSE;
     }
+	//[self performSelector:authenticationChanged withObject:[NSNumber numberWithBool:userAuthenticated]];
 	
 }
 
@@ -80,5 +84,30 @@ static GCHelper *sharedHelper = nil;
     }
 }
 
+-(void)displayLeaderboard {
+	
+    if (!gameCenterAvailable) return;
+	if (viewController == nil) {
+		@throw [NSException exceptionWithName:@"ViewControllerNotSet"
+				reason:@"viewController is not set in GCHelper"
+				userInfo:nil];
+	}
+	
+    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];	
+    if (leaderboardController != nil)		
+    {
+        leaderboardController.leaderboardDelegate = self;
+		// on affiche le leaderboard
+		[viewController presentModalViewController: leaderboardController animated: YES];
+    }		
+}
+
+
+// implémentation de <GKLeaderboardViewControllerDelegate>
+- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
+{
+	// on revient à la vue standard (appelé par le tap sur le bouton "Done")
+	[viewController dismissModalViewControllerAnimated:YES];
+}
 @end
 

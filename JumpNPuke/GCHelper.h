@@ -11,15 +11,18 @@
 #import <GameKit/GameKit.h>
 #import "cocos2d.h"
 
-@interface GCHelper : NSObject {
-    BOOL gameCenterAvailable;
-    BOOL userAuthenticated;    
+@interface GCHelper : NSObject <GKLeaderboardViewControllerDelegate> {
+    BOOL userAuthenticated; 
 }
 
 @property (assign, readonly) BOOL gameCenterAvailable;
+@property (retain) UIViewController * viewController;
+@property (assign) 	SEL authenticationChanged; 
+
 
 + (GCHelper *)sharedInstance;
 - (void)authenticateLocalUser;
 -(BOOL)isUserAuthenticated;
+-(void)displayLeaderboard;
 
 @end

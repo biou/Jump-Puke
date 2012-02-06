@@ -85,50 +85,31 @@ JNPAudioManager * audioManager;
 
 
 -(void)menu1 {
-	[self unscheduleAllSelectors];
-	[self unscheduleUpdate];
-	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
-	[audioManager play:jnpSndMenu];	
+	[self startMenuAction];
 	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPGameLayer scene]]];
     
 }
 
 -(void)menu2 {
-	[self unscheduleAllSelectors];
-	[self unscheduleUpdate];
-	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
-	[audioManager play:jnpSndMenu];	
+	[self startMenuAction];	
 	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpCredits]]];    
 }
 
 -(void)menu3 {
-	[self unscheduleAllSelectors];
-	[self unscheduleUpdate];
-	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
-	[audioManager play:jnpSndMenu];	
+	[self startMenuAction];
 	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPBasicLayer scene:jnpHelp]]];    
 }
 
 -(void)menu4 {
+	[self startMenuAction];
+	[[GCHelper sharedInstance] displayLeaderboard];
+}
+
+-(void)startMenuAction {
 	[self unscheduleAllSelectors];
 	[self unscheduleUpdate];
 	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
-	[audioManager play:jnpSndMenu];
-	AppController * delegate = (AppController *)[UIApplication sharedApplication].delegate; 
-    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];	
-    if (leaderboardController != nil)		
-    {
-        leaderboardController.leaderboardDelegate = self;
-         
-		[delegate.viewController presentModalViewController: leaderboardController animated: YES];
-    }	
+	[audioManager play:jnpSndMenu];	
 }
-
-- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
-{
-	AppController * delegate = (AppController *)[UIApplication sharedApplication].delegate;
-	[delegate.viewController dismissModalViewControllerAnimated:YES];
-}
-
 
 @end

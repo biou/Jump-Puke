@@ -30,6 +30,5 @@
 @property (readonly) UINavigationController *navController;
 @property (readonly) CCDirectorIOS *director;
 @property (nonatomic, retain) NSOperationQueue *queue;
-@property (nonatomic, retain) UIViewController *viewController;
 
 @end
