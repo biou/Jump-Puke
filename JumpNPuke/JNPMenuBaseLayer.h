@@ -17,5 +17,7 @@
 }
 
 -(void)startMenuAction;
+-(void)setupMenu;
+-(void)handleAuthChange:(NSNumber *) n;
 
 @end

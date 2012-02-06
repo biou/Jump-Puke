@@ -17,7 +17,7 @@
 
 @property (assign, readonly) BOOL gameCenterAvailable;
 @property (retain) UIViewController * viewController;
-@property (assign) 	SEL authenticationChanged; 
+@property (assign) 	id authChangeDelegate; 
 
 
 + (GCHelper *)sharedInstance;

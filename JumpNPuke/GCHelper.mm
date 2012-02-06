@@ -14,7 +14,7 @@
 
 @synthesize gameCenterAvailable;
 @synthesize viewController;
-@synthesize authenticationChanged;
+@synthesize authChangeDelegate;
 
 static GCHelper *sharedHelper = nil;
 
@@ -68,7 +68,9 @@ static GCHelper *sharedHelper = nil;
 		NSLog(@"Authentication changed: player not authenticated");
 		userAuthenticated = FALSE;
     }
-	//[self performSelector:authenticationChanged withObject:[NSNumber numberWithBool:userAuthenticated]];
+	if (authChangeDelegate) {
+		[authChangeDelegate handleAuthChange:userAuthenticated];
+	}
 	
 }
 

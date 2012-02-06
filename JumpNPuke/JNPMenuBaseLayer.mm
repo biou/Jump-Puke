@@ -11,6 +11,7 @@
 #import "GCHelper.h"
 
 JNPAudioManager * audioManager;
+CCMenu * myMenu;
 
 @implementation JNPMenuBaseLayer
 
@@ -25,47 +26,16 @@ JNPAudioManager * audioManager;
         logo.position = ccp(winsize.width/2 , winsize.height/2 );
 		[self addChild:logo z:0];	
 		
-		
+		[[GCHelper sharedInstance] setAuthChangeDelegate:self];
 		
 		// http://www.cocos2d-iphone.org/wiki/doku.php/prog_guide:lesson_3._menus_and_scenes
-        // [self setUpMenus];
         
-		CCMenuItemImage *menuItem1 = [CCMenuItemImage itemWithNormalImage:@"start-over.png"
-            selectedImage: @"start.png"
-            target:self
-            selector:@selector(menu1)];
-        CCMenuItemImage *menuItem2 = [CCMenuItemImage itemWithNormalImage:@"credits.png"
-        selectedImage: @"credits-over.png"
-        target:self
-        selector:@selector(menu2)];
-        
-        CCMenuItemImage *menuItem3 = [CCMenuItemImage itemWithNormalImage:@"help.png"
-            selectedImage: @"help-on.png"
-            target:self
-            selector:@selector(menu3)];
+		[self setupMenu];
 		
-		// FIXME changer le graphisme du bouton leaderboard
-		CCMenuItemImage *menuItem4 = [CCMenuItemImage itemWithNormalImage:@"scores.png"
-			selectedImage: @"scores-over.png"
-			target:self
-			selector:@selector(menu4)];
-        
-        
-		CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, nil];
-		BOOL userAuth = [[GCHelper sharedInstance] isUserAuthenticated];
-        if (userAuth) {
-			NSLog(@"user authenticated, we add the menu item\n");
-			[myMenu addChild:menuItem4];
-		}
-		[myMenu addChild:menuItem2];
-        		
-        // Arrange the menu items vertically
-        [myMenu alignItemsVertically];
-
-		myMenu.position = ccp(winsize.width/2, 280);
-        
-        // add the menu to your scene
-        [self addChild:myMenu];
+		CCMenuItemImage *menuItem3 = [CCMenuItemImage itemWithNormalImage:@"help.png"
+															selectedImage: @"help-on.png"
+																   target:self
+																 selector:@selector(menu3)];
         
         CCMenu * myMenu2 = [CCMenu menuWithItems:menuItem3, nil];
 
@@ -85,7 +55,49 @@ JNPAudioManager * audioManager;
     return self;
 }
 
+-(void)setupMenu {
+	if (myMenu != nil) {
+		[self removeChild:myMenu cleanup:NO];
+		//[myMenu release];
+	}
 
+	CGSize winsize = [[CCDirector sharedDirector] winSize];
+
+	CCMenuItemImage *menuItem1 = [CCMenuItemImage itemWithNormalImage:@"start-over.png"
+														selectedImage: @"start.png"
+															   target:self
+															 selector:@selector(menu1)];
+	CCMenuItemImage *menuItem2 = [CCMenuItemImage itemWithNormalImage:@"credits.png"
+														selectedImage: @"credits-over.png"
+															   target:self
+															 selector:@selector(menu2)];
+	
+
+	
+	CCMenuItemImage *menuItem4 = [CCMenuItemImage itemWithNormalImage:@"scores.png"
+														selectedImage: @"scores-over.png"
+															   target:self
+															 selector:@selector(menu4)];
+	
+	
+	myMenu = [CCMenu menuWithItems:menuItem1, nil];
+	BOOL userAuth = [[GCHelper sharedInstance] isUserAuthenticated];
+	if (userAuth) {
+		NSLog(@"user authenticated, we add the menu item\n");
+		[myMenu addChild:menuItem4];
+	}
+	[myMenu addChild:menuItem2];
+	
+	// Arrange the menu items vertically
+	[myMenu alignItemsVertically];
+	
+	myMenu.position = ccp(winsize.width/2, 280);
+	
+	// add the menu to your scene
+	[self addChild:myMenu];
+	
+	
+}
 
 -(void)menu1 {
 	[self startMenuAction];
@@ -113,6 +125,10 @@ JNPAudioManager * audioManager;
 	[self unscheduleUpdate];
 	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
 	[audioManager play:jnpSndMenu];	
+}
+
+-(void)handleAuthChange:(BOOL) n {
+	[self setupMenu];
 }
 
 @end
