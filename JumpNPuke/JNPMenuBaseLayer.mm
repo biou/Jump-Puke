@@ -34,8 +34,8 @@ JNPAudioManager * audioManager;
             selectedImage: @"start.png"
             target:self
             selector:@selector(menu1)];
-        CCMenuItemImage *menuItem2 = [CCMenuItemImage itemWithNormalImage:@"credits-over.png"
-        selectedImage: @"credits.png"
+        CCMenuItemImage *menuItem2 = [CCMenuItemImage itemWithNormalImage:@"credits.png"
+        selectedImage: @"credits-over.png"
         target:self
         selector:@selector(menu2)];
         
@@ -45,29 +45,32 @@ JNPAudioManager * audioManager;
             selector:@selector(menu3)];
 		
 		// FIXME changer le graphisme du bouton leaderboard
-		CCMenuItemImage *menuItem4 = [CCMenuItemImage itemWithNormalImage:@"help.png"
-			selectedImage: @"help-on.png"
+		CCMenuItemImage *menuItem4 = [CCMenuItemImage itemWithNormalImage:@"scores.png"
+			selectedImage: @"scores-over.png"
 			target:self
 			selector:@selector(menu4)];
         
         
-		CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, menuItem2, nil];
-        
+		CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, nil];
+		BOOL userAuth = [[GCHelper sharedInstance] isUserAuthenticated];
+        if (userAuth) {
+			NSLog(@"user authenticated, we add the menu item\n");
+			[myMenu addChild:menuItem4];
+		}
+		[myMenu addChild:menuItem2];
+        		
         // Arrange the menu items vertically
         [myMenu alignItemsVertically];
+
 		myMenu.position = ccp(winsize.width/2, 280);
         
         // add the menu to your scene
         [self addChild:myMenu];
         
         CCMenu * myMenu2 = [CCMenu menuWithItems:menuItem3, nil];
-		BOOL userAuth = [[GCHelper sharedInstance] isUserAuthenticated];
-        if (userAuth) {
-			NSLog(@"user authenticated, we add the menu item\n");
-			[myMenu2 addChild:menuItem4];
-		}
+
         [myMenu2 alignItemsHorizontally];		
-        myMenu2.position = ccp(winsize.width/2, 113);
+        myMenu2.position = ccp(70, 113);
         [self addChild:myMenu2];
         
         
