@@ -94,6 +94,10 @@ static JNPAudioManager *sharedAM = nil;
     self.nextMusicStress = stress;
 }
 
+-(void) stopMusic {
+    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+}
+
 -(void) playJump {
 	int r = arc4random() % 2;
 	r+=4;

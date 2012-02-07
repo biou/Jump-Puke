@@ -73,7 +73,7 @@ CCMenu * myMenu;
 															 selector:@selector(menu2)];
 	
 
-	
+
 	CCMenuItemImage *menuItem4 = [CCMenuItemImage itemWithNormalImage:@"scores.png"
 														selectedImage: @"scores-over.png"
 															   target:self
@@ -127,7 +127,7 @@ CCMenu * myMenu;
 	[audioManager play:jnpSndMenu];	
 }
 
--(void)handleAuthChange:(BOOL) n {
+-(void)handleAuthChange:(Boolean) n {
 	[self setupMenu];
 }
 

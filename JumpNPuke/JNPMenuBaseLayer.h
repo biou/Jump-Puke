@@ -18,6 +18,6 @@
 
 -(void)startMenuAction;
 -(void)setupMenu;
--(void)handleAuthChange:(NSNumber *) n;
+-(void)handleAuthChange:(Boolean) n;
 
 @end

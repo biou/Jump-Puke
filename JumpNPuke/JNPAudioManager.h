@@ -38,6 +38,7 @@
 
 -(void) playMusicWithStress:(int)stress;
 -(void) playMusic:(int)stress;
+-(void) stopMusic;
 -(void) play:(int)soundType;
 -(void) preload;
 -(void) playJump;
