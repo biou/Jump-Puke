@@ -97,7 +97,7 @@ static GCHelper *sharedHelper = nil;
         }
 		NSLog(@"begin categories:\n");
 		for(id i in categories) {
-			NSLog(i);
+			NSLog(@"%@\n",i);
 		}
 		NSLog(@"end categories\n");
         // use the category and title information
@@ -144,10 +144,10 @@ static GCHelper *sharedHelper = nil;
 
 
 // implémentation de <GKLeaderboardViewControllerDelegate>
-- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
+- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewC
 {
 	// on revient à la vue standard (appelé par le tap sur le bouton "Done")
-	[viewController dismissModalViewControllerAnimated:YES];
+	[viewC dismissModalViewControllerAnimated:YES];
 }
 @end
 

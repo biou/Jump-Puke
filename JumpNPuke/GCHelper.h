@@ -28,3 +28,7 @@
 -(void)displayLeaderboard;
 
 @end
+
+@protocol GCEnabled
+	-(void) handleAuthChange:(BOOL)b;
+@end

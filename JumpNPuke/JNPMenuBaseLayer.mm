@@ -127,7 +127,7 @@ CCMenu * myMenu;
 	[audioManager play:jnpSndMenu];	
 }
 
--(void)handleAuthChange:(Boolean) n {
+-(void)handleAuthChange:(BOOL) n {
 	[self setupMenu];
 }
 
