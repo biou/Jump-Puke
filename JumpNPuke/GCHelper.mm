@@ -15,6 +15,8 @@
 @synthesize gameCenterAvailable;
 @synthesize viewController;
 @synthesize authChangeDelegate;
+@synthesize scoreBuffer;
+@synthesize scoreArchiveFile;
 
 static GCHelper *sharedHelper = nil;
 
@@ -25,6 +27,28 @@ static GCHelper *sharedHelper = nil;
     return sharedHelper;
 }
 
+- (id)init {
+    if ((self = [super init])) {
+        gameCenterAvailable = [self isGameCenterAvailable];
+        if (gameCenterAvailable) {
+			scoreArchiveFile = @"<Application_Home>/Library/PrivateData/scores.archive";
+			[self loadScoreBuffer];
+            NSNotificationCenter *nc = 
+            [NSNotificationCenter defaultCenter];
+            [nc addObserver:self 
+                   selector:@selector(basicAuthenticationChanged)
+                       name:GKPlayerAuthenticationDidChangeNotificationName 
+                     object:nil];
+        }
+    }
+    return self;
+}
+
+- (void) dealloc
+{
+	[self saveScoreBuffer];
+	[super dealloc];
+}
 
 - (BOOL)isGameCenterAvailable {
     // check for presence of GKLocalPlayer API
@@ -43,20 +67,7 @@ static GCHelper *sharedHelper = nil;
 	return userAuthenticated;
 }
 
-- (id)init {
-    if ((self = [super init])) {
-        gameCenterAvailable = [self isGameCenterAvailable];
-        if (gameCenterAvailable) {
-            NSNotificationCenter *nc = 
-            [NSNotificationCenter defaultCenter];
-            [nc addObserver:self 
-                   selector:@selector(basicAuthenticationChanged)
-                       name:GKPlayerAuthenticationDidChangeNotificationName 
-                     object:nil];
-        }
-    }
-    return self;
-}
+
 
 - (void)basicAuthenticationChanged {    
 	
@@ -108,25 +119,55 @@ static GCHelper *sharedHelper = nil;
 
 - (void) reportScore: (int64_t)score forCategory: (NSString*)category
 {
+    if (!gameCenterAvailable) return;
+	
     GKScore * scoreReporter = [[[GKScore alloc] initWithCategory:category] autorelease];	
     scoreReporter.value = score;
 	
-    [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
-		NSLog(@"---Score Sent Successfully\n");
-		if (error != nil)
-		{
-            NSLog(@"error reportScore: %@", error);
-			// handle the reporting error
-			/*  FIXME
-			 If your application receives a network error, you should not discard the score. Instead, store the score object and attempt to report the player’s process at a later time. GKScore objects support the NSCoding protocol, so if necessary, they can be archived when your application terminates and unarchived after it launches.
-			 */
-        }
-    }];
+	[scoreBuffer addObject:scoreReporter];	
+	[self sendScoreBuffer];
+	
+}
+
+-(void) sendScoreBuffer {
+    if (!gameCenterAvailable) return;	
+	
+	for (NSUInteger i=0; i< scoreBuffer.count; i++) {
+		GKScore * scoreReporter = [scoreBuffer objectAtIndex:i];
+		[scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
+			if (error == nil) {
+				[scoreBuffer removeObjectAtIndex:i];
+			} else {
+				NSLog(@"error reportScore: %@", error);
+			}
+		}];
+	}
+}
+
+-(void) loadScoreBuffer {
+    if (!gameCenterAvailable) return;
+	
+	scoreBuffer = (NSMutableArray *) [NSKeyedUnarchiver unarchiveObjectWithFile:scoreArchiveFile];
+	if (scoreBuffer == Nil) {
+		scoreBuffer = [[NSMutableArray alloc] init];
+	}
+
+}
+
+-(void) saveScoreBuffer {
+    if (!gameCenterAvailable) return;
+	
+	BOOL result = [NSKeyedArchiver archiveRootObject:scoreBuffer
+										 toFile:scoreArchiveFile];
+	if (result == NO) {
+		NSLog(@"Unable to save score data to local filesystem\n");
+	}
+
 }
 
 -(void)displayLeaderboard {
-	
     if (!gameCenterAvailable) return;
+	
 	if (viewController == nil) {
 		@throw [NSException exceptionWithName:@"ViewControllerNotSet"
 				reason:@"viewController is not set in GCHelper"

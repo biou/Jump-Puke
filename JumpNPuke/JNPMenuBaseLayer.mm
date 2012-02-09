@@ -49,6 +49,7 @@ CCMenu * myMenu;
 		[sc setLevel:1];
 		[sc setScore:0];
 		
+		[[GCHelper sharedInstance] sendScoreBuffer];
         // Il ne sert à rien d'activer le "Touch" sur ce Layer car le menu, lui, est TouchEnabled.
         // self.isTouchEnabled = YES;		
     }
