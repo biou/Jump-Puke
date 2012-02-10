@@ -134,7 +134,7 @@ static GCHelper *sharedHelper = nil;
 }
 
 -(void) sendScoreBuffer {
-    if (!gameCenterAvailable) return;	
+    if (!gameCenterAvailable || ![self isUserAuthenticated]) return;	
 	
 		NSLog(@"-SendScoreBuffer\n");
 	for (NSUInteger i=0; i< scoreBuffer.count; i++) {
@@ -152,7 +152,8 @@ static GCHelper *sharedHelper = nil;
 }
 
 -(void) loadScoreBuffer {
-    if (!gameCenterAvailable) return;
+    if (!gameCenterAvailable || ![self isUserAuthenticated]) return;
+	
 	NSLog(@"-LoadScoreBuffer\n");
 	scoreBuffer = (NSMutableArray *) [NSKeyedUnarchiver unarchiveObjectWithFile:scoreArchiveFile];
 	if (scoreBuffer == Nil) {
@@ -163,7 +164,7 @@ static GCHelper *sharedHelper = nil;
 
 -(void) saveScoreBuffer {
 	
-    if (!gameCenterAvailable) return;
+    if (!gameCenterAvailable || ![self isUserAuthenticated]) return;
 	NSLog(@"-SaveScoreBuffer\n");	
 	BOOL result = [NSKeyedArchiver archiveRootObject:scoreBuffer
 										 toFile:scoreArchiveFile];
@@ -174,7 +175,7 @@ static GCHelper *sharedHelper = nil;
 }
 
 -(void)displayLeaderboard {
-    if (!gameCenterAvailable) return;
+    if (!gameCenterAvailable || ![self isUserAuthenticated]) return;
 	
 	if (viewController == nil) {
 		@throw [NSException exceptionWithName:@"ViewControllerNotSet"
