@@ -18,8 +18,7 @@
 @property (assign, readonly) BOOL gameCenterAvailable;
 @property (retain) UIViewController * viewController;
 @property (assign) 	id authChangeDelegate;
-@property (retain) NSMutableArray * scoreBuffer;
-@property (retain) NSString * scoreArchiveFile;
+
 
 
 + (GCHelper *)sharedInstance;
@@ -29,10 +28,6 @@
 -(void)reportScore: (int64_t) score forCategory: (NSString*) category;
 - (void) loadCategoryTitles;
 -(void)displayLeaderboard;
-
--(void) loadScoreBuffer;
--(void) saveScoreBuffer;
--(void) sendScoreBuffer;
 
 @end
 
