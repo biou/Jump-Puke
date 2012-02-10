@@ -254,12 +254,10 @@ static CCScene *scene;
         if (!strcmp(deviceStr, "PowerVR SGX 535")) {
             // iPad 1
             enableParticles = NO;
-            NSLog(@"HEEEEY HOOOOOH YEAH FUCK YA iPAD 1111!!1!");
         }
         else {
             // iPad 2 or later
             enableParticles = YES;
-            NSLog(@"HUUUUUUUUUU FUCK TA PUTE CONNASSE iPAD 2222222222");
         }
         
         
