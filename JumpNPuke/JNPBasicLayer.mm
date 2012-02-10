@@ -64,6 +64,7 @@ static int mode;
 		if (mode == jnpGameover) {
 			JNPScore * s = [JNPScore jnpscore];
 			int t = [s getScore];
+			s.vomis = [NSMutableArray array];
 			[[GCHelper sharedInstance] reportScore:t forCategory:@"JNPScore1"];			
 		}
 		
