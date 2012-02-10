@@ -247,6 +247,22 @@ static CCScene *scene;
         //[self schedule:@selector(updateScore:) interval:0.5];
         [self schedule:@selector(detectObstacleCollision:)];
 
+        
+        
+        // détection du modèle d'ipad pou savoir si on active les fioritures particulantes ou pas, qui rendent un peu joli sur ipad 2 mais pas bien du tout du tout sur iPad 1.
+        const char * deviceStr = (const char *)glGetString(GL_RENDERER);
+        if (!strcmp(deviceStr, "PowerVR SGX 535")) {
+            // iPad 1
+            enableParticles = NO;
+            NSLog(@"HEEEEY HOOOOOH YEAH FUCK YA iPAD 1111!!1!");
+        }
+        else {
+            // iPad 2 or later
+            enableParticles = YES;
+            NSLog(@"HUUUUUUUUUU FUCK TA PUTE CONNASSE iPAD 2222222222");
+        }
+        
+        
 
 #if 1
 		// Use batch node. Faster
