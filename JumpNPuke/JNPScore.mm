@@ -28,7 +28,7 @@ static JNPScore * instance = nil;
     if (self) {
 		level=1;
 		score=0;
-		time=300;
+		time=90;
     }
     return self;
 }
@@ -75,7 +75,9 @@ static JNPScore * instance = nil;
 
 -(void)decrementTime
 {
-	time--;
+	if (time!=0) {
+		time--;
+	}
 }
 
 - (void)dealloc {

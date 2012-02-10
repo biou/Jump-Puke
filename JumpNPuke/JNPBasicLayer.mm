@@ -71,9 +71,16 @@ static int mode;
 		if (mode != jnpCredits && mode != jnpHelp)
 		{
 			JNPScore * s = [JNPScore jnpscore];
-			int t = [s getScore];
-			NSString * str = [NSString stringWithFormat:@"Score: %d", t]; 
-			CCLabelTTF *label = [CCLabelTTF labelWithString:str fontName:@"Chalkduster" fontSize:64];
+			int newScore = [s getScore] + [s getTime]*100;
+			NSString * str = nil;
+
+			if (mode == jnpGameover) {
+				str = [NSString stringWithFormat:@"Score: %d", [s getScore]];
+			} else {
+				str = [NSString stringWithFormat:@"Score: %d + %d x 100 = %d", [s getScore], [s getTime], newScore];
+				[s setScore:newScore];			
+			}
+			CCLabelTTF *label = [CCLabelTTF labelWithString:str fontName:@"Chalkduster" fontSize:42];
 			[label setPosition: ccp(winsize.width/2, winsize.height-50)];
 			[self addChild: label];
 		}
@@ -83,6 +90,7 @@ static int mode;
 			JNPScore * s = [JNPScore jnpscore];
 			[s incrementLevel];
 			int t = [s getLevel];
+			[s setTime:90];
 			NSString * str = [NSString stringWithFormat:@"Level %d", t]; 
 			CCLabelTTF *label = [CCLabelTTF labelWithString:str fontName:@"Chalkduster" fontSize:64];
 			[label setPosition: ccp(winsize.width/2, 50)];

@@ -48,6 +48,7 @@ CCMenu * myMenu;
 		JNPScore * sc = [JNPScore jnpscore];
 		[sc setLevel:1];
 		[sc setScore:0];
+		[sc setTime:90];		
 		
         // Il ne sert à rien d'activer le "Touch" sur ce Layer car le menu, lui, est TouchEnabled.
         // self.isTouchEnabled = YES;		
