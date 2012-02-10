@@ -8,6 +8,10 @@
 // Attention: je n'ai pas ajouté de paramètre à l'init pour régler la valeur de la propriété viewController pour ne pas alourdir le
 // code. Ceci est cependant nécessaire pour l'appel à displayLeaderboard.
 
+// Il semblerait que le système de scoreBuffer soit surtout nécessaire sous IOS 4.1. Sous IOS5, quand il n'y a pas de réseau dispo
+// le systeme tentera tout seul de renvoyer les scores au retour de la connectivité (et donc pas de network error)
+// -> cette fonctionnalité n'est pas testée, je n'ai pas d'IOS 4 pour tester.
+
 #import "GCHelper.h"
 
 @implementation GCHelper
@@ -31,7 +35,7 @@ static GCHelper *sharedHelper = nil;
     if ((self = [super init])) {
         gameCenterAvailable = [self isGameCenterAvailable];
         if (gameCenterAvailable) {
-			scoreArchiveFile = @"<Application_Home>/Library/PrivateData/scores.archive";
+			scoreArchiveFile = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/PrivateData/scores.archive"];
 			[self loadScoreBuffer];
             NSNotificationCenter *nc = 
             [NSNotificationCenter defaultCenter];
@@ -132,10 +136,13 @@ static GCHelper *sharedHelper = nil;
 -(void) sendScoreBuffer {
     if (!gameCenterAvailable) return;	
 	
+		NSLog(@"-SendScoreBuffer\n");
 	for (NSUInteger i=0; i< scoreBuffer.count; i++) {
 		GKScore * scoreReporter = [scoreBuffer objectAtIndex:i];
 		[scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
+
 			if (error == nil) {
+					NSLog(@"--scoreSent: %lld\n", scoreReporter.value);
 				[scoreBuffer removeObjectAtIndex:i];
 			} else {
 				NSLog(@"error reportScore: %@", error);
@@ -146,7 +153,7 @@ static GCHelper *sharedHelper = nil;
 
 -(void) loadScoreBuffer {
     if (!gameCenterAvailable) return;
-	
+	NSLog(@"-LoadScoreBuffer\n");
 	scoreBuffer = (NSMutableArray *) [NSKeyedUnarchiver unarchiveObjectWithFile:scoreArchiveFile];
 	if (scoreBuffer == Nil) {
 		scoreBuffer = [[NSMutableArray alloc] init];
@@ -155,8 +162,9 @@ static GCHelper *sharedHelper = nil;
 }
 
 -(void) saveScoreBuffer {
-    if (!gameCenterAvailable) return;
 	
+    if (!gameCenterAvailable) return;
+	NSLog(@"-SaveScoreBuffer\n");	
 	BOOL result = [NSKeyedArchiver archiveRootObject:scoreBuffer
 										 toFile:scoreArchiveFile];
 	if (result == NO) {

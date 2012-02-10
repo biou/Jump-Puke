@@ -127,6 +127,7 @@
 // application will be killed
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+	[[GCHelper sharedInstance] saveScoreBuffer];
 	CC_DIRECTOR_END();
 }
 
