@@ -10,6 +10,9 @@
 #import "cocos2d.h"
 #import "CCTouchDispatcher.h"
 
+#define NUM_FILTER_POINTS 10  // number of recent points to use in average
+
+
 @class JNPGameLayer;
 
 typedef enum tagPaddleState {
@@ -17,7 +20,7 @@ typedef enum tagPaddleState {
 	kPaddleStateUngrabbed
 } PaddleState;
 
-@interface JNPControlLayer : CCLayer <CCTargetedTouchDelegate> {
+@interface JNPControlLayer : CCLayer <CCTargetedTouchDelegate,UIAccelerometerDelegate> {
 	@private
     PaddleState state;
     JNPGameLayer *ref;
@@ -25,11 +28,14 @@ typedef enum tagPaddleState {
     CCLabelTTF *labelScore;
     CCLabelTTF *labelShadowScore;
     CCLabelTTF *labelTime;
-    CCLabelTTF *labelShadowTime;	
+    CCLabelTTF *labelShadowTime;
+    float accelY;
+    NSMutableArray *rawAccelY;	
 }
 
 -(void)assignGameLayer:(JNPGameLayer*)gameLayer;
 - (void)showScore: (int)score;
 - (void)showTime: (int)t;
+- (float)getAccelY;
 
 @end

@@ -4,7 +4,6 @@
 //
 //  Created by Vincent on 28/01/12.
 //  Copyright __MyCompanyName__ 2012. All rights reserved.
-//
 
 
 #import <GameKit/GameKit.h>

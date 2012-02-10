@@ -69,6 +69,20 @@ id pukeButtonSelected;
         [self addChild: labelShadowTime];
         [self addChild: labelTime];		
 		
+		
+		
+		// Initialisation de l'acelerometre
+		
+		rawAccelY = [NSMutableArray arrayWithCapacity:NUM_FILTER_POINTS];
+        for (int i = 0; i < NUM_FILTER_POINTS; i++)
+        {
+            [rawAccelY addObject:[NSNumber numberWithFloat:0.0]];
+        }
+        [rawAccelY retain];  
+		
+        UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
+        accelerometer.updateInterval = 1.0/60.0;
+        accelerometer.delegate = self;		
         
 		self.isTouchEnabled = YES;
 	}
@@ -104,6 +118,26 @@ id pukeButtonSelected;
 	[super onExit];
 }
 
+- (float)getAccelY
+{
+    return accelY;
+}
+
+- (void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+{    
+    [rawAccelY insertObject:[NSNumber numberWithFloat: acceleration.y] atIndex:0];
+    [rawAccelY removeObjectAtIndex:NUM_FILTER_POINTS];
+    
+    // perform averaging
+    accelY = 0.0;
+    for (NSNumber *raw in rawAccelY)
+    {
+        accelY += [raw floatValue];
+    }    
+    
+    NSLog(@"accel.y = %f - valeurmem = %f -- prout %f", accelY, [(NSNumber *)[rawAccelY objectAtIndex:0] floatValue],acceleration.y);
+    
+}
 
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event

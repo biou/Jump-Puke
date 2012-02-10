@@ -474,7 +474,7 @@ static CCScene *scene;
     float leveldifficulty = 100.0+45.0*[s getLevel];
     
     if (v<leveldifficulty) {
-        float zeForce = (leveldifficulty - v)/200;
+        float zeForce = (leveldifficulty - v + [controlLayer getAccelY]*300)/200;
         b2Vec2 force = b2Vec2(zeForce, 0.0f);
         playerBody->ApplyLinearImpulse(force, playerBody->GetPosition());
     }
