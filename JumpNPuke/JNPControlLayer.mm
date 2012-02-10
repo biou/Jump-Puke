@@ -88,6 +88,10 @@ id pukeButtonSelected;
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    NSLog(@"##############################################");
+    NSLog(@"########        TOUCH BEGAN        ###########");
+    NSLog(@"##############################################");
+    
 	if (state != kPaddleStateUngrabbed) return NO;
 	state = kPaddleStateGrabbed;
 	
@@ -111,6 +115,9 @@ id pukeButtonSelected;
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    NSLog(@"##############################################");
+    NSLog(@"########        TOUCH ENDED        ###########");
+    NSLog(@"##############################################");
 	NSAssert(state == kPaddleStateGrabbed, @"Paddle - Unexpected state!");
 	state = kPaddleStateUngrabbed;
 	[jumpButton setTexture:jumpButtonNormal]; 
