@@ -55,6 +55,14 @@ CCMenu * myMenu;
     return self;
 }
 
+- (void) dealloc
+{
+	[[GCHelper sharedInstance] setAuthChangeDelegate:nil];
+	
+	[super dealloc];
+}
+
+
 -(void)setupMenu {
 	if (myMenu != nil) {
 		[self removeChild:myMenu cleanup:NO];
