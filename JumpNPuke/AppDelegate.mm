@@ -85,7 +85,8 @@
 	//[director_ pushScene: [[JNPIntroScene alloc]init]]; 
 	
 	[[GCHelper sharedInstance] authenticateLocalUser];
-    
+
+	
     [[CCDirector sharedDirector] pushScene: [CCTransitionFade transitionWithDuration:1.0f scene:[JNPIntroScene node]]];
 
 	return YES;
@@ -127,7 +128,6 @@
 // application will be killed
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-	[[GCHelper sharedInstance] saveScoreBuffer];
 	CC_DIRECTOR_END();
 }
 

@@ -10,7 +10,7 @@
 
 // Il semblerait que le système de scoreBuffer soit surtout nécessaire sous IOS 4.1. Sous IOS5, quand il n'y a pas de réseau dispo
 // le systeme tentera tout seul de renvoyer les scores au retour de la connectivité (et donc pas de network error)
-// -> cette fonctionnalité n'est pas testée, je n'ai pas d'IOS 4 pour tester.
+// -> sous IOS 4.1 s'il y a erreur lors de l'envoi des scores, ils ne seront pas réémis.
 
 #import "GCHelper.h"
 
@@ -19,8 +19,6 @@
 @synthesize gameCenterAvailable;
 @synthesize viewController;
 @synthesize authChangeDelegate;
-@synthesize scoreBuffer;
-@synthesize scoreArchiveFile;
 
 static GCHelper *sharedHelper = nil;
 
@@ -35,8 +33,6 @@ static GCHelper *sharedHelper = nil;
     if ((self = [super init])) {
         gameCenterAvailable = [self isGameCenterAvailable];
         if (gameCenterAvailable) {
-			scoreArchiveFile = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/PrivateData/scores.archive"];
-			[self loadScoreBuffer];
             NSNotificationCenter *nc = 
             [NSNotificationCenter defaultCenter];
             [nc addObserver:self 
@@ -48,11 +44,6 @@ static GCHelper *sharedHelper = nil;
     return self;
 }
 
-- (void) dealloc
-{
-	[self saveScoreBuffer];
-	[super dealloc];
-}
 
 - (BOOL)isGameCenterAvailable {
     // check for presence of GKLocalPlayer API
@@ -123,55 +114,20 @@ static GCHelper *sharedHelper = nil;
 
 - (void) reportScore: (int64_t)score forCategory: (NSString*)category
 {
-    if (!gameCenterAvailable) return;
+    if (!gameCenterAvailable || ![self isUserAuthenticated]) return;	
 	
     GKScore * scoreReporter = [[[GKScore alloc] initWithCategory:category] autorelease];	
     scoreReporter.value = score;
+	[scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
+		if (error == nil) {
+			NSLog(@"--scoreSent: %lld\n", scoreReporter.value);
+		} else {
+			NSLog(@"error reportScore: %@", error);
+		}
+	}];
 	
-	[scoreBuffer addObject:scoreReporter];	
-	[self sendScoreBuffer];
+
 	
-}
-
--(void) sendScoreBuffer {
-    if (!gameCenterAvailable || ![self isUserAuthenticated]) return;	
-	
-		NSLog(@"-SendScoreBuffer\n");
-	for (NSUInteger i=0; i< scoreBuffer.count; i++) {
-		GKScore * scoreReporter = [scoreBuffer objectAtIndex:i];
-		[scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
-
-			if (error == nil) {
-					NSLog(@"--scoreSent: %lld\n", scoreReporter.value);
-				[scoreBuffer removeObjectAtIndex:i];
-			} else {
-				NSLog(@"error reportScore: %@", error);
-			}
-		}];
-	}
-}
-
--(void) loadScoreBuffer {
-    if (!gameCenterAvailable) return;
-	
-	NSLog(@"-LoadScoreBuffer\n");
-	scoreBuffer = (NSMutableArray *) [NSKeyedUnarchiver unarchiveObjectWithFile:scoreArchiveFile];
-	if (scoreBuffer == Nil) {
-		scoreBuffer = [[NSMutableArray alloc] init];
-	}
-
-}
-
--(void) saveScoreBuffer {
-	
-    if (!gameCenterAvailable) return;
-	NSLog(@"-SaveScoreBuffer\n");	
-	BOOL result = [NSKeyedArchiver archiveRootObject:scoreBuffer
-										 toFile:scoreArchiveFile];
-	if (result == NO) {
-		NSLog(@"Unable to save score data to local filesystem\n");
-	}
-
 }
 
 -(void)displayLeaderboard {
