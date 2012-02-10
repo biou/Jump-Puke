@@ -38,6 +38,7 @@ id pukeButtonSelected;
         [self addChild:pukeButton];	
 		
         
+		// Affichage du score
         JNPScore * s = [JNPScore jnpscore];
         int t = [s getScore];
         t += 0;
@@ -45,16 +46,29 @@ id pukeButtonSelected;
         CGSize labelSize;
         labelSize.width = 400;
         labelSize.height= 50;
-        label = [CCLabelTTF labelWithString:str dimensions:labelSize alignment:UITextAlignmentLeft fontName:@"Chalkduster" fontSize:42];
-        [label setColor:ccc3(240, 0, 0)];
-        [label setPosition: ccp(213, winSize.height - 30)];
-        labelShadow = [CCLabelTTF labelWithString:str dimensions:labelSize alignment:UITextAlignmentLeft fontName:@"Chalkduster" fontSize:42];
-        [labelShadow setColor:ccc3(0, 0, 0)];
-        [labelShadow setPosition: ccp(215, winSize.height - 31)];
-
-        
-        [self addChild: labelShadow];
-        [self addChild: label];
+        labelScore = [CCLabelTTF labelWithString:str dimensions:labelSize alignment:UITextAlignmentLeft fontName:@"Chalkduster" fontSize:42];
+        [labelScore setColor:ccc3(240, 0, 0)];
+        [labelScore setPosition: ccp(213, winSize.height - 30)];
+        labelShadowScore = [CCLabelTTF labelWithString:str dimensions:labelSize alignment:UITextAlignmentLeft fontName:@"Chalkduster" fontSize:42];
+        [labelShadowScore setColor:ccc3(0, 0, 0)];
+        [labelShadowScore setPosition: ccp(215, winSize.height - 31)];
+        [self addChild: labelShadowScore];
+        [self addChild: labelScore];
+		
+		int time = [s getTime];
+        NSString * strTime = [NSString stringWithFormat:@"Time: %d", time];
+        CGSize labelSizeTime;
+        labelSizeTime.width = 400;
+        labelSizeTime.height= 50;
+        labelTime = [CCLabelTTF labelWithString:strTime dimensions:labelSize alignment:UITextAlignmentLeft fontName:@"Chalkduster" fontSize:42];
+        [labelTime setColor:ccc3(240, 0, 0)];
+        [labelTime setPosition: ccp(512, winSize.height - 30)];
+        labelShadowTime = [CCLabelTTF labelWithString:strTime dimensions:labelSize alignment:UITextAlignmentLeft fontName:@"Chalkduster" fontSize:42];
+        [labelShadowTime setColor:ccc3(0, 0, 0)];
+        [labelShadowTime setPosition: ccp(514, winSize.height - 31)];
+        [self addChild: labelShadowTime];
+        [self addChild: labelTime];		
+		
         
 		self.isTouchEnabled = YES;
 	}
@@ -63,8 +77,14 @@ id pukeButtonSelected;
 
 - (void)showScore: (int)score {
     NSString * str = [NSString stringWithFormat:@"Score: %d", score];
-    [labelShadow setString:str];
-    [label setString:str];
+    [labelShadowScore setString:str];
+    [labelScore setString:str];
+}
+
+- (void)showTime: (int)t {
+    NSString * str = [NSString stringWithFormat:@"Time: %d", t];
+    [labelShadowTime setString:str];
+    [labelTime setString:str];
 }
 
 

@@ -15,6 +15,7 @@
 @interface JNPScore: NSObject {
     int score;
 	int level;
+	int time;
 }
 +(JNPScore *)jnpscore;
 -(int)getScore;
@@ -24,6 +25,10 @@
 -(int)getLevel;
 -(void)setLevel:(int)l;
 -(void)incrementLevel;
+
+-(int)getTime;
+-(void)setTime:(int)t;
+-(void)decrementTime;
 
 @property (retain) NSMutableArray *vomis;
 
