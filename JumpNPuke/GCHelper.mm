@@ -152,7 +152,7 @@ static GCHelper *sharedHelper = nil;
 }
 
 -(void) loadScoreBuffer {
-    if (!gameCenterAvailable || ![self isUserAuthenticated]) return;
+    if (!gameCenterAvailable) return;
 	
 	NSLog(@"-LoadScoreBuffer\n");
 	scoreBuffer = (NSMutableArray *) [NSKeyedUnarchiver unarchiveObjectWithFile:scoreArchiveFile];
@@ -164,7 +164,7 @@ static GCHelper *sharedHelper = nil;
 
 -(void) saveScoreBuffer {
 	
-    if (!gameCenterAvailable || ![self isUserAuthenticated]) return;
+    if (!gameCenterAvailable) return;
 	NSLog(@"-SaveScoreBuffer\n");	
 	BOOL result = [NSKeyedArchiver archiveRootObject:scoreBuffer
 										 toFile:scoreArchiveFile];
