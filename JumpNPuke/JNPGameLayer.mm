@@ -244,7 +244,7 @@ static CCScene *scene;
 		[self schedule:@selector(updatePlayerSize:) interval:0.3];
         [self schedule:@selector(updateViewPoint:)];
         [self schedule:@selector(detectBonusPickup:)];
-        [self schedule:@selector(updateScore:) interval:0.5];
+        //[self schedule:@selector(updateScore:) interval:0.5];
         [self schedule:@selector(detectObstacleCollision:)];
 
 
@@ -259,16 +259,17 @@ static CCScene *scene;
 #endif
 		[self addChild:parent z:0 tag:kTagParentNode];
         
-
-        particleSystem = [[CCParticleFire alloc] initWithTotalParticles:50];
-        //[particleSystem setEmitterMode: kCCParticleModeRadius];
-        particleSystem.startColor = (ccColor4F){200/255.f, 200/255.f, 200/255.f, 0.6f};
-        particleSystem.life = 1;
-        particleSystem.lifeVar = 1;
-        particleSystem.angleVar = 50;
-        particleSystem.startSize = 1.5;
-        particleSystem.texture = [[CCTextureCache sharedTextureCache] addImage:@"particle.png"];
-        [self addChild:particleSystem z:10];
+		if (enableParticles) {
+			particleSystem = [[CCParticleFire alloc] initWithTotalParticles:50];
+			//[particleSystem setEmitterMode: kCCParticleModeRadius];
+			particleSystem.startColor = (ccColor4F){200/255.f, 200/255.f, 200/255.f, 0.6f};
+			particleSystem.life = 1;
+			particleSystem.lifeVar = 1;
+			particleSystem.angleVar = 50;
+			particleSystem.startSize = 1.5;
+			particleSystem.texture = [[CCTextureCache sharedTextureCache] addImage:@"particle.png"];
+			[self addChild:particleSystem z:10];
+		}
 		
         [self scheduleUpdate];
 	}
@@ -372,7 +373,6 @@ static CCScene *scene;
 	JNPScore * s = [JNPScore jnpscore];
 	[s incrementScore:10];
     [controlLayer showScore:[s getScore]];
-
 }
 
 -(void)updatePlayerSize:(float)dt {
@@ -563,10 +563,12 @@ static CCScene *scene;
         
         float speedFactor = [[NSString stringWithFormat:@"%d", currentSpeed] length];        
         
-        particleSystem.sourcePosition = ccp( playerSpriteA.position.x - 450 , playerSpriteA.position.y );
-        particleSystem.startSizeVar = 0.9 * speedFactor;
-        particleSystem.lifeVar = 3 * speedFactor;
-        particleSystem.life = 2 * speedFactor;
+		if (enableParticles) {
+			particleSystem.sourcePosition = ccp( playerSpriteA.position.x - 450 , playerSpriteA.position.y );
+			particleSystem.startSizeVar = 0.9 * speedFactor;
+			particleSystem.lifeVar = 3 * speedFactor;
+			particleSystem.life = 2 * speedFactor;
+		}
         
                 
         // not toooooo much boingboing
@@ -574,7 +576,9 @@ static CCScene *scene;
             && fabs(prevPlayerPosition_y - currentPlayerPosition_y) >= 1) {
 
             [_audioManager playJump];
-            [particleSystem resetSystem];
+			if (enableParticles) {
+				[particleSystem resetSystem];
+			}
         }
         
         if (bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL) {

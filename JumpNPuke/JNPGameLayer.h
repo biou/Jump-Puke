@@ -60,6 +60,7 @@
 	float currentScale;
 	float elephantSize;
 	BOOL hasWon;
+	BOOL enableParticles;
 	b2CircleShape * currentCircle;
 
     JNPAudioManager *_audioManager;
