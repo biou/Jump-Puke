@@ -244,7 +244,7 @@ static CCScene *scene;
 		[self schedule:@selector(updatePlayerSize:) interval:0.3];
         [self schedule:@selector(updateViewPoint:)];
         [self schedule:@selector(detectBonusPickup:)];
-        //[self schedule:@selector(updateScore:) interval:0.5];
+        [self schedule:@selector(updateTime:) interval:1];
         [self schedule:@selector(detectObstacleCollision:)];
 
         
@@ -382,11 +382,11 @@ static CCScene *scene;
 
 #pragma mark Méthodes schedulées dans l'init
 
--(void)updateScore:(float)dt
+-(void)updateTime:(float)dt
 {
 	JNPScore * s = [JNPScore jnpscore];
-	[s incrementScore:10];
-    [controlLayer showScore:[s getScore]];
+	[s decrementTime];
+    [controlLayer showTime:[s getTime]];
 }
 
 -(void)updatePlayerSize:(float)dt {

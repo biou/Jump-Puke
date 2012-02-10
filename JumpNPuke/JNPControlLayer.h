@@ -22,11 +22,14 @@ typedef enum tagPaddleState {
     PaddleState state;
     JNPGameLayer *ref;
     
-    CCLabelTTF *label;
-    CCLabelTTF *labelShadow;
+    CCLabelTTF *labelScore;
+    CCLabelTTF *labelShadowScore;
+    CCLabelTTF *labelTime;
+    CCLabelTTF *labelShadowTime;	
 }
 
 -(void)assignGameLayer:(JNPGameLayer*)gameLayer;
 - (void)showScore: (int)score;
+- (void)showTime: (int)t;
 
 @end

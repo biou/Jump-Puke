@@ -28,6 +28,7 @@ static JNPScore * instance = nil;
     if (self) {
 		level=1;
 		score=0;
+		time=300;
     }
     return self;
 }
@@ -60,6 +61,21 @@ static JNPScore * instance = nil;
 -(void)incrementLevel
 {
 	level++;	
+}
+
+-(int)getTime
+{
+	return time;
+}
+
+-(void)setTime:(int)t
+{
+	time=t;
+}
+
+-(void)decrementTime
+{
+	time--;
 }
 
 - (void)dealloc {
