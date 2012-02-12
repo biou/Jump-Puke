@@ -189,5 +189,12 @@ id pukeButtonSelected;
     ref=gameLayer;
 }
 
+- (void) dealloc
+{
+	UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
+	accelerometer.delegate = nil;		
+	
+	[super dealloc];
+}
 
 @end
