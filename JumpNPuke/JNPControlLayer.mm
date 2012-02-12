@@ -67,10 +67,10 @@ id pukeButtonSelected;
         labelSizeTime.height= 50;
         labelTime = [CCLabelTTF labelWithString:strTime dimensions:labelSize alignment:UITextAlignmentLeft fontName:@"Chalkduster" fontSize:42];
         [labelTime setColor:ccc3(240, 0, 0)];
-        [labelTime setPosition: ccp(512, winSize.height - 30)];
+        [labelTime setPosition: ccp(600, winSize.height - 30)];
         labelShadowTime = [CCLabelTTF labelWithString:strTime dimensions:labelSize alignment:UITextAlignmentLeft fontName:@"Chalkduster" fontSize:42];
         [labelShadowTime setColor:ccc3(0, 0, 0)];
-        [labelShadowTime setPosition: ccp(514, winSize.height - 31)];
+        [labelShadowTime setPosition: ccp(602, winSize.height - 31)];
         [self addChild: labelShadowTime];
         [self addChild: labelTime];		
 		
