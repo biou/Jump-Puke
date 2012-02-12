@@ -18,12 +18,17 @@ id jumpButtonSelected;
 id pukeButtonNormal;
 id pukeButtonSelected;
 
+
 @implementation JNPControlLayer
+
+@synthesize rawAccelY;
+
 - (id)init {
     self = [super init];
     if (self) {
 		state = kPaddleStateUngrabbed;
 		winSize = [[CCDirector sharedDirector] winSize];
+		orientation = 1;
 		
 		jumpButton = [CCSprite spriteWithFile: @"jumpButton.png"];
         jumpButton.position = ccp( 100, 100 );
@@ -73,12 +78,11 @@ id pukeButtonSelected;
 		
 		// Initialisation de l'acelerometre
 		
-		rawAccelY = [NSMutableArray arrayWithCapacity:NUM_FILTER_POINTS];
+		[self setRawAccelY:[NSMutableArray arrayWithCapacity:NUM_FILTER_POINTS]];
         for (int i = 0; i < NUM_FILTER_POINTS; i++)
         {
-            [rawAccelY addObject:[NSNumber numberWithFloat:0.0]];
-        }
-        [rawAccelY retain];  
+            [[self rawAccelY] addObject:[NSNumber numberWithFloat:0.0]];
+        } 
 		
         UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
         accelerometer.updateInterval = 1.0/60.0;
@@ -125,17 +129,25 @@ id pukeButtonSelected;
 
 - (void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {    
-    [rawAccelY insertObject:[NSNumber numberWithFloat: acceleration.y] atIndex:0];
-    [rawAccelY removeObjectAtIndex:NUM_FILTER_POINTS];
+    [[self rawAccelY] insertObject:[NSNumber numberWithFloat: acceleration.y] atIndex:0];
+    [[self rawAccelY] removeObjectAtIndex:NUM_FILTER_POINTS];
     
     // perform averaging
     accelY = 0.0;
-    for (NSNumber *raw in rawAccelY)
+    for (NSNumber *raw in [self rawAccelY])
     {
         accelY += [raw floatValue];
     }    
-    
-    NSLog(@"accel.y = %f - valeurmem = %f -- prout %f", accelY, [(NSNumber *)[rawAccelY objectAtIndex:0] floatValue],acceleration.y);
+	UIInterfaceOrientation u= [[CCDirector sharedDirector] interfaceOrientation];
+	if (u == UIInterfaceOrientationLandscapeLeft) {
+		orientation = 1;
+	} else if (u == UIInterfaceOrientationLandscapeRight) {
+		orientation = -1;
+	}
+
+	accelY *= orientation;
+	
+    NSLog(@"accel.y = %f - valeurmem = %f -- prout %f", accelY, [(NSNumber *)[[self rawAccelY] objectAtIndex:0] floatValue],acceleration.y);
     
 }
 
@@ -177,10 +189,5 @@ id pukeButtonSelected;
     ref=gameLayer;
 }
 
-
-
-- (void)dealloc {
-    [super dealloc];
-}
 
 @end

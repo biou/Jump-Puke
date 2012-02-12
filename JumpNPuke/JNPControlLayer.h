@@ -30,8 +30,11 @@ typedef enum tagPaddleState {
     CCLabelTTF *labelTime;
     CCLabelTTF *labelShadowTime;
     float accelY;
-    NSMutableArray *rawAccelY;	
+	int orientation;
+
 }
+
+@property (retain) NSMutableArray *rawAccelY;	
 
 -(void)assignGameLayer:(JNPGameLayer*)gameLayer;
 - (void)showScore: (int)score;
