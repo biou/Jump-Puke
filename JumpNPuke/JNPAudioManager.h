@@ -20,15 +20,17 @@
 #define jnpSndDie 3
 #define jnpSndJump1 4
 #define jnpSndJump2 5
-#define jnpSndLevel_Up 6
-#define jnpSndMalus 7
-#define jnpSndMenu 8
-#define jnpSndObstacle 9
-#define jnpSndPuke1 10
-#define jnpSndPuke2 11
-#define jnpSndPuke3 12
-#define jnpSndPuke4 13
-#define jnpSndPuke5 14
+#define jnpSndJump3 6
+#define jnpSndLevel_Up 7
+#define jnpSndMalus 8
+#define jnpSndMenu 9
+#define jnpSndObstacle 10
+#define jnpSndPuke1 11
+#define jnpSndPuke2 12
+#define jnpSndPuke3 13
+#define jnpSndPuke4 14
+#define jnpSndPuke5 15
+#define jnpSndNoSound 999
 
 
 @interface JNPAudioManager : CCNode {

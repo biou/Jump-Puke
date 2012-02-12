@@ -25,7 +25,6 @@
 #define KVMIN 155.0
 #define KV2 180.0
 #define KV3 260.0
-#define KV4 400.0
 #define RAYONITEMS 21
 #define KREBONDISSEMENT 0.55
 #define KFRICTION 0.2

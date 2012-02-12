@@ -485,10 +485,8 @@ static CCScene *scene;
         [_audioManager playMusicWithStress:2];
     } else if (v<KV3) {
         [_audioManager playMusicWithStress:3];
-    } else if (v<KV4) {
-        [_audioManager playMusicWithStress:4];
     } else {
-        [_audioManager playMusicWithStress:5];
+        [_audioManager playMusicWithStress:4];
     }
     
     [self checkCollisions:dt];

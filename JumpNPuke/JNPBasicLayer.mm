@@ -41,7 +41,7 @@ static int mode;
 				break;
 			case jnpCredits:
 				image = @"creditsImg.png";
-				son = 15;
+				son = jnpSndNoSound;
 				break;
 			case jnpNewLevel:
 				image = @"levelup.png";
@@ -49,7 +49,7 @@ static int mode;
 				break;
 			case jnpHelp:
 				image = @"faq.png";
-				son = 15;
+				son = jnpSndNoSound;
 				break;				
 			default:
 				break;

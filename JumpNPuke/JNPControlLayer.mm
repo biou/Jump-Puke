@@ -147,7 +147,7 @@ id pukeButtonSelected;
 
 	accelY *= orientation;
 	
-    NSLog(@"accel.y = %f - valeurmem = %f -- prout %f", accelY, [(NSNumber *)[[self rawAccelY] objectAtIndex:0] floatValue],acceleration.y);
+    //NSLog(@"accel.y = %f - valeurmem = %f -- prout %f", accelY, [(NSNumber *)[[self rawAccelY] objectAtIndex:0] floatValue],acceleration.y);
     
 }
 

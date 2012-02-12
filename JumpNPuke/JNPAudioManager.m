@@ -70,19 +70,16 @@ static JNPAudioManager *sharedAM = nil;
 -(void) playMusic:(int)stress {
     switch (stress) {
         case 1:
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Tribal_1.aifc" loop:YES];
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Theme1.aifc" loop:YES];
             break;
         case 2:
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Tribal_2.aifc" loop:YES];
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Theme2.aifc" loop:YES];
             break;
         case 3:
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Tribal_3.aifc" loop:YES];
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Theme3.aifc" loop:YES];
             break;
         case 4:
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Tribal_4.aifc" loop:YES];
-            break;
-        case 5:
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Tribal_5.aifc" loop:YES];
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Theme4.aifc" loop:YES];
             break;
         default:
             break;
@@ -99,20 +96,22 @@ static JNPAudioManager *sharedAM = nil;
 }
 
 -(void) playJump {
-	int r = arc4random() % 2;
-	r+=4;
+	int r = arc4random() % 3;
+	r+=jnpSndJump1;
 	[self play:r];
 }
 
 -(void) playPuke {
 	int r = arc4random() % 5;
-	r+=10;
+	r+=jnpSndPuke1;
 	[self play:r];
 }
 
 // play
 -(void) play:(int)soundType {
-    switch (soundType) {			
+    switch (soundType) {
+		case jnpSndNoSound:
+			break;
 		case jnpSndBile:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Bile.caf"];			
 			break;
@@ -126,13 +125,16 @@ static JNPAudioManager *sharedAM = nil;
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Game_Over.caf"];
             break;	
         case jnpSndJump1:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Jump_1.caf"];
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Jump1.caf"];
             break;
         case jnpSndJump2:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Jump_2.caf"];
-            break;			
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Jump2.caf"];
+            break;	
+        case jnpSndJump3:
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Jump3.caf"];
+            break;				
 		case jnpSndLevel_Up:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Level_Up.caf"];				
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Checkpoint.caf"];				
 			break;
 		case jnpSndMalus:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Malus.caf"];			
@@ -144,22 +146,22 @@ static JNPAudioManager *sharedAM = nil;
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Obstacle.caf"];			
 			break;
 		case jnpSndPuke1:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke_1.caf"];			
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke1.caf"];			
 			break;
 		case jnpSndPuke2:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke_2.caf"];			
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke2.caf"];			
 			break;
 		case jnpSndPuke3:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke_3.caf"];			
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke3.caf"];			
 			break;
 		case jnpSndPuke4:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke_4.caf"];			
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke4.caf"];			
 			break;
 		case jnpSndPuke5:
-            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke_5.caf"];			
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Puke5.caf"];			
 			break;
-
         default:
+			NSLog(@"--Sound not found\n");
             break;
     }
 }
@@ -170,22 +172,22 @@ static JNPAudioManager *sharedAM = nil;
 	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Bonus.caf"];
 	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Collision.caf"];
 	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Game_Over.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Jump_1.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Jump_2.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Level_Up.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Jump1.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Jump2.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Jump3.caf"];	
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Checkpoint.caf"];
 	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Malus.caf"];		
 	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Menu.caf"];
 	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Obstacle.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke_1.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke_2.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke_3.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke_4.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke_5.caf"];
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_1.aifc"];
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_2.aifc"];
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_3.aifc"];
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_4.aifc"];
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Tribal_5.aifc"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke1.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke2.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke3.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke4.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"sons-events/Puke5.caf"];
+    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Theme1.aifc"];
+    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Theme2.aifc"];
+    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Theme3.aifc"];
+    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Theme4.aifc"];
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"musique/Intro.aifc"];
 }
 
