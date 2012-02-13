@@ -568,7 +568,6 @@ static CCScene *scene;
         pos != _contactListener->_contacts.end(); ++pos) {
         MyContact contact = *pos;
         
-        b2Body *bodyA = contact.fixtureA->GetBody();
         b2Body *bodyB = contact.fixtureB->GetBody();
         
         CCSprite *playerSpriteA = (CCSprite*)bodyB->GetUserData();
@@ -592,17 +591,6 @@ static CCScene *scene;
 				[particleSystem resetSystem];
 			}
         }
-        
-        if (bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL) {
-            CCSprite *spriteA = (CCSprite *) bodyA->GetUserData();
-            CCSprite *spriteB = (CCSprite *) bodyB->GetUserData();
-            
-            if (spriteA.tag == 1 && spriteB.tag == 2) {
-                
-            } else if (spriteA.tag == 2 && spriteB.tag == 1) {
-                
-            } 
-        }        
     }
     
 }
