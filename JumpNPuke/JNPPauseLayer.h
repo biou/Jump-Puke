@@ -21,4 +21,5 @@
 @property (retain) id controlLayer;
 @property (retain) id scene;
 - (id)init;
+
 @end

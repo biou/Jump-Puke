@@ -34,7 +34,10 @@
 		[myMenu alignItemsVertically];
 		
 		myMenu.position = ccp(winsize.width/2, 280);
-		
+        
+        CCLayerColor *lc = [CCLayerColor layerWithColor:ccc4(20, 20, 40, 140)];
+        [self addChild:lc z:-1];
+        
 		// add the menu to your scene
 		[self addChild:myMenu];
 		
@@ -59,6 +62,9 @@
 	[self startMenuAction];	
 	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPMenuBaseLayer scene]]];    
 }
+
+
+
 
 
 
