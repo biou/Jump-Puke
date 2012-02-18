@@ -42,6 +42,7 @@
 		
 		[gameLayer setGameScene:self];
 		[controlLayer setGameScene:self];
+		[pauseLayer setControlLayer:controlLayer];
 		
 		
 		

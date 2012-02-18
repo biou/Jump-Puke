@@ -51,12 +51,12 @@
 
 -(void)menu1 {
 	[self startMenuAction];
-	[(JNPControlLayer *)[scene getChildByTag:2] resume];
-	[scene reorderChild:self z:1];	
+	[controlLayer resume];
 }
 
 -(void)menu2 {
 	[self startMenuAction];	
+	[[CCDirector sharedDirector] resume];
 	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: [JNPMenuBaseLayer scene]]];    
 }
 

@@ -207,15 +207,17 @@ id pukeButtonSelected;
 -(void)menuPause {
 	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
 	[audioManager play:jnpSndMenu];	
-	[ref pauseSchedulerAndActions];
-	[self pauseSchedulerAndActions];
+	//[ref pauseSchedulerAndActions];
+	//[self pauseSchedulerAndActions];
+	[[CCDirector sharedDirector] pause];
 	[gameScene showPauseLayer];
 	
 }
 
 -(void)resume {
-	[self resumeSchedulerAndActions];
-	[ref resumeSchedulerAndActions];
+	//[self resumeSchedulerAndActions];
+	//[ref resumeSchedulerAndActions];
+	[[CCDirector sharedDirector] resume];
 	[gameScene hidePauseLayer];
 }
 
