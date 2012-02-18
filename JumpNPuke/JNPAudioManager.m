@@ -95,6 +95,14 @@ static JNPAudioManager *sharedAM = nil;
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 }
 
+-(void) pauseMusic {
+	[[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
+}
+
+-(void) resumeMusic {
+	[[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+}
+
 -(void) playJump {
 	int r = arc4random() % 3;
 	r+=jnpSndJump1;
