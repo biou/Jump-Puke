@@ -11,11 +11,13 @@
 #import "cocos2d.h"
 #import "CCTouchDispatcher.h"
 #import "CCTexture2D.h"
-#import "JNPMenuScene.h"
 #import "SimpleAudioEngine.h"
+#import "JNPMenuBaseLayer.h"
 
-// JNPGameLayer
-@interface JNPIntroBaseLayer : CCLayer
-{
+
+// JNPIntroBaseLayer
+@interface JNPIntroBaseLayer : CCLayer {
 }
+
++(CCScene *) scene;
 @end

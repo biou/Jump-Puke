@@ -5,10 +5,9 @@
 //  Created by Alain Vagner on 28/01/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
 #import "JNPControlLayer.h"
-#import "JNPGameLayer.h"
+
+#import "JNPGameScene.h"
 
 CCSprite * jumpButton;
 CCSprite * pukeButton;
@@ -74,7 +73,17 @@ id pukeButtonSelected;
         [self addChild: labelShadowTime];
         [self addChild: labelTime];		
 		
+
+		CCMenuItemImage *menuItem3 = [CCMenuItemImage itemWithNormalImage:@"help.png"
+															selectedImage: @"help-on.png"
+																   target:self
+																 selector:@selector(menuPause)];
+        
+        CCMenu * myMenu2 = [CCMenu menuWithItems:menuItem3, nil];
 		
+        [myMenu2 alignItemsHorizontally];		
+        myMenu2.position = ccp(1024-100, 768-100);
+        [self addChild:myMenu2];
 		
 		// Initialisation de l'acelerometre
 		
@@ -187,6 +196,20 @@ id pukeButtonSelected;
 
 -(void)assignGameLayer:(JNPGameLayer *)gameLayer{
     ref=gameLayer;
+}
+
+-(void)menuPause {
+	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
+	[audioManager play:jnpSndMenu];	
+	[ref pauseSchedulerAndActions];
+	[self pauseSchedulerAndActions];
+	
+}
+
+-(void)resume {
+	[self resumeSchedulerAndActions];
+	[ref resumeSchedulerAndActions];
+	[parent_ reorderChild:[parent_ getChildByTag:3] z:150];
 }
 
 - (void) dealloc

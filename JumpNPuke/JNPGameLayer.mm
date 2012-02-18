@@ -9,9 +9,9 @@
 // Import the interfaces
 #import "JNPGameLayer.h"
 
-// Needed to obtain the Navigation Controller
-#import "AppDelegate.h"
+#import "JNPControlLayer.h"
 #import "JNPBasicLayer.h"
+#import "AppDelegate.h"
 
 enum {
 	kTagParentNode = 1,
@@ -23,48 +23,13 @@ enum {
 
 id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 
-static JNPControlLayer * controlLayer;
-static CCScene *scene;
 
 // ta mere elle mange des pruneaux
 
 @implementation JNPGameLayer
 
-#pragma mark Scene (conteneur de ce Layer)
-+(CCScene *) scene
-{
-	// 'scene' is an autorelease object.
-	scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
-	JNPGameLayer * baseLayer = [JNPGameLayer node];
-	controlLayer = [JNPControlLayer node];
-	[controlLayer assignGameLayer:baseLayer];
-	
-    CCLayer *bgLayer = [CCLayer node];
-    CGSize s = [CCDirector sharedDirector].winSize;
-    
-    // init du background
-    CCSprite *bgpic = [CCSprite spriteWithFile:@"fondpapier.png"];
-    bgpic.position = ccp(bgpic.position.x + s.width/2.0, bgpic.position.y+s.height/2.0);
-    bgpic.opacity = 160;
-    [bgLayer addChild:bgpic];
-    [scene addChild:bgLayer z:-10];
-    
-    JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
-    [audioManager playMusic:1];
-    
-    [scene addChild:audioManager];
-    [baseLayer setAudioManager:audioManager];
-    
-	// add layer as a child to scene
-	[scene addChild: baseLayer];
-	[scene addChild: controlLayer z:5 tag:2];
-	
-	// return the scene
-	return scene;
-}
-
+JNPControlLayer * controlLayer;
+JNPGameScene * gameScene;
 
 #pragma mark -
 #pragma mark Création du Layer
@@ -72,22 +37,6 @@ static CCScene *scene;
 -(id) init
 {
 	if( (self=[super init])) {
-        
-        /**** parallax ****/
-        parallax = [CCParallaxScrollNode node];
-        CCSprite *clouds1 = [CCSprite spriteWithFile:@"paralaxe1.png"];
-        CCSprite *clouds2 = [CCSprite spriteWithFile:@"paralaxe2.png"];
-        CCSprite *clouds1bis = [CCSprite spriteWithFile:@"paralaxe1.png"];
-        CCSprite *clouds2bis = [CCSprite spriteWithFile:@"paralaxe2.png"];
-        float totalWidth = 4 * clouds1.contentSize.width;
-        [parallax addChild:clouds1 z:0 Ratio:ccp(1.3,1) Pos:ccp(0,0) ScrollOffset:ccp(totalWidth,0)];
-        [parallax addChild:clouds2 z:0 Ratio:ccp(0.6,1) Pos:ccp(0,0) ScrollOffset:ccp(totalWidth,0)];
-        [parallax addChild:clouds1bis z:0 Ratio:ccp(1.3,1) Pos:ccp(clouds1.contentSize.width,0) ScrollOffset:ccp(totalWidth,0)];
-        [parallax addChild:clouds2bis z:0 Ratio:ccp(0.6,1) Pos:ccp(clouds2.contentSize.width,0) ScrollOffset:ccp(totalWidth,0)];
-        // Add to layer, sprite, etc.
-        [scene addChild:parallax z:-1];
-        
-        /******************/
         
 		CGSize winSize = [[CCDirector sharedDirector] winSize];
 		hasWon = NO;
@@ -106,7 +55,6 @@ static CCScene *scene;
         // initiailisation des bonus collectables
         lesBonusDeTaMere = [NSMutableArray array];
 
-        
         JNPScore *s = [JNPScore jnpscore];
         NSMutableArray *tmpVomis = s.vomis;
         
@@ -290,7 +238,19 @@ static CCScene *scene;
 	return self;
 }
 
+-(void)setControlLayer:(JNPControlLayer *)c {
+	controlLayer = c;
+}
 
+-(void)setParallax:(CCParallaxScrollNode *)p {
+	parallax = p;
+}
+
+-(void)setGameScene:(JNPGameScene *)s {
+	gameScene = s;
+	[self setControlLayer:[gameScene controlLayer]];
+	[self setParallax:[gameScene parallax]];
+}
 
 -(void) initPhysics
 {

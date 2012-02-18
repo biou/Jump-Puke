@@ -8,6 +8,7 @@
 
 #import "JNPBasicLayer.h"
 
+
 static int mode;
 
 @implementation JNPBasicLayer
@@ -139,16 +140,16 @@ static int mode;
 {
 	switch (mode) {
 		case jnpGameover:
-			[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPMenuScene node]]];
+			[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPMenuBaseLayer scene]]];
 			break;
 		case jnpCredits:
-			[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPMenuScene node]]];
+			[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPMenuBaseLayer scene]]];
 			break;
 		case jnpHelp:
-            [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPGameLayer scene]]];
+            [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPGameScene node]]];
 			break;
 		case jnpNewLevel:
-			[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPGameLayer scene]]];
+			[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPGameScene node]]];
 			break;				
 		default:
 			break;

@@ -9,11 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "CCTouchDispatcher.h"
+#import "JNPScore.h"
+#import "JNPAudioManager.h"
+#import "JNPGameLayer.h"
+
 
 #define NUM_FILTER_POINTS 10  // number of recent points to use in average
 
 
-@class JNPGameLayer;
+
+
 
 typedef enum tagPaddleState {
 	kPaddleStateGrabbed,
@@ -40,5 +45,6 @@ typedef enum tagPaddleState {
 - (void)showScore: (int)score;
 - (void)showTime: (int)t;
 - (float)getAccelY;
+-(void)resume;
 
 @end

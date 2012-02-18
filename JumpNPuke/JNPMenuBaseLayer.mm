@@ -7,20 +7,32 @@
 //
 
 #import "JNPMenuBaseLayer.h"
-#import "AppDelegate.h"
-#import "GCHelper.h"
+
 
 JNPAudioManager * audioManager;
 CCMenu * myMenu;
 
 @implementation JNPMenuBaseLayer
 
++(CCScene *) scene
+{
+	// 'scene' is an autorelease object.
+	CCScene *scene = [CCScene node];
+	
+	
+	JNPMenuBaseLayer * baseLayer = [[JNPMenuBaseLayer alloc] init];
+	
+	[scene addChild: baseLayer];
+	
+	// return the scene
+	return scene;
+}
+
 - (id)init {
     self = [super init];
     if (self) {
 		[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Intro.aifc" loop:YES];
         
-		// logo qui va s'animer
         CCSprite * logo = [CCSprite spriteWithFile: @"fond-menu.png"];
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
         logo.position = ccp(winsize.width/2 , winsize.height/2 );
@@ -67,7 +79,6 @@ CCMenu * myMenu;
 -(void)setupMenu {
 	if (myMenu != nil) {
 		[self removeChild:myMenu cleanup:NO];
-		//[myMenu release];
 	}
 
 	CGSize winsize = [[CCDirector sharedDirector] winSize];
@@ -110,7 +121,7 @@ CCMenu * myMenu;
 
 -(void)menu1 {
 	[self startMenuAction];
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPGameLayer scene]]];
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[JNPGameScene node]]];
     
 }
 

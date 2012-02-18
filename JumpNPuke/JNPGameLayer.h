@@ -12,13 +12,13 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #import "GLES-Render.h"
-#import "JNPControlLayer.h"
 #import "JNPAudioManager.h"
-#import "JNPBasicLayer.h"
 #import "JNPScore.h"
 #import "MyContactListener.h"
-#import "JNPScore.h"
 #import "CCParallaxScrollNode.h"
+
+
+
 
 
 #define KLIMITLEVELUP 24150 
@@ -35,6 +35,10 @@
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
 //to define the ratio so that your most common object type is 1x1 metre.
 #define PTM_RATIO 32
+
+
+@class JNPControlLayer;
+@class JNPGameScene;
 
 // JNPGameLayer
 @interface JNPGameLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
@@ -63,6 +67,7 @@
 
     JNPAudioManager *_audioManager;
     CCParallaxScrollNode *parallax;
+
     
     NSMutableArray *lesBonusDeTaMere;
     NSMutableArray *lesObstaclesDeTonPere;
@@ -80,14 +85,14 @@
 -(void)initPhysics;
 -(void)playerGrowWithBonus;
 -(void)gameover;
-
-
-// returns a CCScene that contains the JNPGameLayer as the only child
-+(CCScene *) scene;
+-(void)setControlLayer:(JNPControlLayer *)c;
+-(void)setGameScene:(JNPGameScene *)s;
 
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
 @property (nonatomic, retain) CCTMXLayer *background;
 @property (nonatomic) b2Body *playerBody;
+
+
 
 @end

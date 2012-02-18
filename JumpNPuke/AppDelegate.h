@@ -8,10 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
-
-#import "JNPIntroScene.h"
 #import "JNPIntroBaseLayer.h"
-#import "JNPMenuScene.h"
 #import "GCHelper.h"
 
 @interface AppController : NSObject <UIApplicationDelegate, CCDirectorDelegate>
@@ -21,7 +18,6 @@
 	
 	CCDirectorIOS	*director_;							// weak ref
 
-    JNPIntroScene *introScene;
     JNPIntroBaseLayer *introLayer;
 	NSOperationQueue *queue;
 }

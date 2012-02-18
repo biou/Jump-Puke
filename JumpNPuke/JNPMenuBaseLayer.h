@@ -9,14 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "CCMenu.h"
-#import "JNPGameLayer.h"
 #import "JNPAudioManager.h"
 #import "GCHelper.h"
+#import "JNPBasicLayer.h"
+#import "JNPGameScene.h"
+
 
 @interface JNPMenuBaseLayer : CCLayer <GCEnabled> {
     
 }
 
++(CCScene *) scene;
 -(void)startMenuAction;
 -(void)setupMenu;
 -(void)handleAuthChange:(BOOL) n;

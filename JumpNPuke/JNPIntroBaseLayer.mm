@@ -11,8 +11,23 @@
 #import "JNPIntroBaseLayer.h"
 
 
+
 // IntroBaseLayer implementation
 @implementation JNPIntroBaseLayer
+
++(CCScene *) scene
+{
+	// 'scene' is an autorelease object.
+	CCScene *scene = [CCScene node];
+	
+
+	JNPIntroBaseLayer * baseLayer = [[JNPIntroBaseLayer alloc] init];
+	
+	[scene addChild: baseLayer];
+	
+	// return the scene
+	return scene;
+}
 
 // on "init" you need to initialize your instance
 -(id) init
@@ -48,7 +63,7 @@
 }
 
 - (void) toNextScene:(ccTime) dt {
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.75f scene:[JNPMenuScene node]]];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.75f scene:[JNPMenuBaseLayer scene]]];
 }
 
 - (void) introSound:(ccTime) dt {

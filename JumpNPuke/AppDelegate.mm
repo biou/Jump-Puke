@@ -87,7 +87,7 @@
 	[[GCHelper sharedInstance] authenticateLocalUser];
 
 	
-    [[CCDirector sharedDirector] pushScene: [CCTransitionFade transitionWithDuration:1.0f scene:[JNPIntroScene node]]];
+    [[CCDirector sharedDirector] pushScene: [CCTransitionFade transitionWithDuration:1.0f scene:[JNPIntroBaseLayer scene]]];
 
 	return YES;
 }
