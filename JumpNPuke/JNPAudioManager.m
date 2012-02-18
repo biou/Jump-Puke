@@ -123,7 +123,7 @@ static JNPAudioManager *sharedAM = nil;
 		case jnpSndBile:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Bile.caf"];			
 			break;
-		case jnpSndBonus:
+		case jnpSndMalus:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Bonus.caf"];			
 			break;
 		case jnpSndCollision:
@@ -144,7 +144,7 @@ static JNPAudioManager *sharedAM = nil;
 		case jnpSndLevel_Up:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Checkpoint.caf"];				
 			break;
-		case jnpSndMalus:
+		case jnpSndBonus:
             [[SimpleAudioEngine sharedEngine] playEffect:@"sons-events/Malus.caf"];			
 			break;
 		case jnpSndMenu:
