@@ -40,7 +40,11 @@ static JNPScore * instance = nil;
 
 -(void)setScore:(int)s
 {
-	score = s;
+	if (s >= 0) {
+		score = s;
+	} else {
+		score =0;
+	}
 }
 
 -(void)incrementScore:(int)s
