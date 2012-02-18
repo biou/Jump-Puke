@@ -413,6 +413,9 @@ JNPControlLayer * controlLayer;
             [lesObstaclesDeTonPere removeObject:schpritz];
             [self diminuerPlayerDeltaScale:0.04];	
             [_audioManager play:jnpSndMalus];
+			JNPScore *s = [JNPScore jnpscore];
+			[s setScore:[s getScore] - 250];
+			[controlLayer showScore:[s getScore]];
             return;
         }
     }
@@ -720,8 +723,8 @@ JNPControlLayer * controlLayer;
 
 
 #pragma mark DRAW DEBUG DATA ICI !!!
--(void) draw
-{
+//-(void) draw
+//{
 	//
 	// IMPORTANT:
 	// This is only for debug purposes
@@ -729,14 +732,14 @@ JNPControlLayer * controlLayer;
 	//
 	// [super draw];
     
-	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+	//ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
 	
-	kmGLPushMatrix();
+	//kmGLPushMatrix();
 	
 	//world->DrawDebugData();	
 	
-	kmGLPopMatrix();
-}
+	//kmGLPopMatrix();
+//}
 
 
 
