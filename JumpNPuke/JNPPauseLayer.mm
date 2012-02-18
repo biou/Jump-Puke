@@ -21,12 +21,12 @@
     if (self) {
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
 		
-		CCMenuItemImage *menuItem1 = [CCMenuItemImage itemWithNormalImage:@"start-over.png"
-															selectedImage: @"start.png"
+		CCMenuItemImage *menuItem1 = [CCMenuItemImage itemWithNormalImage:@"resume-off.png"
+															selectedImage: @"resume-on.png"
 																   target:self
 																 selector:@selector(menu1)];
-		CCMenuItemImage *menuItem2 = [CCMenuItemImage itemWithNormalImage:@"credits.png"
-															selectedImage: @"credits-over.png"
+		CCMenuItemImage *menuItem2 = [CCMenuItemImage itemWithNormalImage:@"quit-off.png"
+															selectedImage: @"quit-on.png"
 																   target:self
 																 selector:@selector(menu2)];
 		CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, menuItem2, nil];

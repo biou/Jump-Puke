@@ -52,6 +52,7 @@
     CCTMXTiledMap *_tileMap;
     CCTMXLayer *_background;
  
+	JNPGameScene * gameScene;	
     MyContactListener *_contactListener;
     
     b2Body *playerBody;

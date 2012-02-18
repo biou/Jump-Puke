@@ -29,7 +29,7 @@ id elephantNormalTexture,elephantPukeTexture, elephantJumpTexture;
 @implementation JNPGameLayer
 
 JNPControlLayer * controlLayer;
-JNPGameScene * gameScene;
+
 
 #pragma mark -
 #pragma mark Création du Layer

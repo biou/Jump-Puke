@@ -20,7 +20,7 @@
     self = [super init];
     if (self) {
 		
-		//pauseLayer = [JNPPauseLayer node];
+		pauseLayer = [JNPPauseLayer node];
 		gameLayer = [JNPGameLayer node];
 		controlLayer = [JNPControlLayer node];
 		[controlLayer assignGameLayer:gameLayer];
@@ -41,6 +41,7 @@
         [self addChild:parallax z:-1];	
 		
 		[gameLayer setGameScene:self];
+		[controlLayer setGameScene:self];
 		
 		
 		
@@ -49,7 +50,8 @@
 		// init du background
 		CCSprite *bgpic = [CCSprite spriteWithFile:@"fondpapier.png"];
 		bgpic.position = ccp(bgpic.position.x + s.width/2.0, bgpic.position.y+s.height/2.0);
-		bgpic.opacity = 160;
+		//bgpic.opacity = 160;
+		bgpic.color = ccc3(160, 160, 160);
 		[bgLayer addChild:bgpic];
 		[self addChild:bgLayer z:-10];
 
@@ -61,7 +63,7 @@
 		[gameLayer setAudioManager:audioManager];
 		
 		// add layer as a child to scene
-		//[self addChild: pauseLayer z:-2 tag:3];		
+		[self addChild: pauseLayer z:-15 tag:3];		
 		[self addChild: gameLayer z:5 tag:1];
 		[self addChild: controlLayer z:10 tag:2];
 
@@ -69,7 +71,15 @@
     return self;
 }
 
+-(void)showPauseLayer
+{
+	[self reorderChild:pauseLayer z:15];
+}
 
 
+-(void)hidePauseLayer
+{
+	[self reorderChild:pauseLayer z:-15];
+}
 
 @end

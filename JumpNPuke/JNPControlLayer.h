@@ -36,6 +36,7 @@ typedef enum tagPaddleState {
     CCLabelTTF *labelShadowTime;
     float accelY;
 	int orientation;
+	JNPGameScene * gameScene;
 
 }
 
@@ -46,5 +47,6 @@ typedef enum tagPaddleState {
 - (void)showTime: (int)t;
 - (float)getAccelY;
 -(void)resume;
+-(void)setGameScene:(JNPGameScene *)s;
 
 @end

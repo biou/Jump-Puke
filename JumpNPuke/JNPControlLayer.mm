@@ -18,7 +18,9 @@ id pukeButtonNormal;
 id pukeButtonSelected;
 
 
+
 @implementation JNPControlLayer
+
 
 @synthesize rawAccelY;
 
@@ -74,8 +76,8 @@ id pukeButtonSelected;
         [self addChild: labelTime];		
 		
 
-		CCMenuItemImage *menuItem3 = [CCMenuItemImage itemWithNormalImage:@"help.png"
-															selectedImage: @"help-on.png"
+		CCMenuItemImage *menuItem3 = [CCMenuItemImage itemWithNormalImage:@"pause-off.png"
+															selectedImage: @"pause-on.png"
 																   target:self
 																 selector:@selector(menuPause)];
         
@@ -100,6 +102,10 @@ id pukeButtonSelected;
 		self.isTouchEnabled = YES;
 	}
     return self;
+}
+
+-(void)setGameScene:(JNPGameScene *)s {
+	gameScene = s;
 }
 
 - (void)showScore: (int)score {
@@ -203,13 +209,14 @@ id pukeButtonSelected;
 	[audioManager play:jnpSndMenu];	
 	[ref pauseSchedulerAndActions];
 	[self pauseSchedulerAndActions];
+	[gameScene showPauseLayer];
 	
 }
 
 -(void)resume {
 	[self resumeSchedulerAndActions];
 	[ref resumeSchedulerAndActions];
-	[parent_ reorderChild:[parent_ getChildByTag:3] z:150];
+	[gameScene hidePauseLayer];
 }
 
 - (void) dealloc

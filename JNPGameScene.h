@@ -23,6 +23,8 @@
 @property (retain) JNPPauseLayer * pauseLayer;
 @property (retain) CCParallaxScrollNode * parallax;
 
+-(void)showPauseLayer;
+-(void)hidePauseLayer;
 
 
 @end
