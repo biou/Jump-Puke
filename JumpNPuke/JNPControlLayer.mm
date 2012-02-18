@@ -208,12 +208,14 @@ id pukeButtonSelected;
 	JNPAudioManager *audioManager = [JNPAudioManager sharedAM];
 	[audioManager play:jnpSndMenu];	
 	[audioManager pauseMusic];	
+	self.isTouchEnabled = false;
 	[[CCDirector sharedDirector] pause];
 	[gameScene showPauseLayer];
 	
 }
 
 -(void)resume {
+	self.isTouchEnabled = true;
 	[[JNPAudioManager sharedAM] resumeMusic];
 	[[CCDirector sharedDirector] resume];
 	[gameScene hidePauseLayer];
