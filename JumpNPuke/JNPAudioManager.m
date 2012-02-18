@@ -68,6 +68,7 @@ static JNPAudioManager *sharedAM = nil;
 
 // playMusic
 -(void) playMusic:(int)stress {
+    [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:1.0];
     switch (stress) {
         case 1:
             [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Theme1.aifc" loop:YES];

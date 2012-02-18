@@ -32,6 +32,7 @@ CCMenu * myMenu;
     self = [super init];
     if (self) {
 		[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"musique/Intro.aifc" loop:YES];
+        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0.25];
         
         CCSprite * logo = [CCSprite spriteWithFile: @"fond-menu.png"];
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
