@@ -169,11 +169,8 @@ id pukeButtonSelected;
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    NSLog(@"##############################################");
-    NSLog(@"########        TOUCH BEGAN        ###########");
-    NSLog(@"##############################################");
-    
-	if (state != kPaddleStateUngrabbed) return NO;
+    // Désactivation du lock sur les boutons
+    // if (state != kPaddleStateUngrabbed) return NO;
 	state = kPaddleStateGrabbed;
 	
 	CGPoint location = [touch locationInView: [touch view]];
@@ -196,11 +193,9 @@ id pukeButtonSelected;
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    NSLog(@"##############################################");
-    NSLog(@"########        TOUCH ENDED        ###########");
-    NSLog(@"##############################################");
-	NSAssert(state == kPaddleStateGrabbed, @"Paddle - Unexpected state!");
-	state = kPaddleStateUngrabbed;
+    // Désactivation du lock sur les boutons
+    // NSAssert(state == kPaddleStateGrabbed, @"Paddle - Unexpected state!");
+	// state = kPaddleStateUngrabbed;
 	[jumpButton setTexture:jumpButtonNormal]; 
 	[pukeButton setTexture:pukeButtonNormal]; 
 }
